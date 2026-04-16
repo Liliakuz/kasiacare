@@ -126,7 +126,7 @@ export default function Home() {
             </div>
             <div className="p-7 border border-border rounded bg-white hover:border-accent hover:shadow-[0_8px_28px_rgba(196,102,122,0.08)] transition-all">
               <span className="inline-block text-[0.68em] font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded bg-[#e8f5e9] text-sage mb-3">All Tiers</span>
-              <h3 className="font-serif text-lg font-semibold text-primary mb-2">Five Calendars</h3>
+              <h3 className="font-serif text-lg font-semibold text-primary mb-2">Six Calendars</h3>
               <p className="text-[0.85em] leading-[1.75] text-muted-foreground">Meals, Personal Care, Tasks, Medications, and Activities — each with its own reminder option.</p>
             </div>
             <div className="p-7 border border-border rounded bg-white hover:border-accent hover:shadow-[0_8px_28px_rgba(196,102,122,0.08)] transition-all">
