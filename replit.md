@@ -36,3 +36,14 @@ See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and pa
 - **Brand Colors**: Navy (#1a3a5c), Rose (#c4667a), Gold (#c8952a), Cream (#faf7f2)
 - **Fonts**: Cormorant Garamond (headings), DM Sans (body)
 - **No backend** — pure static frontend
+
+### KasiaCare Dev (`artifacts/kasiacare-dev`)
+- **Type**: React + Vite (mirrors production)
+- **Preview Path**: `/dev/`
+- **Description**: Staging environment for reviewing changes before they go live. Imports source directly from `artifacts/kasiacare/src` via Vite aliases. Shows a "Dev Preview" header badge and a bottom banner on every page.
+
+## Pending: Form Email Integration
+- Forms on Contact page (Sign Up for a Free Trial) and Angels page (Apply form) are UI-complete but not wired to a backend.
+- **Plan**: Use Resend (resend.com) to send form submissions to My211411@gmail.com (and eventually lilia@kasiacare.com once kasiacare.com email is configured).
+- **TODO**: User needs to create a free Resend account, get an API key, and provide it. Then wire up a `/api/contact` and `/api/angels` route in `artifacts/api-server/src/` and update form `onSubmit` handlers in `contact.tsx` and `angels.tsx`.
+- **Note**: The Replit Resend integration was dismissed — use `RESEND_API_KEY` secret instead. Do NOT ask user for Resend credentials via Replit integration flow again until they are ready.
