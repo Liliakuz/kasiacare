@@ -156,7 +156,7 @@ export default function Contact() {
               <div className="mb-4">
                 <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Message</label>
                 <textarea
-                  rows={4}
+                  rows={8}
                   placeholder="Tell us how we can help..."
                   value={fields.message}
                   onChange={set("message")}

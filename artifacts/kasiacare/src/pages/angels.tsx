@@ -249,7 +249,7 @@ export default function Angels() {
               </div>
               <div className="mb-3.5">
                 <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">About You <span className="text-white/40 font-normal">(optional)</span></label>
-                <textarea value={fields.about} onChange={set("about")} placeholder="Tell us a little about yourself and your connection to caregiving" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[100px] resize-y" />
+                <textarea value={fields.about} onChange={set("about")} placeholder="Tell us a little about yourself and your connection to caregiving" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[180px] resize-y" />
               </div>
               <p className="text-[0.75em] text-[#8aaac8] mb-3">Fields marked <span className="text-red-300">*</span> are required.</p>
               <button type="submit" className="w-full px-3.5 py-3.5 bg-accent text-white border-none rounded text-[0.9em] font-semibold cursor-pointer hover:bg-[#a8455f] transition-colors text-center">
