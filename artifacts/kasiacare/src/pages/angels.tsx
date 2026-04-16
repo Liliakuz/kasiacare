@@ -2,8 +2,58 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
+import { useState } from "react";
+
+const angInputClass = (err?: string) =>
+  `w-full px-4.5 py-3 border rounded text-[0.9em] outline-none transition-colors bg-white/10 text-white placeholder:text-[#8aaac8] ${
+    err ? "border-red-400" : "border-white/15"
+  }`;
+
+const ErrorMsg = ({ msg }: { msg?: string }) =>
+  msg ? <p className="text-[0.75em] text-red-300 mt-1">{msg}</p> : null;
+
+type AngFields = {
+  firstName: string; lastName: string; phone: string;
+  address: string; city: string; state: string;
+  email: string; role: string; about: string;
+};
+
+const angEmpty: AngFields = {
+  firstName: "", lastName: "", phone: "",
+  address: "", city: "", state: "",
+  email: "", role: "", about: "",
+};
 
 export default function Angels() {
+  const [fields, setFields] = useState<AngFields>(angEmpty);
+  const [errors, setErrors] = useState<Partial<AngFields>>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const set = (field: keyof AngFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFields(prev => ({ ...prev, [field]: e.target.value }));
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: "" }));
+  };
+
+  const validate = (): Partial<AngFields> => {
+    const errs: Partial<AngFields> = {};
+    if (!fields.firstName.trim()) errs.firstName = "First name is required.";
+    if (!fields.lastName.trim()) errs.lastName = "Last name is required.";
+    if (!fields.phone.trim()) errs.phone = "Phone number is required.";
+    if (!fields.address.trim()) errs.address = "Address is required.";
+    if (!fields.city.trim()) errs.city = "City is required.";
+    if (!fields.state.trim()) errs.state = "State is required.";
+    if (!fields.email.trim()) errs.email = "Email address is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = "Please enter a valid email address.";
+    return errs;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setSubmitted(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col pt-16 bg-cream">
       <Nav />
@@ -139,28 +189,74 @@ export default function Angels() {
           </p>
           
           <div className="max-w-[560px] mx-auto text-left">
-            <div className="mb-3.5">
-              <input type="text" placeholder="Your full name" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8]" />
-            </div>
-            <div className="mb-3.5">
-              <input type="email" placeholder="Your email address" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8]" />
-            </div>
-            <div className="mb-3.5">
-              <select className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-[#8aaac8] rounded text-[0.9em] outline-none">
-                <option value="" disabled selected>Which Angel role interests you most?</option>
-                <option className="bg-primary text-white">Social Media Angel</option>
-                <option className="bg-primary text-white">Beta Testing Angel</option>
-                <option className="bg-primary text-white">Care Plan Builder Angel</option>
-                <option className="bg-primary text-white">Grant Research Angel</option>
-                <option className="bg-primary text-white">Multiple roles / Not sure yet</option>
-              </select>
-            </div>
-            <div className="mb-3.5">
-              <textarea placeholder="Tell us a little about yourself and your connection to caregiving (optional)" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[100px] resize-y"></textarea>
-            </div>
-            <button type="button" className="w-full px-3.5 py-3.5 bg-accent text-white border-none rounded text-[0.9em] font-semibold cursor-pointer hover:bg-[#a8455f] transition-colors text-center">
-              Apply to Become a KasiaCare Angel 💙
-            </button>
+            {submitted ? (
+              <div className="text-center py-10">
+                <div className="text-4xl mb-4">💙</div>
+                <h3 className="font-serif text-[1.8em] text-white mb-2">Thank you!</h3>
+                <p className="text-[0.9em] text-[#8aaac8] leading-[1.6]">We received your application and will be in touch within a few days.</p>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+                <div>
+                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">First Name <span className="text-red-300">*</span></label>
+                  <input type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={angInputClass(errors.firstName)} />
+                  <ErrorMsg msg={errors.firstName} />
+                </div>
+                <div>
+                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-300">*</span></label>
+                  <input type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={angInputClass(errors.lastName)} />
+                  <ErrorMsg msg={errors.lastName} />
+                </div>
+              </div>
+              <div className="mb-3.5">
+                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-300">*</span></label>
+                <input type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={angInputClass(errors.phone)} />
+                <ErrorMsg msg={errors.phone} />
+              </div>
+              <div className="mb-3.5">
+                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Address <span className="text-red-300">*</span></label>
+                <input type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={angInputClass(errors.address)} />
+                <ErrorMsg msg={errors.address} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+                <div>
+                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">City <span className="text-red-300">*</span></label>
+                  <input type="text" placeholder="City" value={fields.city} onChange={set("city")} className={angInputClass(errors.city)} />
+                  <ErrorMsg msg={errors.city} />
+                </div>
+                <div>
+                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">State <span className="text-red-300">*</span></label>
+                  <input type="text" placeholder="State" value={fields.state} onChange={set("state")} className={angInputClass(errors.state)} />
+                  <ErrorMsg msg={errors.state} />
+                </div>
+              </div>
+              <div className="mb-3.5">
+                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-300">*</span></label>
+                <input type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={angInputClass(errors.email)} />
+                <ErrorMsg msg={errors.email} />
+              </div>
+              <div className="mb-3.5">
+                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Which Angel role interests you most?</label>
+                <select value={fields.role} onChange={set("role")} className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-[#8aaac8] rounded text-[0.9em] outline-none">
+                  <option value="" className="bg-primary">Select a role</option>
+                  <option className="bg-primary text-white">Social Media Angel</option>
+                  <option className="bg-primary text-white">Beta Testing Angel</option>
+                  <option className="bg-primary text-white">Care Plan Builder Angel</option>
+                  <option className="bg-primary text-white">Grant Research Angel</option>
+                  <option className="bg-primary text-white">Multiple roles / Not sure yet</option>
+                </select>
+              </div>
+              <div className="mb-3.5">
+                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">About You <span className="text-white/40 font-normal">(optional)</span></label>
+                <textarea value={fields.about} onChange={set("about")} placeholder="Tell us a little about yourself and your connection to caregiving" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[100px] resize-y" />
+              </div>
+              <p className="text-[0.75em] text-[#8aaac8] mb-3">Fields marked <span className="text-red-300">*</span> are required.</p>
+              <button type="submit" className="w-full px-3.5 py-3.5 bg-accent text-white border-none rounded text-[0.9em] font-semibold cursor-pointer hover:bg-[#a8455f] transition-colors text-center">
+                Apply to Become a KasiaCare Angel 💙
+              </button>
+            </form>
+            )}
           </div>
         </section>
       </main>
