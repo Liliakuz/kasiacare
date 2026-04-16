@@ -33,6 +33,7 @@ export function Nav() {
         {/* Floating logo pill */}
         <Link
           href="/"
+          onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
           className="pointer-events-auto font-serif text-xl font-semibold text-primary decoration-transparent bg-[#faf7f2]/95 backdrop-blur-md border border-border shadow-sm px-5 py-2.5 rounded-full hover:shadow-md transition-shadow"
         >
           Kasia<span className="text-accent">Care</span>
@@ -81,7 +82,7 @@ export function Nav() {
                       >
                         <Link
                           href={link.href}
-                          onClick={() => setOpen(false)}
+                          onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
                           className={`flex items-center gap-3 px-5 py-3 text-sm transition-colors ${
                             isActive
                               ? "text-primary font-semibold bg-secondary"
@@ -98,7 +99,7 @@ export function Nav() {
                   <div className="px-4 pt-1.5 pb-2.5 mt-1 border-t border-border">
                     <Link
                       href="/contact"
-                      onClick={() => setOpen(false)}
+                      onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
                       className="block text-center w-full bg-primary text-white px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-[#2c6fad] transition-colors"
                     >
                       Start Free Trial
