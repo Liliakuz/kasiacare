@@ -14,7 +14,6 @@ export function Nav() {
     { href: "/pricing", label: "Pricing" },
     { href: "/angels", label: "Angels" },
     { href: "/contact", label: "Contact" },
-    { href: "/free-trial", label: "Free Trial" },
   ];
 
   useEffect(() => {
