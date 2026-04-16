@@ -10,7 +10,7 @@ export default function Pricing() {
       
       <main className="flex-1">
         <div className="bg-primary px-6 md:px-16 pt-[110px] pb-[70px] text-center">
-          <div className="text-[0.72em] tracking-[2.5px] uppercase text-[#c8952a] font-medium mb-4 flex items-center justify-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-[#c8952a]">
+          <div className="text-[0.72em] tracking-[2.5px] uppercase text-[#c8952a] font-medium mb-4 ">
             Simple Pricing
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.4em)] font-light leading-[1.12] text-white mb-4.5">
