@@ -14,6 +14,7 @@ export function Nav() {
     { href: "/pricing", label: "Pricing" },
     { href: "/angels", label: "Angels" },
     { href: "/contact", label: "Contact" },
+    { href: "/free-trial", label: "Free Trial" },
   ];
 
   useEffect(() => {
@@ -98,7 +99,7 @@ export function Nav() {
 
                   <div className="px-4 pt-1.5 pb-2.5 mt-1 border-t border-border">
                     <Link
-                      href="/contact"
+                      href="/free-trial"
                       onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
                       className="block text-center w-full bg-primary text-white px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-[#2c6fad] transition-colors"
                     >

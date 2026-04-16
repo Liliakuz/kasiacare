@@ -4,7 +4,7 @@ import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
 import { useState } from "react";
 
-export default function Contact() {
+export default function FreeTrial() {
   const [votes, setVotes] = useState<Record<string, boolean>>({});
 
   const toggleVote = (feature: string) => {
@@ -29,24 +29,24 @@ export default function Contact() {
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
           <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-accent">
-            Get in Touch
+            Get Started
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.4em)] font-light leading-[1.12] text-primary mb-4.5">
-            We'd love to hear<br/>
-            <em className="italic text-accent">from you.</em>
+            Sign up for a free trial.<br/>
+            <em className="italic text-accent">No credit card</em> required.
           </h1>
           <p className="text-base leading-[1.8] text-muted-foreground max-w-[500px]">
-            Have a question, idea, or just want to say hello? Send us a message and we'll get back to you.
+            14 days free. Cancel anytime. We are here to help you every step of the way.
           </p>
         </div>
 
         <FlowerStrip />
 
-        <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-start">
+        <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-start" id="signup">
           
           <div className="bg-white p-8 rounded border border-border shadow-sm">
-            <h2 className="font-serif text-[2em] font-light text-primary mb-2">Contact Us</h2>
-            <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Fill out the form below and we'll be in touch within 1–2 business days.</p>
+            <h2 className="font-serif text-[2em] font-light text-primary mb-2">Sign Up for a Free Trial</h2>
+            <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Create your account and start building your care plan today. 14 days free — no credit card required.</p>
             
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
@@ -64,32 +64,35 @@ export default function Contact() {
                 <input type="email" placeholder="your@email.com" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors" />
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Subject</label>
+                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Password</label>
+                <input type="password" placeholder="Create a password" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors" />
+              </div>
+              <div className="mb-4">
+                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">I am a...</label>
                 <select defaultValue="" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
-                  <option value="" disabled>Select a topic</option>
-                  <option value="general">General question</option>
-                  <option value="pricing">Pricing & plans</option>
-                  <option value="support">Technical support</option>
-                  <option value="partnership">Partnership or press</option>
-                  <option value="angels">Angels Program</option>
+                  <option value="" disabled>Select your role</option>
+                  <option value="family">Family caregiver</option>
+                  <option value="self">Individual managing my own care</option>
+                  <option value="caregiver">Personal aid or caregiver</option>
                   <option value="other">Other</option>
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Message</label>
-                <textarea
-                  rows={5}
-                  placeholder="Tell us how we can help..."
-                  className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors resize-none"
-                />
+                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Which plan interests you?</label>
+                <select defaultValue="" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
+                  <option value="" disabled>Select a plan</option>
+                  <option value="basic">Basic — $14.99/month</option>
+                  <option value="plus">Plus — $34.99/month</option>
+                  <option value="unsure">Not sure yet — start the trial first</option>
+                </select>
               </div>
               
               <button type="button" className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors">
-                Send Message
+                Sign Up for a Free Trial
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">
-                By reaching out you agree to our <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link>. We never share your information.
+                By signing up you agree to our <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link> and <Link href="/privacy" className="text-accent hover:underline">Terms of Service</Link>. KasiaCare Version 1 does not store medical data. Cancel anytime.
               </p>
             </form>
           </div>

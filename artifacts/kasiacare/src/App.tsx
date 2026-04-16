@@ -10,6 +10,7 @@ import Features from "@/pages/features";
 import Pricing from "@/pages/pricing";
 import Angels from "@/pages/angels";
 import Contact from "@/pages/contact";
+import FreeTrial from "@/pages/free-trial";
 import Privacy from "@/pages/privacy";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/pricing" component={Pricing} />
       <Route path="/angels" component={Angels} />
       <Route path="/contact" component={Contact} />
+      <Route path="/free-trial" component={FreeTrial} />
       <Route path="/privacy" component={Privacy} />
       <Route component={NotFound} />
     </Switch>
