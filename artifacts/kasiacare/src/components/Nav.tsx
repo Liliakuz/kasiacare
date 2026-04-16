@@ -102,7 +102,7 @@ export function Nav() {
                       onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }}
                       className="block text-center w-full bg-primary text-white px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-[#2c6fad] transition-colors"
                     >
-                      Start Free Trial
+                      Sign Up for a Free Trial
                     </Link>
                   </div>
                 </div>

@@ -167,7 +167,7 @@ export default function Home() {
               className="px-5.5 py-3 border-none rounded text-sm w-72 outline-none text-foreground" 
             />
             <button type="button" className="px-7 py-3 bg-primary text-white border-none rounded text-sm font-medium hover:bg-[#0f2540] transition-colors cursor-pointer">
-              Start Free Trial
+              Sign Up for a Free Trial
             </button>
           </div>
           <p className="mt-3 text-[0.78em] text-white/70">

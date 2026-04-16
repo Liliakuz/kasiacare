@@ -32,7 +32,7 @@ export default function Contact() {
             Get Started
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.4em)] font-light leading-[1.12] text-primary mb-4.5">
-            Start your free trial.<br/>
+            Sign up for a free trial.<br/>
             <em className="italic text-accent">No credit card</em> required.
           </h1>
           <p className="text-base leading-[1.8] text-muted-foreground max-w-[500px]">
@@ -45,7 +45,7 @@ export default function Contact() {
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-start" id="signup">
           
           <div className="bg-white p-8 rounded border border-border shadow-sm">
-            <h2 className="font-serif text-[2em] font-light text-primary mb-2">Start Your Free Trial</h2>
+            <h2 className="font-serif text-[2em] font-light text-primary mb-2">Sign Up for a Free Trial</h2>
             <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Create your account and start building your care plan today. 14 days free — no credit card required.</p>
             
             <form onSubmit={(e) => e.preventDefault()}>
@@ -88,7 +88,7 @@ export default function Contact() {
               </div>
               
               <button type="button" className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors">
-                Start My Free 14-Day Trial
+                Sign Up for a Free Trial
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">

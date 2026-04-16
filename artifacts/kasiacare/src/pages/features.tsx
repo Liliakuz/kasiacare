@@ -213,7 +213,7 @@ export default function Features() {
               View Pricing
             </Link>
             <Link href="/contact" className="bg-transparent text-white px-8 py-3 rounded border border-white/50 text-[0.9em] hover:bg-white/10 transition-all">
-              Start Free Trial
+              Sign Up for a Free Trial
             </Link>
           </div>
         </section>
