@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "KasiaCare"
+version = "1.0.0"
+id = "artifacts/kasiacare"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21175
+
+[services.development]
+run = "pnpm --filter @workspace/kasiacare run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/kasiacare", "run", "build" ]
+publicDir = "artifacts/kasiacare/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21175"
+BASE_PATH = "/"

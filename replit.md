@@ -25,3 +25,14 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `pnpm --filter @workspace/api-server run dev` — run API server locally
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+
+## Artifacts
+
+### KasiaCare (`artifacts/kasiacare`)
+- **Type**: React + Vite marketing website
+- **Preview Path**: `/`
+- **Description**: 7-page marketing website for KasiaCare — care plan software for families, personal aids, and caregivers. Named in memory of Kasia (1938–2023).
+- **Pages**: Home (`/`), About (`/about`), Features (`/features`), Pricing (`/pricing`), Angels (`/angels`), Contact (`/contact`), Privacy (`/privacy`)
+- **Brand Colors**: Navy (#1a3a5c), Rose (#c4667a), Gold (#c8952a), Cream (#faf7f2)
+- **Fonts**: Cormorant Garamond (headings), DM Sans (body)
+- **No backend** — pure static frontend

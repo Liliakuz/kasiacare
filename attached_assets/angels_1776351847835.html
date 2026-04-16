@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>KasiaCare Angels — Volunteer with Us</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#faf7f2;--warm:#f5ede0;--navy:#1a3a5c;--blue:#2c6fad;--gold:#c8952a;--rose:#c4667a;--sage:#6a8f6a;--text:#2a2018;--muted:#7a6a58;--line:#e0d5c5;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,247,242,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:600;color:var(--navy);text-decoration:none;}
+.nav-logo span{color:var(--rose);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:0.85em;color:var(--muted);text-decoration:none;padding-bottom:2px;border-bottom:2px solid transparent;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--navy);border-bottom-color:var(--rose);}
+.nav-cta{background:var(--navy);color:#fff;padding:9px 22px;border-radius:3px;font-size:0.83em;font-weight:500;text-decoration:none;}
+.nav-cta:hover{background:var(--blue);}
+
+/* Hero */
+.page-hero{padding:110px 60px 80px;background:var(--rose);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.page-hero .eyebrow{font-size:0.72em;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.page-hero .eyebrow::before{content:'';width:24px;height:1px;background:rgba(255,255,255,0.5);}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4em,5vw,3.6em);font-weight:300;line-height:1.12;color:#fff;margin-bottom:18px;}
+.page-hero h1 em{font-style:italic;}
+.page-hero p{font-size:1em;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:28px;max-width:480px;}
+.btn-w{background:#fff;color:var(--rose);padding:13px 30px;border-radius:3px;font-size:0.88em;font-weight:600;text-decoration:none;display:inline-block;transition:all 0.2s;}
+.btn-w:hover{background:var(--navy);color:#fff;}
+.hero-flowers{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.hero-flowers img{width:100%;border-radius:4px;object-fit:cover;height:180px;}
+
+/* What are Angels */
+.intro-section{max-width:1080px;margin:0 auto;padding:70px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.intro-photo{width:100%;border-radius:4px;box-shadow:14px 14px 44px rgba(26,58,92,0.12);max-width:400px;}
+.intro-text .eyebrow{font-size:0.72em;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.intro-text .eyebrow::before{content:'';width:24px;height:1px;background:var(--rose);}
+.intro-text h2{font-family:'Cormorant Garamond',serif;font-size:2.4em;font-weight:300;color:var(--navy);margin-bottom:20px;line-height:1.15;}
+.intro-text h2 em{font-style:italic;color:var(--rose);}
+.intro-text p{font-size:0.96em;line-height:1.85;color:var(--muted);margin-bottom:14px;}
+
+/* Roles */
+.roles-section{background:var(--warm);padding:70px 60px;}
+.sec-head{text-align:center;margin-bottom:50px;}
+.sec-ey{font-size:0.72em;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose);font-weight:500;margin-bottom:14px;}
+.sec-t{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8em,3vw,2.6em);font-weight:300;color:var(--navy);line-height:1.2;}
+.roles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto;}
+.role-card{background:#fff;padding:30px;border-radius:4px;box-shadow:0 2px 12px rgba(26,58,92,0.06);display:flex;gap:18px;}
+.role-icon{width:48px;height:48px;border-radius:50%;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:1.4em;flex-shrink:0;}
+.role-content h3{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.role-content p{font-size:0.86em;line-height:1.75;color:var(--muted);}
+
+/* Tiers */
+.tiers-section{max-width:1080px;margin:0 auto;padding:70px 40px;}
+.tiers-table{width:100%;border-collapse:collapse;font-size:0.88em;margin-top:30px;}
+.tiers-table th{background:var(--navy);color:#fff;padding:12px 18px;text-align:left;font-weight:600;}
+.tiers-table td{padding:12px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;}
+.tiers-table tr:nth-child(even) td{background:var(--warm);}
+.tier-name{font-weight:700;color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.05em;}
+.angel-note{background:var(--navy);color:#fff;padding:24px 30px;border-radius:4px;margin-top:30px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1em;line-height:1.7;text-align:center;}
+.angel-note span{color:var(--gold);}
+
+/* Apply */
+.apply-section{background:var(--navy);padding:80px 60px;text-align:center;}
+.apply-section h2{font-family:'Cormorant Garamond',serif;font-size:2.6em;font-weight:300;color:#fff;margin-bottom:16px;line-height:1.2;}
+.apply-section h2 em{font-style:italic;color:var(--rose);}
+.apply-section p{font-size:0.97em;color:#8aaac8;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;}
+.apply-form{max-width:560px;margin:0 auto;}
+.form-group{margin-bottom:14px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 18px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#fff;border-radius:3px;font-size:0.9em;font-family:'DM Sans',sans-serif;outline:none;}
+.form-group textarea{height:100px;resize:vertical;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:#8aaac8;}
+.form-group select{color:#8aaac8;}
+.form-group select option{background:var(--navy);color:#fff;}
+.submit-btn{width:100%;padding:14px;background:var(--rose);color:#fff;border:none;border-radius:3px;font-size:0.9em;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s;}
+.submit-btn:hover{background:#a8455f;}
+
+footer{background:var(--navy);color:#c8d8e8;padding:48px 60px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;}
+.f-brand .logo{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:600;color:#fff;margin-bottom:10px;display:block;text-decoration:none;}
+.f-brand .logo span{color:var(--rose);}
+.f-brand p{font-size:0.83em;line-height:1.7;color:#8aaac8;}
+.f-links h4{font-size:0.72em;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.f-links a{display:block;font-size:0.84em;color:#8aaac8;text-decoration:none;margin-bottom:8px;}
+.f-links a:hover{color:#fff;}
+.f-bottom{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);text-align:center;padding:16px 60px;font-size:0.75em;color:#5a7a9a;font-family:'Cormorant Garamond',serif;font-style:italic;}
+@media(max-width:860px){nav{padding:0 20px;}.nav-links{display:none;}.page-hero,.roles-section,.apply-section{padding:90px 24px 60px;}.page-hero{grid-template-columns:1fr;}.intro-section,.tiers-section{padding:50px 24px;grid-template-columns:1fr;}.roles-grid{grid-template-columns:1fr;}footer{grid-template-columns:1fr;padding:40px 24px 20px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="angels.html" class="active">Angels</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start Free Trial</a>
+</nav>
+
+<div class="page-hero">
+  <div>
+    <div class="eyebrow">KasiaCare Angels</div>
+    <h1>Volunteer with us.<br>Care alongside <em>Kasia.</em></h1>
+    <p>The KasiaCare Angels program brings together people who believe in the power of prepared, joyful caregiving — and who want to help families who are on the same journey Kasia's family walked.</p>
+    <a href="#apply" class="btn-w">Become an Angel</a>
+  </div>
+  <div class="hero-flowers">
+    <img src="flower_pink_gerbera2.png" alt="" aria-hidden="true">
+    <img src="flower_white_rose.png" alt="" aria-hidden="true">
+    <img src="flower_yellow_rose.png" alt="" aria-hidden="true">
+    <img src="flower_hot_pink_gerbera.webp" alt="" aria-hidden="true">
+  </div>
+</div>
+
+<div class="intro-section">
+  <img src="lilia_and_kasia.jpg" alt="Lilia and Kasia" class="intro-photo">
+  <div class="intro-text">
+    <div class="eyebrow">Named for Kasia</div>
+    <h2>What is a<br><em>KasiaCare Angel?</em></h2>
+    <p>KasiaCare Angels are volunteers who help families, individuals, and caregivers get the most from KasiaCare — and who help grow a community of prepared, joyful caregiving.</p>
+    <p>The program is named in Kasia's honor. Every Angel carries a piece of her spirit — the belief that care is better when it is organized, shared, and done with love.</p>
+    <p>Angels give their time in whatever way they can. Some spend a few hours a month. Some become deeply involved in the community. All of them matter.</p>
+  </div>
+</div>
+
+<section class="roles-section">
+  <div class="sec-head">
+    <div class="sec-ey">Angel Roles</div>
+    <div class="sec-t">Find your way to help.</div>
+  </div>
+  <div class="roles-grid">
+    <div class="role-card"><div class="role-icon">📱</div><div class="role-content"><h3>Social Media Angel</h3><p>Share KasiaCare's story with caregiver communities online. Help families find the platform that can change how they care. No experience required — just heart.</p></div></div>
+    <div class="role-card"><div class="role-icon">🧪</div><div class="role-content"><h3>Beta Testing Angel</h3><p>Test new features before they launch and give feedback that shapes the product. Your real-world caregiving experience makes you the most valuable tester we could have.</p></div></div>
+    <div class="role-card"><div class="role-icon">📝</div><div class="role-content"><h3>Care Plan Builder Angel</h3><p>Help families and individuals set up their care plans with warmth and patience. This role may evolve into a paid A La Carte service role as KasiaCare grows.</p></div></div>
+    <div class="role-card"><div class="role-icon">🔍</div><div class="role-content"><h3>Grant Research Angel</h3><p>Help identify grant opportunities, application deadlines, and funding sources that support KasiaCare's mission to reach more families.</p></div></div>
+  </div>
+</section>
+
+<div class="tiers-section">
+  <div class="sec-head">
+    <div class="sec-ey">Recognition Tiers</div>
+    <div class="sec-t">Every hour of care is honored.</div>
+  </div>
+  <table class="tiers-table">
+    <thead><tr><th>Angel Tier</th><th>Hours / Month</th><th>What It Means</th></tr></thead>
+    <tbody>
+      <tr><td class="tier-name">Kasia's Angel</td><td>10–19 hrs/month</td><td>Core tier. Named in Kasia's honor — for Angels who show up consistently and make a real difference.</td></tr>
+      <tr><td class="tier-name">Guardian Angel</td><td>20–39 hrs/month</td><td>Deep commitment. Guardian Angels often take on leadership within the community and mentor newer Angels.</td></tr>
+      <tr><td class="tier-name">Archangel</td><td>40+ hrs/month</td><td>Our most dedicated Angels — recognized publicly, given first access to new features, and honored in KasiaCare's story.</td></tr>
+    </tbody>
+  </table>
+  <div class="angel-note">"Just as Lilia was an assistant to her mother — <span>KasiaCare Angels are assistants to caregivers</span> who are planning and caring for other people's lives."</div>
+</div>
+
+<section class="apply-section" id="apply">
+  <h2>Ready to become a<br><em>KasiaCare Angel?</em></h2>
+  <p>Tell us a little about yourself and how you would like to help. We will be in touch within a few days.</p>
+  <div class="apply-form">
+    <div class="form-group"><input type="text" placeholder="Your full name"></div>
+    <div class="form-group"><input type="email" placeholder="Your email address"></div>
+    <div class="form-group">
+      <select>
+        <option value="" disabled selected>Which Angel role interests you most?</option>
+        <option>Social Media Angel</option>
+        <option>Beta Testing Angel</option>
+        <option>Care Plan Builder Angel</option>
+        <option>Grant Research Angel</option>
+        <option>Multiple roles / Not sure yet</option>
+      </select>
+    </div>
+    <div class="form-group"><textarea placeholder="Tell us a little about yourself and your connection to caregiving (optional)"></textarea></div>
+    <button class="submit-btn" type="button">Apply to Become a KasiaCare Angel 💙</button>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand"><a href="index.html" class="logo">Kasia<span>Care</span></a><p>Care Plan Software for Families, Caregivers &amp; Care Teams.<br>Named in honor of Kasia — a beloved mother.</p></div>
+  <div class="f-links"><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="contact.html">Free Trial</a><a href="angels.html">Angels</a></div>
+  <div class="f-links"><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a></div>
+</footer>
+<div class="f-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. 💙</div>
+
+</body>
+</html>
