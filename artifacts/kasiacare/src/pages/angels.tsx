@@ -2,7 +2,6 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
 
 export default function Angels() {
   return (
@@ -10,29 +9,20 @@ export default function Angels() {
       <Nav />
       
       <main className="flex-1">
-        <div className="bg-accent text-white px-6 md:px-16 pt-[110px] pb-[80px] grid grid-cols-1 md:grid-cols-2 gap-15 items-center">
-          <div>
-            <div className="text-[0.72em] tracking-[2.5px] uppercase text-white/70 font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-white/50">
-              KasiaCare Angels
-            </div>
-            <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-white mb-4.5">
-              Volunteer with us.<br/>
-              Care alongside <em className="italic">Kasia.</em>
-            </h1>
-            <p className="text-base leading-[1.8] text-white/85 max-w-[480px] mb-7">
-              The KasiaCare Angels program brings together people who believe in the power of prepared, joyful caregiving — and who want to help families who are on the same journey Kasia's family walked.
-            </p>
-            <a href="#apply" className="inline-block bg-white text-accent px-7.5 py-3 rounded text-[0.88em] font-semibold hover:bg-primary hover:text-white transition-all">
-              Become an Angel
-            </a>
+        <div className="bg-accent text-white px-6 md:px-16 pt-[110px] pb-[80px]">
+          <div className="text-[0.72em] tracking-[2.5px] uppercase text-white/70 font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-white/50">
+            KasiaCare Angels
           </div>
-          <div className="grid grid-cols-2 gap-3">
-             {/* Using simple colored boxes as placeholders for the flower grid as per the instructions (SVG / emojis rendered elegantly) */}
-             <div className="w-full h-[180px] bg-[#c4667a]/40 rounded flex items-center justify-center text-6xl">🌺</div>
-             <div className="w-full h-[180px] bg-[#faf7f2]/40 rounded flex items-center justify-center text-6xl">🌸</div>
-             <div className="w-full h-[180px] bg-[#c8952a]/40 rounded flex items-center justify-center text-6xl">🌻</div>
-             <div className="w-full h-[180px] bg-[#c4667a]/60 rounded flex items-center justify-center text-6xl">🪷</div>
-          </div>
+          <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-white mb-4.5">
+            Volunteer with us.<br/>
+            Care alongside <em className="italic">Kasia.</em>
+          </h1>
+          <p className="text-base leading-[1.8] text-white/85 max-w-[560px] mb-7">
+            The KasiaCare Angels program brings together people who believe in the power of prepared, joyful caregiving — and who want to help families who are on the same journey Kasia's family walked.
+          </p>
+          <a href="#apply" className="inline-block bg-white text-accent px-7.5 py-3 rounded text-[0.88em] font-semibold hover:bg-primary hover:text-white transition-all">
+            Become an Angel
+          </a>
         </div>
 
         <FlowerStrip />
