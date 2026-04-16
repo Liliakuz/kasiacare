@@ -60,8 +60,10 @@ export default function Home() {
           </div>
         </section>
 
+        <FlowerStrip />
+
         {/* MISSION */}
-        <section className="bg-primary text-white px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center mt-16">
+        <section className="bg-primary text-white px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center">
           <div>
             <div className="text-xs tracking-[2px] uppercase text-[#c8952a] mb-2.5">Our Mission</div>
             <div className="font-serif text-3xl md:text-4xl font-light leading-[1.25] text-white">

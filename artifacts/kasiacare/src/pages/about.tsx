@@ -24,6 +24,8 @@ export default function About() {
           </p>
         </div>
 
+        <FlowerStrip />
+
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
             <div className="relative h-[400px] md:h-[500px] hidden md:block">
@@ -89,6 +91,8 @@ export default function About() {
           </div>
         </div>
 
+        <FlowerStrip />
+
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10 md:gap-14 items-start">
             <div className="w-full md:w-[220px] h-[280px] bg-[#e0d5c5]/30 rounded shadow-[12px_12px_40px_rgba(26,58,92,0.12)] flex items-center justify-center overflow-hidden">
@@ -126,7 +130,6 @@ export default function About() {
           </div>
         </div>
 
-        <FlowerStrip />
       </main>
       
       <Footer />

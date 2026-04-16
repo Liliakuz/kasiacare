@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
 
 export default function Features() {
@@ -20,6 +21,8 @@ export default function Features() {
             KasiaCare is built for the person who is tired, busy, and just needs to know what to do next. Every feature is designed to reduce friction and add joy to caregiving.
           </p>
         </div>
+
+        <FlowerStrip />
 
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
           
@@ -150,6 +153,8 @@ export default function Features() {
             </div>
           </div>
         </div>
+
+        <FlowerStrip />
 
         <section className="bg-secondary px-6 md:px-16 py-16 md:py-20">
           <div className="text-center mb-12">

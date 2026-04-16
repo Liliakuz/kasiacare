@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
 
 export default function Pricing() {
@@ -20,6 +21,8 @@ export default function Pricing() {
             14-day free trial on all plans. No credit card required. Cancel anytime.
           </p>
         </div>
+
+        <FlowerStrip />
 
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
@@ -162,6 +165,8 @@ export default function Pricing() {
             </p>
           </div>
         </section>
+
+        <FlowerStrip />
 
         <section className="px-6 md:px-16 py-16 md:py-20 bg-cream">
           <div className="max-w-[720px] mx-auto">

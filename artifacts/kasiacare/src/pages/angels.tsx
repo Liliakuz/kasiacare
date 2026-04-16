@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 
@@ -33,6 +34,8 @@ export default function Angels() {
              <div className="w-full h-[180px] bg-[#c4667a]/60 rounded flex items-center justify-center text-6xl">🪷</div>
           </div>
         </div>
+
+        <FlowerStrip />
 
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-15 items-center">
           <div className="w-full max-w-[400px] h-[500px] mx-auto bg-[#e0d5c5]/40 rounded shadow-[14px_14px_44px_rgba(26,58,92,0.12)] flex items-center justify-center overflow-hidden">
@@ -94,6 +97,8 @@ export default function Angels() {
             </div>
           </div>
         </section>
+
+        <FlowerStrip />
 
         <section className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="text-center mb-8">

@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { FlowerStrip } from "@/components/FlowerStrip";
 
 export default function Privacy() {
   return (
@@ -13,6 +14,8 @@ export default function Privacy() {
           </h1>
           <p className="text-[0.9em] text-muted-foreground">KasiaCare &nbsp;·&nbsp; KasiaCare.com &nbsp;·&nbsp; Effective April 2026</p>
         </div>
+
+        <FlowerStrip />
 
         <div className="max-w-[820px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="text-[0.78em] text-muted-foreground mb-7">

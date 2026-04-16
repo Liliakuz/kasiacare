@@ -1,8 +1,10 @@
 import { Link } from "wouter";
+import { FlowerStrip } from "@/components/FlowerStrip";
 
 export function Footer() {
   return (
     <>
+      <FlowerStrip />
       <footer className="bg-primary text-[#c8d8e8] px-6 md:px-16 py-12 pb-6 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-10">
         <div className="flex flex-col">
           <Link href="/" className="font-serif text-2xl font-semibold text-white mb-2 decoration-transparent">

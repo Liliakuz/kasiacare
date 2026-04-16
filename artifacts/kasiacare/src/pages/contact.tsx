@@ -40,6 +40,8 @@ export default function Contact() {
           </p>
         </div>
 
+        <FlowerStrip />
+
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-start" id="signup">
           
           <div className="bg-white p-8 rounded border border-border shadow-sm">
@@ -159,7 +161,6 @@ export default function Contact() {
 
         </div>
         
-        <FlowerStrip />
       </main>
       
       <Footer />
