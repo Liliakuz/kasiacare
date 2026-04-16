@@ -36,7 +36,7 @@ export default function FreeTrial() {
             <em className="italic text-accent">No credit card</em> required.
           </h1>
           <p className="text-base leading-[1.8] text-muted-foreground max-w-[500px]">
-            14 days free. Cancel anytime. We are here to help you every step of the way.
+            14 days free. No credit card needed. We are here to help you every step of the way.
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export default function FreeTrial() {
           
           <div className="bg-white p-8 rounded border border-border shadow-sm">
             <h2 className="font-serif text-[2em] font-light text-primary mb-2">Sign Up for a Free Trial</h2>
-            <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Create your account and start building your care plan today. 14 days free — no credit card required.</p>
+            <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Tell us a little about yourself and we'll be in touch to get your free trial started. 14 days free — no credit card required.</p>
             
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
@@ -64,10 +64,6 @@ export default function FreeTrial() {
                 <input type="email" placeholder="your@email.com" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors" />
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Password</label>
-                <input type="password" placeholder="Create a password" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors" />
-              </div>
-              <div className="mb-4">
                 <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">I am a...</label>
                 <select defaultValue="" className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
                   <option value="" disabled>Select your role</option>
@@ -83,16 +79,16 @@ export default function FreeTrial() {
                   <option value="" disabled>Select a plan</option>
                   <option value="basic">Basic — $14.99/month</option>
                   <option value="plus">Plus — $34.99/month</option>
-                  <option value="unsure">Not sure yet — start the trial first</option>
+                  <option value="unsure">Not sure yet — explore the trial first</option>
                 </select>
               </div>
               
               <button type="button" className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors">
-                Sign Up for a Free Trial
+                Request My Free Trial
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">
-                By signing up you agree to our <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link> and <Link href="/privacy" className="text-accent hover:underline">Terms of Service</Link>. KasiaCare Version 1 does not store medical data. Cancel anytime.
+                By submitting this form you agree to our <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link>. KasiaCare does not store medical data. We will follow up by email to get you started.
               </p>
             </form>
           </div>
