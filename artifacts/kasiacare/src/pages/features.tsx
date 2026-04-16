@@ -10,7 +10,7 @@ export default function Features() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-accent">
+          <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
             Features
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-primary mb-4.5">

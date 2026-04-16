@@ -10,7 +10,7 @@ export default function Angels() {
       
       <main className="flex-1">
         <div className="bg-accent text-white px-6 md:px-16 pt-[110px] pb-[80px]">
-          <div className="text-[0.72em] tracking-[2.5px] uppercase text-white/70 font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-white/50">
+          <div className="text-[0.72em] tracking-[2.5px] uppercase text-white/70 font-medium mb-4 ">
             KasiaCare Angels
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-white mb-4.5">
@@ -32,7 +32,7 @@ export default function Angels() {
              <svg className="w-24 h-24 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </div>
           <div>
-            <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-accent">
+            <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-4 ">
               Named for Kasia
             </div>
             <h2 className="font-serif text-[2.4em] font-light text-primary mb-5 leading-[1.15]">

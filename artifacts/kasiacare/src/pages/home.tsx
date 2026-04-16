@@ -15,7 +15,7 @@ export default function Home() {
           <div className="hidden md:block absolute top-0 right-0 w-[55%] h-full bg-secondary z-0" />
           
           <div className="relative z-10 md:pr-16">
-            <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-5 flex items-center gap-2.5 before:content-[''] before:w-7 before:h-px before:bg-accent">
+            <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-5">
               Care Plans for Every Caregiver
             </div>
             <h1 className="font-serif text-4xl md:text-[clamp(2.8em,5vw,4.2em)] font-light leading-[1.12] text-primary mb-6">

@@ -11,7 +11,7 @@ export default function About() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-accent">
+          <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4 ">
             Our Story
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-primary mb-4.5">
@@ -43,7 +43,7 @@ export default function About() {
             </div>
             
             <div>
-              <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-accent">
+              <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4 ">
                 Kasia — KAH-shah
               </div>
               <h2 className="font-serif text-[2.4em] font-light text-primary mb-5.5 leading-[1.15]">
@@ -99,7 +99,7 @@ export default function About() {
                <svg className="w-20 h-20 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </div>
             <div>
-              <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-4 flex items-center gap-2.5 before:content-[''] before:w-6 before:h-px before:bg-accent">
+              <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-4 ">
                 The Founder
               </div>
               <h2 className="font-serif text-3xl md:text-[2em] font-light text-primary mb-1.5">Lilia Kuzmicz</h2>
