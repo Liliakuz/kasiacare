@@ -29,6 +29,8 @@ export default function Contact() {
   const [fields, setFields] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Partial<Fields>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
 
   const toggleVote = (feature: string) => {
     setVotes(prev => ({ ...prev, [feature]: !prev[feature] }));
@@ -58,14 +60,25 @@ export default function Contact() {
     return errs;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setSending(true);
+    setSendError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      if (!res.ok) throw new Error("Server error");
+      setSubmitted(true);
+    } catch {
+      setSendError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSending(false);
     }
-    setSubmitted(true);
   };
 
   return (
@@ -164,8 +177,9 @@ export default function Contact() {
                 />
               </div>
               
-              <button type="submit" className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors">
-                Send Message
+              {sendError && <p className="text-[0.8em] text-red-500 mb-2">{sendError}</p>}
+              <button type="submit" disabled={sending} className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                {sending ? "Sending…" : "Send Message"}
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">

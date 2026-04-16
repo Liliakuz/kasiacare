@@ -28,6 +28,8 @@ export default function Angels() {
   const [fields, setFields] = useState<AngFields>(angEmpty);
   const [errors, setErrors] = useState<Partial<AngFields>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
 
   const set = (field: keyof AngFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFields(prev => ({ ...prev, [field]: e.target.value }));
@@ -47,11 +49,25 @@ export default function Angels() {
     return errs;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setSubmitted(true);
+    setSending(true);
+    setSendError("");
+    try {
+      const res = await fetch("/api/angels", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      if (!res.ok) throw new Error("Server error");
+      setSubmitted(true);
+    } catch {
+      setSendError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -252,8 +268,9 @@ export default function Angels() {
                 <textarea value={fields.about} onChange={set("about")} placeholder="Tell us a little about yourself and your connection to caregiving" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[180px] resize-y" />
               </div>
               <p className="text-[0.75em] text-[#8aaac8] mb-3">Fields marked <span className="text-red-300">*</span> are required.</p>
-              <button type="submit" className="w-full px-3.5 py-3.5 bg-accent text-white border-none rounded text-[0.9em] font-semibold cursor-pointer hover:bg-[#a8455f] transition-colors text-center">
-                Apply to Become a KasiaCare Angel 💙
+              {sendError && <p className="text-[0.8em] text-red-300 mb-2">{sendError}</p>}
+              <button type="submit" disabled={sending} className="w-full px-3.5 py-3.5 bg-accent text-white border-none rounded text-[0.9em] font-semibold cursor-pointer hover:bg-[#a8455f] transition-colors text-center disabled:opacity-60 disabled:cursor-not-allowed">
+                {sending ? "Sending…" : "Apply to Become a KasiaCare Angel 💙"}
               </button>
             </form>
             )}
