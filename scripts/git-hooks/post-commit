@@ -1,0 +1,16 @@
+#!/bin/sh
+# Auto-push to GitHub after every commit.
+# Requires GITHUB_TOKEN environment variable (set as a Replit secret).
+
+if [ -z "$GITHUB_TOKEN" ]; then
+  echo "[git-hook] GITHUB_TOKEN not set — skipping GitHub push." >&2
+  exit 0
+fi
+
+# Refresh credentials from the current token every time
+git config --global credential.helper store
+printf "https://x-oauth-basic:%s@github.com\n" "$GITHUB_TOKEN" > "$HOME/.git-credentials"
+chmod 600 "$HOME/.git-credentials"
+
+# Push quietly; suppress "already up to date" noise
+git push github main --quiet 2>&1 | grep -Ev "Everything up-to-date|^$" || true
