@@ -2,7 +2,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const inputClass = (err?: string) =>
   `w-full px-4 py-3 border rounded text-[0.9em] outline-none transition-colors bg-white text-foreground ${
@@ -28,6 +28,13 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (submitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [submitted]);
 
   const toggleVote = (feature: string) => {
     setVotes(prev => ({ ...prev, [feature]: !prev[feature] }));
@@ -105,8 +112,8 @@ export default function Contact() {
             <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Fill out the form below and we'll be in touch within 1–2 business days.</p>
 
             {submitted ? (
-              <div className="text-center py-10">
-                <div className="text-4xl mb-4">💙</div>
+              <div ref={successRef} role="status" tabIndex={-1} className="text-center py-10 outline-none">
+                <div className="text-4xl mb-4" aria-hidden="true">💙</div>
                 <h3 className="font-serif text-[1.6em] text-primary mb-2">Thank you!</h3>
                 <p className="text-[0.9em] text-muted-foreground leading-[1.6]">We received your message and will be in touch within 1–2 business days.</p>
               </div>
@@ -115,40 +122,40 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
                   <label htmlFor="contact-firstName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">First Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="contact-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} aria-required="true" aria-describedby={errors.firstName ? "err-firstName" : undefined} />
+                  <input id="contact-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} aria-required="true" aria-invalid={errors.firstName ? true : undefined} aria-describedby={errors.firstName ? "err-firstName" : undefined} />
                   {errors.firstName && <p id="err-firstName" className="text-[0.75em] text-red-500 mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
                   <label htmlFor="contact-lastName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="contact-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} aria-required="true" aria-describedby={errors.lastName ? "err-lastName" : undefined} />
+                  <input id="contact-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} aria-required="true" aria-invalid={errors.lastName ? true : undefined} aria-describedby={errors.lastName ? "err-lastName" : undefined} />
                   {errors.lastName && <p id="err-lastName" className="text-[0.75em] text-red-500 mt-1">{errors.lastName}</p>}
                 </div>
               </div>
               <div className="mb-4">
                 <label htmlFor="contact-phone" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                <input id="contact-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} aria-required="true" aria-describedby={errors.phone ? "err-phone" : undefined} />
+                <input id="contact-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} aria-required="true" aria-invalid={errors.phone ? true : undefined} aria-describedby={errors.phone ? "err-phone" : undefined} />
                 {errors.phone && <p id="err-phone" className="text-[0.75em] text-red-500 mt-1">{errors.phone}</p>}
               </div>
               <div className="mb-4">
                 <label htmlFor="contact-address" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                <input id="contact-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} aria-required="true" aria-describedby={errors.address ? "err-address" : undefined} />
+                <input id="contact-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} aria-required="true" aria-invalid={errors.address ? true : undefined} aria-describedby={errors.address ? "err-address" : undefined} />
                 {errors.address && <p id="err-address" className="text-[0.75em] text-red-500 mt-1">{errors.address}</p>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
                   <label htmlFor="contact-city" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">City <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="contact-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} aria-required="true" aria-describedby={errors.city ? "err-city" : undefined} />
+                  <input id="contact-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} aria-required="true" aria-invalid={errors.city ? true : undefined} aria-describedby={errors.city ? "err-city" : undefined} />
                   {errors.city && <p id="err-city" className="text-[0.75em] text-red-500 mt-1">{errors.city}</p>}
                 </div>
                 <div>
                   <label htmlFor="contact-state" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">State <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="contact-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} aria-required="true" aria-describedby={errors.state ? "err-state" : undefined} />
+                  <input id="contact-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} aria-required="true" aria-invalid={errors.state ? true : undefined} aria-describedby={errors.state ? "err-state" : undefined} />
                   {errors.state && <p id="err-state" className="text-[0.75em] text-red-500 mt-1">{errors.state}</p>}
                 </div>
               </div>
               <div className="mb-4">
                 <label htmlFor="contact-email" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                <input id="contact-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} aria-required="true" aria-describedby={errors.email ? "err-email" : undefined} />
+                <input id="contact-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} aria-required="true" aria-invalid={errors.email ? true : undefined} aria-describedby={errors.email ? "err-email" : undefined} />
                 {errors.email && <p id="err-email" className="text-[0.75em] text-red-500 mt-1">{errors.email}</p>}
               </div>
               <div className="mb-4">
@@ -175,13 +182,13 @@ export default function Contact() {
                 />
               </div>
               
-              {sendError && <p className="text-[0.8em] text-red-500 mb-2">{sendError}</p>}
+              {sendError && <p role="alert" className="text-[0.8em] text-red-500 mb-2">{sendError}</p>}
               <button type="submit" disabled={sending} className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
                 {sending ? "Sending…" : "Send Message"}
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">
-                Fields marked <span className="text-red-400" aria-hidden="true">*</span> are required. By reaching out you agree to our <Link href="/privacy" className="text-accent underline hover:text-primary">Privacy Policy</Link>. We never share your information.
+                Fields marked with an asterisk (<span className="text-red-400" aria-hidden="true">*</span>) are required. By reaching out you agree to our <Link href="/privacy" className="text-accent underline hover:text-primary">Privacy Policy</Link>. We never share your information.
               </p>
             </form>
             )}
@@ -235,6 +242,7 @@ export default function Contact() {
                     key={feature}
                     type="button"
                     onClick={() => toggleVote(feature)}
+                    aria-pressed={!!votes[feature]}
                     className={`px-3.5 py-1.5 rounded-full text-[0.8em] cursor-pointer transition-all select-none border ${
                       votes[feature] 
                         ? "bg-accent text-white border-accent" 
