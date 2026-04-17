@@ -223,7 +223,18 @@
   }
 }
 
-/* Mobile font fix */
+/* Mobile font fix
+ *
+ * Typography conventions for new pages in this artifact:
+ *   Section labels:  className="text-base md:text-[0.72em] tracking-[...] uppercase ..."
+ *                    (text-base ensures ≥1rem on mobile; md: shrinks for desktop)
+ *   Body text:       Use text-base or larger — never text-xs/text-sm without a text-base md: prefix
+ *   FAQ / accordion answer text: use <p> elements (not <div>) so the CSS fix applies
+ *   Price cents:     wrap cents in <sup> for proper superscript sizing
+ *
+ * The rules below enforce ≥1rem for inline elements on mobile.
+ * Inline styles on <div>s bypass these rules — avoid sub-1rem inline font-size on divs.
+ */
 html {
   font-size: 1rem;
 }
