@@ -222,50 +222,9 @@
   }
 }
 
-/* Mobile base */
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-button, [role="button"] {
-  min-height: 48px;
-}
-
+/* Prevent iOS/Android from auto-zooming on input focus */
 input, textarea, select {
-  font-size: 16px;
-}
-
-@media (max-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-
-  /* Prevent tiny text from em-based Tailwind classes */
-  p, li, span, label, td, th, div, a {
-    min-height: unset;
-  }
-
-  /* Ensure no text is smaller than 14px on mobile */
-  body {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  button, [role="button"] {
-    min-height: 52px;
-  }
-
-  input, textarea, select {
-    font-size: 16px !important;
-  }
-
-  /* Prevent sections from having too much horizontal padding */
-  section, .section {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
+  font-size: max(16px, 1em);
 }
 
 @layer utilities {
