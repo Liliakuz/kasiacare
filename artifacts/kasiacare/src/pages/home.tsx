@@ -11,10 +11,10 @@ export default function Home() {
       
       <main className="flex-1">
         {/* HERO */}
-        <section className="min-h-[calc(100vh-64px)] grid grid-cols-1 md:grid-cols-2 items-center px-6 md:px-16 py-16 relative overflow-hidden bg-cream">
-          <div className="hidden md:block absolute top-0 right-0 w-[55%] h-full bg-secondary z-0" />
+        <section className="min-h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-2 items-center px-6 lg:px-16 py-16 relative overflow-hidden bg-cream">
+          <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full bg-secondary z-0" />
           
-          <div className="relative z-10 md:pr-16">
+          <div className="relative z-10 lg:pr-16">
             <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-5">
               Care Plans for Every Caregiver
             </div>
@@ -34,7 +34,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative z-10 hidden md:flex justify-center items-center min-h-[520px]">
+          <div className="relative z-10 hidden lg:flex justify-center items-center min-h-[520px]">
             <div className="relative w-[340px] h-[420px]">
               <div className="w-[300px] h-[380px] bg-[#e0d5c5]/30 rounded absolute top-5 left-5 shadow-[20px_20px_60px_rgba(26,58,92,0.15)] flex items-center justify-center overflow-hidden">
                 <svg className="w-24 h-24 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -63,10 +63,10 @@ export default function Home() {
         <FlowerStrip />
 
         {/* MISSION */}
-        <section className="bg-primary text-white px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-center">
+        <section className="bg-primary text-white px-6 lg:px-16 py-16 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 items-center">
           <div>
             <div className="text-xs tracking-[2px] uppercase text-[#c8952a] mb-2.5">Our Mission</div>
-            <div className="font-serif text-3xl md:text-4xl font-light leading-[1.25] text-white">
+            <div className="font-serif text-3xl lg:text-4xl font-light leading-[1.25] text-white">
               Care with<br/>clarity.<br/>Care with<br/>joy.
             </div>
           </div>
@@ -77,14 +77,14 @@ export default function Home() {
         </section>
 
         {/* WHO IT'S FOR */}
-        <section className="px-6 md:px-16 py-20 bg-secondary">
+        <section className="px-6 lg:px-16 py-20 bg-secondary">
           <div className="text-center mb-12">
             <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Who It's For</div>
-            <h2 className="font-serif text-3xl md:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
+            <h2 className="font-serif text-3xl lg:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
               Built for every person<br/>in the circle of care.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <motion.div whileHover={{ y: -4 }} className="bg-cream p-8 rounded shadow-[0_4px_20px_rgba(26,58,92,0.06)] hover:shadow-[0_12px_36px_rgba(26,58,92,0.1)] transition-all">
               <div className="text-3xl mb-3.5">💙</div>
               <h3 className="font-serif text-xl font-semibold text-primary mb-2.5">Family Caregivers</h3>
@@ -106,14 +106,14 @@ export default function Home() {
         <FlowerStrip />
 
         {/* FEATURES PREVIEW */}
-        <section className="px-6 md:px-16 py-20 bg-cream">
+        <section className="px-6 lg:px-16 py-20 bg-cream">
           <div className="text-center mb-12">
             <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Features</div>
-            <h2 className="font-serif text-3xl md:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
+            <h2 className="font-serif text-3xl lg:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
               Everything in one place.<br/>Simple enough for anyone.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-5xl mx-auto mb-10">
             <div className="p-7 border border-border rounded bg-white hover:border-accent hover:shadow-[0_8px_28px_rgba(196,102,122,0.08)] transition-all">
               <span className="inline-block text-[0.68em] font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded bg-[#e8f5e9] text-sage mb-3">All Tiers</span>
               <h3 className="font-serif text-lg font-semibold text-primary mb-2">Daily Dashboard</h3>
@@ -153,8 +153,8 @@ export default function Home() {
         </section>
 
         {/* SIGNUP CTA */}
-        <section className="bg-accent px-6 md:px-16 py-20 text-center">
-          <h2 className="font-serif text-4xl md:text-[2.6em] font-light text-white leading-[1.2] mb-4">
+        <section className="bg-accent px-6 lg:px-16 py-20 text-center">
+          <h2 className="font-serif text-4xl lg:text-[2.6em] font-light text-white leading-[1.2] mb-4">
             Ready to bring <em className="italic">joy</em><br/>back to caregiving?
           </h2>
           <p className="text-[0.97em] text-white/85 mb-8">
