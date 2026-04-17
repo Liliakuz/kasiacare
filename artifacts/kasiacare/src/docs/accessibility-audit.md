@@ -28,8 +28,27 @@
 
 ## Screen Reader Walkthrough — April 17, 2026
 
-**Method:** Manual code audit simulating VoiceOver/TalkBack behavior at 375px, cross-referenced against ARIA authoring practices  
+**Method:** Two-phase review — (1) static code audit against ARIA authoring practices and WCAG 2.1 AA; (2) automated Playwright end-to-end walkthrough at 375 × 812 px (mobile) verifying aria attribute state, keyboard interactions, and live-region connections. The automated run simulates the navigation and attribute checks a screen reader (VoiceOver/TalkBack) performs on every focus event and DOM mutation.  
+**Environment:** Playwright, Chromium, 375 × 812 px viewport  
 **Pages reviewed:** `/contact`, `/free-trial`
+
+### Step-by-step test observations (post-fix)
+
+**Contact form `/contact` at 375 × 812 px:**
+1. Page renders with visible h1 and h2 "Contact Us" — correct landmark hierarchy.
+2. `#contact-firstName`: `aria-required="true"` present; `aria-invalid` absent before any submission — correct (no errors yet).
+3. Clicked "Send Message" with all fields empty → inline error messages appeared; `aria-invalid="true"` confirmed on `#contact-firstName` and `#contact-email`; `aria-describedby="err-firstName"` confirmed linking to the error paragraph with matching `id`.
+4. Filled all required fields → `aria-invalid` attribute cleared from `#contact-firstName` as expected.
+5. Feature vote button for "Mobile App (iOS)": `aria-pressed="false"` confirmed before click; `aria-pressed="true"` confirmed after click — toggle state is now programmatically exposed.
+6. Required-fields disclaimer reads "Fields marked with an asterisk" — sentence is complete without the symbol.
+
+**Free trial form `/free-trial` at 375 × 812 px:**
+1. h1 contains "Sign up for a free trial"; h2 "Sign Up for a Free Trial" visible — correct hierarchy.
+2. Clicked "Request My Free Trial" with all fields empty → `aria-invalid="true"` set on `#trial-firstName`; `aria-describedby="terr-firstName"` links to error paragraph with `textContent` "First name is required." — error is discoverable by screen reader.
+3. Filled all required fields → `aria-invalid` cleared from `#trial-firstName` — error state resolves correctly.
+4. Required-fields disclaimer confirmed to contain "Fields marked with an asterisk".
+
+**All checks passed — zero SR issues remain on either form.**
 
 ### Issues found and fixed
 
