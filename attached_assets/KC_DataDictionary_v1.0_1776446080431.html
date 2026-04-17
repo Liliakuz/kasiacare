@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KasiaCare — Data Dictionary v1.0</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Source+Sans+3:wght@300;400;600&display=swap');
+  :root{
+    --navy:#1a3a5c;--blue:#2c6fad;--gold:#c8952a;
+    --green:#1a6e2a;--purple:#5a2d7a;--rose:#c25a7a;
+    --light:#eef5fb;--bg:#f7f5f1;--line:#dde5f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Source Sans 3",sans-serif;background:var(--bg);color:#1a1a1a;font-size:13px;}
+
+  .cover{background:var(--navy);color:#fff;padding:48px 40px 40px;text-align:center;}
+  .cover h1{font-family:"Playfair Display",serif;font-size:2.1em;margin-bottom:8px;}
+  .cover .tag{display:inline-block;background:var(--gold);color:#fff;font-size:0.78em;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 14px;border-radius:2px;margin-bottom:14px;}
+  .cover .sub{color:#a8c8e8;font-size:0.85em;margin-top:6px;line-height:1.6;}
+  .cover .version{display:inline-block;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:3px 14px;font-size:0.78em;color:#c8d8e8;margin-top:10px;}
+
+  .container{max-width:1100px;margin:0 auto;padding:30px 20px 60px;}
+
+  .intro{background:#fff;border-left:4px solid var(--blue);padding:14px 18px;margin:0 0 24px;border-radius:0 4px 4px 0;box-shadow:0 2px 6px rgba(0,0,0,0.06);font-size:0.88em;line-height:1.75;color:#333;}
+  .intro strong{color:var(--navy);}
+
+  /* Section label */
+  .sec-label{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--navy);margin:28px 0 10px;display:flex;align-items:center;gap:8px;}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--line);}
+
+  /* Tier badge */
+  .tier{display:inline-block;font-size:0.68em;font-weight:700;padding:1px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;}
+  .t-all{background:#e8f5e9;color:var(--green);}
+  .t-basic{background:#e3f0fb;color:var(--blue);}
+  .t-plus{background:#eef5fb;color:var(--navy);}
+  .t-alc{background:#ede7f6;color:var(--purple);}
+  .t-future{background:#f5f5f5;color:#888;}
+
+  /* Version badge */
+  .ver{display:inline-block;font-size:0.68em;font-weight:700;padding:1px 7px;border-radius:3px;margin-left:4px;}
+  .v1{background:#e8f5e9;color:var(--green);}
+  .v2{background:#fff8e8;color:#7a4f00;}
+  .v3{background:#ede7f6;color:var(--purple);}
+
+  /* Main table */
+  table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:0.84em;}
+  thead tr{background:var(--navy);}
+  thead th{color:#fff;padding:9px 12px;text-align:left;font-weight:600;font-size:0.82em;letter-spacing:0.3px;}
+  tbody tr.group-row td{background:var(--light);font-weight:700;color:var(--navy);font-size:0.82em;padding:8px 12px;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:0.5px;}
+  tbody td{padding:7px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55;}
+  tbody tr:hover td{background:#f5f8fc;}
+  td.field-name{font-weight:600;color:var(--navy);}
+  td.sub1{padding-left:24px;color:#333;}
+  td.sub2{padding-left:40px;color:#555;font-style:italic;}
+  td.notes{color:#666;font-size:0.9em;}
+  td.type{color:var(--blue);font-size:0.85em;white-space:nowrap;}
+
+  .note{background:var(--light);border-left:3px solid var(--blue);padding:10px 14px;margin:10px 0 20px;font-size:0.85em;line-height:1.75;color:#2c4a6e;border-radius:0 4px 4px 0;}
+  .warn{background:#fff8e8;border-left:3px solid var(--gold);padding:10px 14px;margin:10px 0 20px;font-size:0.85em;line-height:1.75;color:#5a3a00;border-radius:0 4px 4px 0;}
+
+  /* Changelog */
+  .changelog{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);margin:16px 0;}
+  .changelog table{margin:0;font-size:0.82em;}
+  .changelog thead th{background:var(--purple);}
+  .curr{color:var(--green);font-weight:700;}
+  .curr-badge{display:inline-block;background:#e8f5e9;color:var(--green);font-size:0.68em;font-weight:700;padding:1px 6px;border-radius:3px;margin-left:4px;text-transform:uppercase;}
+
+  .footer{text-align:center;font-size:0.78em;color:#999;margin-top:40px;padding-top:18px;border-top:1px solid #ddd;font-style:italic;}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="tag">KasiaCare Technical Reference</div>
+  <h1>Data Dictionary</h1>
+  <div class="sub">All fields · Subfields · Sub-subfields · Tier · Version · Field type<br>
+  Living document — updated every time a new field is added to the app</div>
+  <div class="version">Version 1.0 &middot; April 2026</div>
+</div>
+
+<div class="container">
+
+<div class="intro">
+  <strong>Purpose:</strong> This Data Dictionary is the authoritative record of every data field KasiaCare collects, stores, or displays. It serves as the developer specification for what to build, an audit reference for data compliance, and an ongoing registry so that any new field added to the app is documented here first. Fields are organized by module. Each entry shows the field name, any subfields, sub-subfields, the tier it belongs to, the product version it appears in, and the field type.<br><br>
+  <strong>Tier Key:</strong>
+  <span class="tier t-all">All Tiers</span> &nbsp;
+  <span class="tier t-basic">Basic</span> &nbsp;
+  <span class="tier t-plus">Plus</span> &nbsp;
+  <span class="tier t-alc">A La Carte</span> &nbsp;
+  <span class="tier t-future">Future</span> &nbsp;&nbsp;
+  <strong>Version Key:</strong>
+  <span class="ver v1">V1</span> &nbsp;
+  <span class="ver v2">V2</span> &nbsp;
+  <span class="ver v3">V3+</span>
+</div>
+
+<div class="warn">
+  <strong>&#9888; PHI Notice:</strong> Version 1 does not store Personal Health Information (PHI). Fields marked <span class="ver v2">V2</span> or <span class="ver v3">V3+</span> require HIPAA review and legal counsel before development begins. No medication names, diagnoses, vital signs, or clinical data are stored in Version 1.
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODULE 1 — USER ACCOUNT
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 1 — User Account</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group-row"><td colspan="7">Account Information</td></tr>
+    <tr><td class="field-name">First Name</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name">Last Name</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name">Email Address</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Email</td><td class="notes">Required · Login credential</td></tr>
+    <tr><td class="field-name">Password</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Encrypted</td><td class="notes">Min 8 chars · MFA supported</td></tr>
+    <tr><td class="field-name">Phone Number</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Phone</td><td class="notes">For notifications</td></tr>
+    <tr><td class="field-name">Role</td><td>Family Member</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes">Determines access level</td></tr>
+    <tr><td class="field-name"></td><td>Personal Aid</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Caregiver</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Individual (Self)</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes">Managing own care</td></tr>
+    <tr><td class="field-name">Subscription Tier</td><td>Free Trial</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">System</td><td class="notes">Auto-assigned by Stripe</td></tr>
+    <tr><td class="field-name"></td><td>Basic</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">System</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Plus</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">System</td><td class="notes"></td></tr>
+    <tr><td class="field-name">Google Calendar Sync</td><td>Enabled / Disabled</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle</td><td class="notes">Appointments only</td></tr>
+    <tr><td class="field-name">Notification Preferences</td><td>Email Notifications</td><td>On / Off</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Text Notifications</td><td>On / Off</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle</td><td class="notes">Plus only</td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 2 — CARE RECIPIENT PROFILE
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 2 — Care Recipient Profile</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group-row"><td colspan="7">Basic Profile</td></tr>
+    <tr><td class="field-name">First Name</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name">Last Name</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name">Preferred Name / Nickname</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name">Date of Birth</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Date</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name">Photo</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Image</td><td class="notes">Optional · For dashboard display</td></tr>
+    <tr class="group-row"><td colspan="7">Personal Preferences</td></tr>
+    <tr><td class="field-name">Food Preferences</td><td>Likes</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Dislikes</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Dietary Notes</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Non-medical — preferences only</td></tr>
+    <tr><td class="field-name">Communication Preferences</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">How person prefers to communicate</td></tr>
+    <tr><td class="field-name">Comfort Items</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Items that bring comfort</td></tr>
+    <tr><td class="field-name">Daily Routine Notes</td><td>Morning Routine</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Evening Routine</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>General Notes</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 3 — EMERGENCY CONTACTS
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 3 — Emergency Contacts</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="field-name">Contact Name</td><td>First Name</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Last Name</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name">Relationship</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">e.g. Daughter, Doctor, Agency</td></tr>
+    <tr><td class="field-name">Phone Number</td><td>Primary</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Phone</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Secondary</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Phone</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name">Email</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Email</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name">Notes</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">e.g. best time to call</td></tr>
+    <tr><td class="field-name">Priority Order</td><td>—</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Number</td><td class="notes">1 = call first</td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 4 — DAILY DASHBOARD
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 4 — Daily Dashboard</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group-row"><td colspan="7">Daily Dashboard — All Tiers</td></tr>
+    <tr><td class="field-name">AM Care View</td><td>Tasks Due AM</td><td>Task Name</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">Pulls from Tasks Calendar</td></tr>
+    <tr><td class="field-name"></td><td></td><td>Completed Y/N</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes">Real-time checklist</td></tr>
+    <tr><td class="field-name"></td><td></td><td>Completed Time</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Timestamp</td><td class="notes">Auto-recorded on check</td></tr>
+    <tr><td class="field-name">Daily Tasks View</td><td>All Tasks for Today</td><td>Task Name</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td></td><td>Completed Y/N</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td></td><td>Completed Time</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Timestamp</td><td class="notes">Auto-recorded on check</td></tr>
+    <tr><td class="field-name">PM Care View</td><td>Tasks Due PM</td><td>Task Name</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">Pulls from Tasks Calendar</td></tr>
+    <tr><td class="field-name"></td><td></td><td>Completed Y/N</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td></td><td>Completed Time</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Timestamp</td><td class="notes"></td></tr>
+    <tr><td class="field-name">Activities Today</td><td>Activity Name</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">Pulls from Activities Calendar</td></tr>
+    <tr><td class="field-name">Appointments Today</td><td>Appointment Name</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">Pulls from scheduling</td></tr>
+    <tr><td class="field-name">Reminders</td><td>Reminder Text</td><td>—</td><td><span class="tier t-all">All Tiers</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">From all active calendars</td></tr>
+    <tr class="group-row"><td colspan="7">Extended Dashboard — Plus Only</td></tr>
+    <tr><td class="field-name">Goal Progress Summary</td><td>Goal Name</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">Pulls from Goals module</td></tr>
+    <tr><td class="field-name"></td><td>Progress Status</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes"></td></tr>
+    <tr><td class="field-name">Detailed Reports Link</td><td>—</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Link</td><td class="notes">Opens full reports section</td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 5 — CALENDARS
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 5 — Calendars (All with Reminder Option)</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group-row"><td colspan="7">Meals Calendar</td></tr>
+    <tr><td class="field-name">Meal Entry</td><td>Meal Type</td><td>Breakfast / Lunch / Dinner / Snack</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Meal Time</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Meal Details</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">What is being served</td></tr>
+    <tr><td class="field-name"></td><td>Meal Notes</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">e.g. preferences or notes</td></tr>
+    <tr><td class="field-name"></td><td>Reminder</td><td>On / Off · Time</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle · Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Completed</td><td>Y/N · Timestamp</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes">Real-time checklist</td></tr>
+
+    <tr class="group-row"><td colspan="7">Personal Care Calendar</td></tr>
+    <tr><td class="field-name">Personal Care Task</td><td>Task Type</td><td>See Daily Tasks list</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Scheduled Time</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Notes</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Reminder</td><td>On / Off · Time</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle · Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Completed</td><td>Y/N · Timestamp</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes">Real-time checklist</td></tr>
+
+    <tr class="group-row"><td colspan="7">Tasks Calendar</td></tr>
+    <tr><td class="field-name">Task Entry</td><td>Task Name</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Task Category</td><td>See Daily Tasks list</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Assigned To</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes">From care team list</td></tr>
+    <tr><td class="field-name"></td><td>Scheduled Time</td><td>AM / PM / Specific Time</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Reminder</td><td>On / Off · Time</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle · Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Completed</td><td>Y/N · Timestamp</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes">Real-time checklist</td></tr>
+
+    <tr class="group-row"><td colspan="7">Medication Calendar</td></tr>
+    <tr><td class="field-name">Medication Reminder</td><td>Reminder Label</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">User writes own label — no med name stored in V1</td></tr>
+    <tr><td class="field-name"></td><td>Reminder Time</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Repeat</td><td>Daily / Weekly / Custom</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Reminder On / Off</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Completed</td><td>Y/N · Timestamp</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes">Real-time checklist</td></tr>
+    <tr><td class="field-name">Medication Name</td><td>—</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v2">V2</span></td><td class="type">Text</td><td class="notes">V2 only · Optional · Requires HIPAA review</td></tr>
+    <tr><td class="field-name">Dosage Notes</td><td>—</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v2">V2</span></td><td class="type">Text</td><td class="notes">V2 only · Optional · Requires HIPAA review</td></tr>
+
+    <tr class="group-row"><td colspan="7">Activities Calendar</td></tr>
+    <tr><td class="field-name">Activity Entry</td><td>Activity Name</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Activity Type</td><td>Outing / Family Visit / Entertainment / Other</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Date / Time</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Date · Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Notes</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Reminder</td><td>On / Off · Time</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle · Time</td><td class="notes"></td></tr>
+
+    <tr class="group-row"><td colspan="7">Caregiver Calendar — Plus Only</td></tr>
+    <tr><td class="field-name">Caregiver Visit</td><td>Caregiver Name</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes">From care team list</td></tr>
+    <tr><td class="field-name"></td><td>Visit Date</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Date</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Start Time</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>End Time</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Notes</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Reminder</td><td>On / Off · Time</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle · Time</td><td class="notes"></td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 6 — DAILY TASKS LIST
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 6 — Daily Tasks (Selectable Options)</div>
+<div class="note">These are the selectable task options available across the Personal Care Calendar, Tasks Calendar, and Real-Time Checklist. They are not data fields themselves but the values that populate the Task Category / Task Type select fields.</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:22%">Category</th>
+      <th style="width:30%">Task Option</th>
+      <th style="width:30%">Sub-Options</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group-row"><td colspan="5">Nutrition & Meals</td></tr>
+    <tr><td>Nutrition & Meals</td><td>Eating</td><td>Breakfast · Lunch · Dinner · Snack</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Nutrition & Meals</td><td>Meal Prep</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Hygiene & Personal Care</td></tr>
+    <tr><td>Hygiene & Personal Care</td><td>Bathe</td><td>Shower · Sponge Bath</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Hygiene & Personal Care</td><td>Spot Wash</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Hygiene & Personal Care</td><td>Grooming</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Hygiene & Personal Care</td><td>Brush Teeth / Dentures</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Hygiene & Personal Care</td><td>Dressing / Undressing</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Hygiene & Personal Care</td><td>Toileting</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Mobility & Physical</td></tr>
+    <tr><td>Mobility & Physical</td><td>Assist Walking</td><td>In · Out</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Mobility & Physical</td><td>Transfer</td><td>Bed · Chair · Toilet</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Mobility & Physical</td><td>Exercise</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Mobility & Physical</td><td>Outdoors</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Health & Medical</td></tr>
+    <tr><td>Health & Medical</td><td>Medication Reminder</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Health & Medical</td><td>Appointment Reminder</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Health & Medical</td><td>Accompany to Appointment</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Household</td></tr>
+    <tr><td>Household</td><td>Housekeeping</td><td>Light · Heavy</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Household</td><td>Change Bed Linens</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Household</td><td>Shopping</td><td>Groceries · Personal · Supplies · Miscellaneous</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Household</td><td>Running Errands</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Social & Companionship</td></tr>
+    <tr><td>Social & Companionship</td><td>Companionship</td><td>Talking · Games · TV · Going Out</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Social & Companionship</td><td>Read to Person</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Social & Companionship</td><td>Watch TV</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Social & Companionship</td><td>Playing Games</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Social & Companionship</td><td>Family Visit</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Social & Companionship</td><td>Participate / Supervise in Activities</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Rest & Wellbeing</td></tr>
+    <tr><td>Rest & Wellbeing</td><td>Relaxing</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Rest & Wellbeing</td><td>Napping</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Rest & Wellbeing</td><td>Rest, Relax & Sleep</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Rest & Wellbeing</td><td>Waking Up</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Rest & Wellbeing</td><td>Sleeping</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+
+    <tr class="group-row"><td colspan="5">Scheduling & Travel</td></tr>
+    <tr><td>Scheduling & Travel</td><td>Appointments</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Scheduling & Travel</td><td>Family Visit</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Scheduling & Travel</td><td>Scheduling Caregiver</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Scheduling & Travel</td><td>Telephone Use</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+    <tr><td>Scheduling & Travel</td><td>Travel</td><td>Medical Appointment · Personal</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 7 — CAREGIVER HUB
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 7 — Caregiver Hub</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group-row"><td colspan="7">Caregiver Profile — Basic & Plus</td></tr>
+    <tr><td class="field-name">Caregiver Name</td><td>First Name</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Last Name</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name">Caregiver Role</td><td>—</td><td>Family · Personal Aid · Agency · Other</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name">Phone Number</td><td>—</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Phone</td><td class="notes"></td></tr>
+    <tr><td class="field-name">Daily Notes</td><td>Note Date</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Date</td><td class="notes">Auto-populated</td></tr>
+    <tr><td class="field-name"></td><td>Note Text</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Free text</td></tr>
+    <tr><td class="field-name"></td><td>Written By</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">System</td><td class="notes">Auto-populated from login</td></tr>
+    <tr class="group-row"><td colspan="7">Real-Time Checklist — Basic & Plus</td></tr>
+    <tr><td class="field-name">Checklist Item</td><td>Task Name</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Display</td><td class="notes">Pulls from assigned tasks</td></tr>
+    <tr><td class="field-name"></td><td>Completed</td><td>Y/N</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Checkbox</td><td class="notes">Checked at moment of completion</td></tr>
+    <tr><td class="field-name"></td><td>Completed Time</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Timestamp</td><td class="notes">Auto-recorded on check</td></tr>
+    <tr><td class="field-name"></td><td>Completed By</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">System</td><td class="notes">Auto from login</td></tr>
+    <tr class="group-row"><td colspan="7">Visit Scheduling — Plus Only</td></tr>
+    <tr><td class="field-name">Visit Schedule</td><td>Caregiver</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes">From caregiver list</td></tr>
+    <tr><td class="field-name"></td><td>Visit Date</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Date</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Start Time</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>End Time</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Recurring</td><td>Yes / No · Frequency</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle · Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Notes</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 8 — SUPPLY NEEDS
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 8 — Supply Needs</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="field-name">Supply Item</td><td>Item Name</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Category</td><td>Medical · Personal · Household · Other</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Vendor / Source</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Where to get it</td></tr>
+    <tr><td class="field-name"></td><td>Usage Quality</td><td>Good · Fair · Poor</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Notes</td><td>—</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">e.g. caused skin reaction</td></tr>
+    <tr><td class="field-name"></td><td>Reorder Needed</td><td>Yes / No</td><td><span class="tier t-basic">Basic</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle</td><td class="notes"></td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 9 — INCIDENT NOTES (PLUS)
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 9 — Incident Notes (Plus Only)</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="field-name">Incident Entry</td><td>Date</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Date</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Time</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Time</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Incident Type</td><td>Medication Change · Unusual Symptom · Behavioral Change · Medical Event · Other</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes">Fields TBD in future version</td></tr>
+    <tr><td class="field-name"></td><td>What Happened</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Free text description</td></tr>
+    <tr><td class="field-name"></td><td>Who Was Present</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Follow-Up Needed</td><td>Yes / No</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Toggle</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Follow-Up Notes</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name"></td><td>Recorded By</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">System</td><td class="notes">Auto from login</td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     MODULE 10 — GOALS (PLUS)
+══════════════════════════════════════════ -->
+<div class="sec-label">Module 10 — Goal Progress (Plus Only)</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:20%">Field Name</th>
+      <th style="width:20%">Subfield</th>
+      <th style="width:18%">Sub-Subfield</th>
+      <th style="width:10%">Tier</th>
+      <th style="width:8%">Version</th>
+      <th style="width:10%">Type</th>
+      <th style="width:14%">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="field-name">Goal Entry</td><td>Goal Name</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Required</td></tr>
+    <tr><td class="field-name"></td><td>Goal Description</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name"></td><td>Target Date</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Date</td><td class="notes">Optional</td></tr>
+    <tr><td class="field-name"></td><td>Status</td><td>Not Started · In Progress · Achieved · On Hold</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Select</td><td class="notes"></td></tr>
+    <tr><td class="field-name"></td><td>Progress Notes</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Text</td><td class="notes">Ongoing updates</td></tr>
+    <tr><td class="field-name"></td><td>Last Updated</td><td>—</td><td><span class="tier t-plus">Plus</span></td><td><span class="ver v1">V1</span></td><td class="type">Timestamp</td><td class="notes">Auto-recorded</td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════
+     CHANGE LOG
+══════════════════════════════════════════ -->
+<div class="sec-label">Document Change Log</div>
+<div class="changelog">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:12%">Version</th>
+        <th style="width:14%">Date</th>
+        <th style="width:30%">Module / Section</th>
+        <th>What Was Added or Changed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="curr">V1.0 <span class="curr-badge">Current</span></td>
+        <td>April 2026</td>
+        <td>All Modules 1–10</td>
+        <td>Initial Data Dictionary created. 10 modules documented: User Account, Care Recipient Profile, Emergency Contacts, Daily Dashboard, Calendars (all 6), Daily Tasks (all categories and sub-options), Caregiver Hub, Supply Needs, Incident Notes, Goal Progress. All fields include tier, version, type, and notes. PHI notice documented. V1 fields confirmed with no PHI storage.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  KasiaCare &middot; KasiaCare.com &middot; Data Dictionary &middot; Version 1.0 &middot; April 2026 &middot; Confidential<br>
+  Add a new module or field entry every time a new data element is added to the app. Never delete existing entries — mark as deprecated if removed.
+</div>
+
+</div>
+</body>
+</html>
