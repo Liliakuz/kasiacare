@@ -2,7 +2,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { FlowerStrip } from "@/components/FlowerStrip";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const inputClass = (err?: string) =>
   `w-full px-4 py-3 border rounded text-[0.9em] outline-none transition-colors bg-white text-foreground ${
@@ -28,6 +28,13 @@ export default function FreeTrial() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState("");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (submitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [submitted]);
 
   const toggleVote = (feature: string) => {
     setVotes(prev => ({ ...prev, [feature]: !prev[feature] }));
@@ -105,8 +112,8 @@ export default function FreeTrial() {
             <p className="text-[0.9em] text-muted-foreground mb-7 leading-[1.6]">Tell us a little about yourself and we'll be in touch to get your free trial started. 14 days free — no credit card required.</p>
 
             {submitted ? (
-              <div className="text-center py-10">
-                <div className="text-4xl mb-4">🌸</div>
+              <div ref={successRef} role="status" tabIndex={-1} className="text-center py-10 outline-none">
+                <div className="text-4xl mb-4" aria-hidden="true">🌸</div>
                 <h3 className="font-serif text-[1.6em] text-primary mb-2">You're on the list!</h3>
                 <p className="text-[0.9em] text-muted-foreground leading-[1.6]">We'll be in touch within 1–2 business days to get your free trial started.</p>
               </div>
@@ -115,40 +122,40 @@ export default function FreeTrial() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
                   <label htmlFor="trial-firstName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">First Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="trial-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} aria-required="true" aria-describedby={errors.firstName ? "terr-firstName" : undefined} />
+                  <input id="trial-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} aria-required="true" aria-invalid={errors.firstName ? true : undefined} aria-describedby={errors.firstName ? "terr-firstName" : undefined} />
                   {errors.firstName && <p id="terr-firstName" className="text-[0.75em] text-red-500 mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
                   <label htmlFor="trial-lastName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="trial-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} aria-required="true" aria-describedby={errors.lastName ? "terr-lastName" : undefined} />
+                  <input id="trial-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} aria-required="true" aria-invalid={errors.lastName ? true : undefined} aria-describedby={errors.lastName ? "terr-lastName" : undefined} />
                   {errors.lastName && <p id="terr-lastName" className="text-[0.75em] text-red-500 mt-1">{errors.lastName}</p>}
                 </div>
               </div>
               <div className="mb-4">
                 <label htmlFor="trial-phone" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                <input id="trial-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} aria-required="true" aria-describedby={errors.phone ? "terr-phone" : undefined} />
+                <input id="trial-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} aria-required="true" aria-invalid={errors.phone ? true : undefined} aria-describedby={errors.phone ? "terr-phone" : undefined} />
                 {errors.phone && <p id="terr-phone" className="text-[0.75em] text-red-500 mt-1">{errors.phone}</p>}
               </div>
               <div className="mb-4">
                 <label htmlFor="trial-address" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                <input id="trial-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} aria-required="true" aria-describedby={errors.address ? "terr-address" : undefined} />
+                <input id="trial-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} aria-required="true" aria-invalid={errors.address ? true : undefined} aria-describedby={errors.address ? "terr-address" : undefined} />
                 {errors.address && <p id="terr-address" className="text-[0.75em] text-red-500 mt-1">{errors.address}</p>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
                   <label htmlFor="trial-city" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">City <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="trial-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} aria-required="true" aria-describedby={errors.city ? "terr-city" : undefined} />
+                  <input id="trial-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} aria-required="true" aria-invalid={errors.city ? true : undefined} aria-describedby={errors.city ? "terr-city" : undefined} />
                   {errors.city && <p id="terr-city" className="text-[0.75em] text-red-500 mt-1">{errors.city}</p>}
                 </div>
                 <div>
                   <label htmlFor="trial-state" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">State <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="trial-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} aria-required="true" aria-describedby={errors.state ? "terr-state" : undefined} />
+                  <input id="trial-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} aria-required="true" aria-invalid={errors.state ? true : undefined} aria-describedby={errors.state ? "terr-state" : undefined} />
                   {errors.state && <p id="terr-state" className="text-[0.75em] text-red-500 mt-1">{errors.state}</p>}
                 </div>
               </div>
               <div className="mb-4">
                 <label htmlFor="trial-email" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                <input id="trial-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} aria-required="true" aria-describedby={errors.email ? "terr-email" : undefined} />
+                <input id="trial-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} aria-required="true" aria-invalid={errors.email ? true : undefined} aria-describedby={errors.email ? "terr-email" : undefined} />
                 {errors.email && <p id="terr-email" className="text-[0.75em] text-red-500 mt-1">{errors.email}</p>}
               </div>
               <div className="mb-4">
@@ -171,13 +178,13 @@ export default function FreeTrial() {
                 </select>
               </div>
               
-              {sendError && <p className="text-[0.8em] text-red-500 mb-2">{sendError}</p>}
+              {sendError && <p role="alert" className="text-[0.8em] text-red-500 mb-2">{sendError}</p>}
               <button type="submit" disabled={sending} className="w-full py-3.5 mt-1 bg-primary text-white border-none rounded text-[0.92em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
                 {sending ? "Sending…" : "Request My Free Trial"}
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">
-                Fields marked <span className="text-red-400" aria-hidden="true">*</span> are required. By submitting this form you agree to our <Link href="/privacy" className="text-accent underline hover:text-primary">Privacy Policy</Link>. KasiaCare does not store medical data. We will follow up by email to get you started.
+                Fields marked with an asterisk (<span className="text-red-400" aria-hidden="true">*</span>) are required. By submitting this form you agree to our <Link href="/privacy" className="text-accent underline hover:text-primary">Privacy Policy</Link>. KasiaCare does not store medical data. We will follow up by email to get you started.
               </p>
             </form>
             )}
@@ -231,6 +238,7 @@ export default function FreeTrial() {
                     key={feature}
                     type="button"
                     onClick={() => toggleVote(feature)}
+                    aria-pressed={!!votes[feature]}
                     className={`px-3.5 py-1.5 rounded-full text-[0.8em] cursor-pointer transition-all select-none border ${
                       votes[feature] 
                         ? "bg-accent text-white border-accent" 

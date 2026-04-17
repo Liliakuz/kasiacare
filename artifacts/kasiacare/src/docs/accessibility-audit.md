@@ -26,6 +26,23 @@
 
 ---
 
+## Screen Reader Walkthrough — April 17, 2026
+
+**Method:** Manual code audit simulating VoiceOver/TalkBack behavior at 375px, cross-referenced against ARIA authoring practices  
+**Pages reviewed:** `/contact`, `/free-trial`
+
+### Issues found and fixed
+
+| # | Issue | WCAG | Impact | Fix applied |
+|---|-------|------|--------|-------------|
+| SR-1 | Required fields lacked `aria-invalid="true"` when in error state — screen readers would not announce "invalid" even though `aria-describedby` linked to the error text | 1.3.1 | Serious | Added `aria-invalid={errors.field ? true : undefined}` to all required inputs on both forms |
+| SR-2 | Submission failure (`sendError`) had no live region — the red error message appeared silently with no screen reader announcement | 4.1.3 | Serious | Added `role="alert"` to the `sendError` paragraph on both forms |
+| SR-3 | Feature vote toggle buttons had no `aria-pressed` — toggled state was purely visual; screen reader users could not tell whether they had voted | 4.1.2 | Moderate | Added `aria-pressed={!!votes[feature]}` to all vote buttons on both forms |
+| SR-4 | Success panel had no focus management — after form submission focus remained on the (now-removed) submit button; the confirmation message was never announced | 2.4.3 | Serious | Added `useRef`/`useEffect` to move focus to the success panel on mount; added `role="status"` and `tabIndex={-1}` to the panel |
+| SR-5 | "Fields marked * are required" disclaimer was broken for screen readers — the asterisk was `aria-hidden="true"` so the sentence read "Fields marked are required" | 1.3.1 | Minor | Reworded to "Fields marked with an asterisk (*) are required" so the sentence is complete without the symbol |
+
+---
+
 ## Summary of Changes Made
 
 ### 1. Form Label Associations (WCAG 1.3.1 — serious → fixed)
