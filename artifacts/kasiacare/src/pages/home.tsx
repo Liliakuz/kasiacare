@@ -26,7 +26,7 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-3.5">
               <Link href="/contact" className="bg-primary text-white px-8 py-3.5 rounded text-sm font-medium hover:bg-[#2c6fad] transition-colors">
-                Start Free — 14 Days
+                Sign Up for Your Free Trial
               </Link>
               <Link href="/features" className="bg-transparent text-primary px-8 py-3.5 rounded border border-primary text-sm font-medium hover:bg-primary hover:text-white transition-all">
                 See How It Works
