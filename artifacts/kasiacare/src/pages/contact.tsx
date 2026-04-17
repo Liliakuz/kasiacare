@@ -9,9 +9,6 @@ const inputClass = (err?: string) =>
     err ? "border-red-400 focus:border-red-400" : "border-border focus:border-accent"
   }`;
 
-const ErrorMsg = ({ msg }: { msg?: string }) =>
-  msg ? <p className="text-[0.75em] text-red-500 mt-1">{msg}</p> : null;
-
 type Fields = {
   firstName: string; lastName: string; phone: string;
   address: string; city: string; state: string;
@@ -87,7 +84,7 @@ export default function Contact() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
+          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-4">
             Get in Touch
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.4em)] font-light leading-[1.12] text-primary mb-4.5">
@@ -117,46 +114,46 @@ export default function Contact() {
             <form onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">First Name <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} />
-                  <ErrorMsg msg={errors.firstName} />
+                  <label htmlFor="contact-firstName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">First Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="contact-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} aria-required="true" aria-describedby={errors.firstName ? "err-firstName" : undefined} />
+                  {errors.firstName && <p id="err-firstName" className="text-[0.75em] text-red-500 mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} />
-                  <ErrorMsg msg={errors.lastName} />
+                  <label htmlFor="contact-lastName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="contact-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} aria-required="true" aria-describedby={errors.lastName ? "err-lastName" : undefined} />
+                  {errors.lastName && <p id="err-lastName" className="text-[0.75em] text-red-500 mt-1">{errors.lastName}</p>}
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-400">*</span></label>
-                <input type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} />
-                <ErrorMsg msg={errors.phone} />
+                <label htmlFor="contact-phone" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="contact-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} aria-required="true" aria-describedby={errors.phone ? "err-phone" : undefined} />
+                {errors.phone && <p id="err-phone" className="text-[0.75em] text-red-500 mt-1">{errors.phone}</p>}
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Address <span className="text-red-400">*</span></label>
-                <input type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} />
-                <ErrorMsg msg={errors.address} />
+                <label htmlFor="contact-address" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="contact-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} aria-required="true" aria-describedby={errors.address ? "err-address" : undefined} />
+                {errors.address && <p id="err-address" className="text-[0.75em] text-red-500 mt-1">{errors.address}</p>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">City <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} />
-                  <ErrorMsg msg={errors.city} />
+                  <label htmlFor="contact-city" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">City <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="contact-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} aria-required="true" aria-describedby={errors.city ? "err-city" : undefined} />
+                  {errors.city && <p id="err-city" className="text-[0.75em] text-red-500 mt-1">{errors.city}</p>}
                 </div>
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">State <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} />
-                  <ErrorMsg msg={errors.state} />
+                  <label htmlFor="contact-state" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">State <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="contact-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} aria-required="true" aria-describedby={errors.state ? "err-state" : undefined} />
+                  {errors.state && <p id="err-state" className="text-[0.75em] text-red-500 mt-1">{errors.state}</p>}
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-400">*</span></label>
-                <input type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} />
-                <ErrorMsg msg={errors.email} />
+                <label htmlFor="contact-email" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="contact-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} aria-required="true" aria-describedby={errors.email ? "err-email" : undefined} />
+                {errors.email && <p id="err-email" className="text-[0.75em] text-red-500 mt-1">{errors.email}</p>}
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Subject</label>
-                <select value={fields.subject} onChange={set("subject")} className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
+                <label htmlFor="contact-subject" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Subject</label>
+                <select id="contact-subject" value={fields.subject} onChange={set("subject")} className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
                   <option value="">Select a topic</option>
                   <option value="general">General question</option>
                   <option value="pricing">Pricing & plans</option>
@@ -167,8 +164,9 @@ export default function Contact() {
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Message</label>
+                <label htmlFor="contact-message" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Message</label>
                 <textarea
+                  id="contact-message"
                   rows={8}
                   placeholder="Tell us how we can help..."
                   value={fields.message}
@@ -183,7 +181,7 @@ export default function Contact() {
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">
-                Fields marked <span className="text-red-400">*</span> are required. By reaching out you agree to our <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link>. We never share your information.
+                Fields marked <span className="text-red-400" aria-hidden="true">*</span> are required. By reaching out you agree to our <Link href="/privacy" className="text-accent underline hover:text-primary">Privacy Policy</Link>. We never share your information.
               </p>
             </form>
             )}
@@ -193,35 +191,35 @@ export default function Contact() {
             <h2 className="font-serif text-[1.8em] font-light text-primary mb-5">We are here to help.</h2>
             
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">📧</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">📧</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Email</h4>
-                <a href="mailto:lilia@kasiacare.com" className="text-[0.86em] text-muted-foreground leading-[1.6] hover:text-accent">lilia@kasiacare.com</a>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Email</h3>
+                <a href="mailto:lilia@kasiacare.com" className="text-[0.86em] text-muted-foreground leading-[1.6] hover:text-accent underline">lilia@kasiacare.com</a>
               </div>
             </div>
             
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">🌐</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">🌐</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Website</h4>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Website</h3>
                 <div className="text-[0.86em] text-muted-foreground leading-[1.6]">
-                  <a href="https://kasiacare.com" className="hover:text-accent">KasiaCare.com</a> &nbsp;·&nbsp; <a href="https://kasia.care" className="hover:text-accent">Kasia.Care</a>
+                  <a href="https://kasiacare.com" className="hover:text-accent underline">KasiaCare.com</a> &nbsp;·&nbsp; <a href="https://kasia.care" className="hover:text-accent underline">Kasia.Care</a>
                 </div>
               </div>
             </div>
 
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">💙</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">💙</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Angels Program</h4>
-                <p className="text-[0.86em] text-muted-foreground leading-[1.6]">Want to volunteer? <Link href="/angels" className="text-accent hover:underline">Become a KasiaCare Angel.</Link></p>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Angels Program</h3>
+                <p className="text-[0.86em] text-muted-foreground leading-[1.6]">Want to volunteer? <Link href="/angels" className="text-accent underline hover:text-primary">Become a KasiaCare Angel.</Link></p>
               </div>
             </div>
 
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">🕐</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">🕐</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Response Time</h4>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Response Time</h3>
                 <p className="text-[0.86em] text-muted-foreground leading-[1.6]">We typically respond within 1–2 business days. Plus subscribers receive priority support.</p>
               </div>
             </div>

@@ -11,11 +11,11 @@ export default function Home() {
       
       <main className="flex-1">
         {/* HERO */}
-        <section className="min-h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-2 items-center px-6 lg:px-16 py-16 relative overflow-hidden bg-cream">
-          <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full bg-secondary z-0" />
+        <section aria-label="Hero: Care Plans for Every Caregiver" className="min-h-[calc(100vh-64px)] grid grid-cols-1 lg:grid-cols-2 items-center px-6 lg:px-16 py-16 relative overflow-hidden bg-cream">
+          <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full bg-secondary z-0" aria-hidden="true" />
           
           <div className="relative z-10 lg:pr-16">
-            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-5">
+            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-5">
               Care Plans for Every Caregiver
             </div>
             <h1 className="font-serif text-4xl md:text-[clamp(2.8em,5vw,4.2em)] font-light leading-[1.12] text-primary mb-6">
@@ -34,10 +34,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative z-10 hidden lg:flex justify-center items-center min-h-[520px]">
+          <div className="relative z-10 hidden lg:flex justify-center items-center min-h-[520px]" aria-hidden="true">
             <div className="relative w-[340px] h-[420px]">
               <div className="w-[300px] h-[380px] bg-[#e0d5c5]/30 rounded absolute top-5 left-5 shadow-[20px_20px_60px_rgba(26,58,92,0.15)] flex items-center justify-center overflow-hidden">
-                <svg className="w-24 h-24 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-24 h-24 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
@@ -46,11 +46,13 @@ export default function Home() {
                 className="absolute -top-12 -right-15 text-7xl select-none"
                 animate={{ y: [0, -12, 0], rotate: [-3, 2, -3] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden="true"
               >🌸</motion.div>
               <motion.div 
                 className="absolute -bottom-8 -left-12 text-6xl select-none"
                 animate={{ y: [0, -8, 0], rotate: [5, -2, 5] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden="true"
               >🪷</motion.div>
               <div className="absolute -bottom-16 right-0 font-serif italic text-[0.95em] text-muted-foreground text-right leading-relaxed">
                 Kasia.<br/>
@@ -63,7 +65,7 @@ export default function Home() {
         <FlowerStrip />
 
         {/* MISSION */}
-        <section className="bg-primary text-white px-6 lg:px-16 py-16 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 items-center">
+        <section aria-label="Our Mission" className="bg-primary text-white px-6 lg:px-16 py-16 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 items-center">
           <div>
             <div className="text-base md:text-xs tracking-[2px] uppercase text-[#c8952a] mb-2.5">Our Mission</div>
             <div className="font-serif text-3xl lg:text-4xl font-light leading-[1.25] text-white">
@@ -77,9 +79,9 @@ export default function Home() {
         </section>
 
         {/* WHO IT'S FOR */}
-        <section className="px-6 lg:px-16 py-20 bg-secondary">
+        <section aria-label="Who It's For" className="px-6 lg:px-16 py-20 bg-secondary">
           <div className="text-center mb-12">
-            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Who It's For</div>
+            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Who It's For</div>
             <h2 className="font-serif text-3xl lg:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
               Built for every person<br/>in the circle of care.
             </h2>
@@ -106,9 +108,9 @@ export default function Home() {
         <FlowerStrip />
 
         {/* FEATURES PREVIEW */}
-        <section className="px-6 lg:px-16 py-20 bg-cream">
+        <section aria-label="Features Overview" className="px-6 lg:px-16 py-20 bg-cream">
           <div className="text-center mb-12">
-            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Features</div>
+            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Features</div>
             <h2 className="font-serif text-3xl lg:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
               Everything in one place.<br/>Simple enough for anyone.
             </h2>
@@ -153,7 +155,7 @@ export default function Home() {
         </section>
 
         {/* SIGNUP CTA */}
-        <section className="bg-accent px-6 lg:px-16 py-20 text-center">
+        <section className="bg-accent px-6 lg:px-16 py-20 text-center" aria-label="Sign up for free trial">
           <h2 className="font-serif text-4xl lg:text-[2.6em] font-light text-white leading-[1.2] mb-4">
             Ready to bring <em className="italic">joy</em><br/>back to caregiving?
           </h2>
@@ -161,7 +163,9 @@ export default function Home() {
             Start your free 14-day trial. No credit card required. Cancel anytime.
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
+            <label htmlFor="cta-email" className="sr-only">Your email address</label>
             <input 
+              id="cta-email"
               type="email" 
               placeholder="Your email address" 
               className="px-5.5 py-3 border-none rounded text-sm w-72 outline-none text-foreground" 

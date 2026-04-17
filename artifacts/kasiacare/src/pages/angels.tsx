@@ -9,9 +9,6 @@ const angInputClass = (err?: string) =>
     err ? "border-red-400" : "border-white/15"
   }`;
 
-const ErrorMsg = ({ msg }: { msg?: string }) =>
-  msg ? <p className="text-[0.75em] text-red-300 mt-1">{msg}</p> : null;
-
 type AngFields = {
   firstName: string; lastName: string; phone: string;
   address: string; city: string; state: string;
@@ -94,11 +91,11 @@ export default function Angels() {
         <FlowerStrip />
 
         <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-15 items-center">
-          <div className="w-full max-w-[400px] h-[500px] mx-auto bg-[#e0d5c5]/40 rounded shadow-[14px_14px_44px_rgba(26,58,92,0.12)] flex items-center justify-center overflow-hidden">
-             <svg className="w-24 h-24 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <div className="w-full max-w-[400px] h-[500px] mx-auto bg-[#e0d5c5]/40 rounded shadow-[14px_14px_44px_rgba(26,58,92,0.12)] flex items-center justify-center overflow-hidden" aria-hidden="true">
+             <svg className="w-24 h-24 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </div>
           <div>
-            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-4 ">
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-4 ">
               Named for Kasia
             </div>
             <h2 className="font-serif text-[2.4em] font-light text-primary mb-5 leading-[1.15]">
@@ -116,10 +113,10 @@ export default function Angels() {
           </div>
         </div>
 
-        <section className="bg-secondary px-6 md:px-16 py-16 md:py-20">
+        <section aria-label="Angel Roles" className="bg-secondary px-6 md:px-16 py-16 md:py-20">
           <div className="text-center mb-12">
-            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Angel Roles</div>
-            <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Find your way to help.</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Angel Roles</div>
+            <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Find your way to help.</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[900px] mx-auto">
@@ -156,13 +153,13 @@ export default function Angels() {
 
         <FlowerStrip />
 
-        <section className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
+        <section aria-label="Recognition Tiers" className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
           <div className="text-center mb-8">
-            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Recognition Tiers</div>
-            <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Every hour of care is honored.</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Recognition Tiers</div>
+            <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Every hour of care is honored.</h2>
           </div>
           
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Angel recognition tiers table">
             <table className="w-full border-collapse text-[0.88em] mt-7">
               <thead>
                 <tr>
@@ -196,7 +193,7 @@ export default function Angels() {
           </div>
         </section>
 
-        <section id="apply" className="bg-primary px-6 md:px-16 py-20 text-center">
+        <section id="apply" aria-label="Apply to Become a KasiaCare Angel" className="bg-primary px-6 md:px-16 py-20 text-center">
           <h2 className="font-serif text-[2.6em] font-light text-white mb-4 leading-[1.2]">
             Ready to become a<br/><em className="italic text-accent">KasiaCare Angel?</em>
           </h2>
@@ -215,57 +212,57 @@ export default function Angels() {
             <form onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">First Name <span className="text-red-300">*</span></label>
-                  <input type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={angInputClass(errors.firstName)} />
-                  <ErrorMsg msg={errors.firstName} />
+                  <label htmlFor="ang-firstName" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">First Name <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="ang-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={angInputClass(errors.firstName)} aria-required="true" aria-describedby={errors.firstName ? "aerr-firstName" : undefined} />
+                  {errors.firstName && <p id="aerr-firstName" className="text-[0.75em] text-red-300 mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-300">*</span></label>
-                  <input type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={angInputClass(errors.lastName)} />
-                  <ErrorMsg msg={errors.lastName} />
+                  <label htmlFor="ang-lastName" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="ang-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={angInputClass(errors.lastName)} aria-required="true" aria-describedby={errors.lastName ? "aerr-lastName" : undefined} />
+                  {errors.lastName && <p id="aerr-lastName" className="text-[0.75em] text-red-300 mt-1">{errors.lastName}</p>}
                 </div>
               </div>
               <div className="mb-3.5">
-                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-300">*</span></label>
-                <input type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={angInputClass(errors.phone)} />
-                <ErrorMsg msg={errors.phone} />
+                <label htmlFor="ang-phone" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="ang-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={angInputClass(errors.phone)} aria-required="true" aria-describedby={errors.phone ? "aerr-phone" : undefined} />
+                {errors.phone && <p id="aerr-phone" className="text-[0.75em] text-red-300 mt-1">{errors.phone}</p>}
               </div>
               <div className="mb-3.5">
-                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Address <span className="text-red-300">*</span></label>
-                <input type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={angInputClass(errors.address)} />
-                <ErrorMsg msg={errors.address} />
+                <label htmlFor="ang-address" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Address <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="ang-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={angInputClass(errors.address)} aria-required="true" aria-describedby={errors.address ? "aerr-address" : undefined} />
+                {errors.address && <p id="aerr-address" className="text-[0.75em] text-red-300 mt-1">{errors.address}</p>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">City <span className="text-red-300">*</span></label>
-                  <input type="text" placeholder="City" value={fields.city} onChange={set("city")} className={angInputClass(errors.city)} />
-                  <ErrorMsg msg={errors.city} />
+                  <label htmlFor="ang-city" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">City <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="ang-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={angInputClass(errors.city)} aria-required="true" aria-describedby={errors.city ? "aerr-city" : undefined} />
+                  {errors.city && <p id="aerr-city" className="text-[0.75em] text-red-300 mt-1">{errors.city}</p>}
                 </div>
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">State <span className="text-red-300">*</span></label>
-                  <input type="text" placeholder="State" value={fields.state} onChange={set("state")} className={angInputClass(errors.state)} />
-                  <ErrorMsg msg={errors.state} />
+                  <label htmlFor="ang-state" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">State <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="ang-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={angInputClass(errors.state)} aria-required="true" aria-describedby={errors.state ? "aerr-state" : undefined} />
+                  {errors.state && <p id="aerr-state" className="text-[0.75em] text-red-300 mt-1">{errors.state}</p>}
                 </div>
               </div>
               <div className="mb-3.5">
-                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-300">*</span></label>
-                <input type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={angInputClass(errors.email)} />
-                <ErrorMsg msg={errors.email} />
+                <label htmlFor="ang-email" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-300" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="ang-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={angInputClass(errors.email)} aria-required="true" aria-describedby={errors.email ? "aerr-email" : undefined} />
+                {errors.email && <p id="aerr-email" className="text-[0.75em] text-red-300 mt-1">{errors.email}</p>}
               </div>
               <div className="mb-3.5">
-                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Which Angel role interests you most?</label>
-                <select value={fields.role} onChange={set("role")} className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-[#8aaac8] rounded text-[0.9em] outline-none">
+                <label htmlFor="ang-role" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">Which Angel role interests you most?</label>
+                <select id="ang-role" value={fields.role} onChange={set("role")} className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-[#8aaac8] rounded text-[0.9em] outline-none">
                   <option value="" className="bg-primary">Select a role</option>
-                  <option className="bg-primary text-white">Social Media Angel</option>
-                  <option className="bg-primary text-white">Beta Testing Angel</option>
-                  <option className="bg-primary text-white">Care Plan Builder Angel</option>
-                  <option className="bg-primary text-white">Grant Research Angel</option>
-                  <option className="bg-primary text-white">Multiple roles / Not sure yet</option>
+                  <option value="social" className="bg-primary text-white">Social Media Angel</option>
+                  <option value="beta" className="bg-primary text-white">Beta Testing Angel</option>
+                  <option value="builder" className="bg-primary text-white">Care Plan Builder Angel</option>
+                  <option value="grant" className="bg-primary text-white">Grant Research Angel</option>
+                  <option value="multiple" className="bg-primary text-white">Multiple roles / Not sure yet</option>
                 </select>
               </div>
               <div className="mb-3.5">
-                <label className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">About You <span className="text-white/40 font-normal">(optional)</span></label>
-                <textarea value={fields.about} onChange={set("about")} placeholder="Tell us a little about yourself and your connection to caregiving" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[180px] resize-y" />
+                <label htmlFor="ang-about" className="block text-[0.8em] font-semibold text-white/70 mb-1.5 tracking-[0.3px]">About You <span className="text-white/40 font-normal">(optional)</span></label>
+                <textarea id="ang-about" value={fields.about} onChange={set("about")} placeholder="Tell us a little about yourself and your connection to caregiving" className="w-full px-4.5 py-3 border border-white/15 bg-white/10 text-white rounded text-[0.9em] outline-none placeholder:text-[#8aaac8] h-[180px] resize-y" />
               </div>
               <p className="text-[0.75em] text-[#8aaac8] mb-3">Fields marked <span className="text-red-300">*</span> are required.</p>
               {sendError && <p className="text-[0.8em] text-red-300 mb-2">{sendError}</p>}

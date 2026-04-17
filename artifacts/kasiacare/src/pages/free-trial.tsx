@@ -9,9 +9,6 @@ const inputClass = (err?: string) =>
     err ? "border-red-400 focus:border-red-400" : "border-border focus:border-accent"
   }`;
 
-const ErrorMsg = ({ msg }: { msg?: string }) =>
-  msg ? <p className="text-[0.75em] text-red-500 mt-1">{msg}</p> : null;
-
 type Fields = {
   firstName: string; lastName: string; phone: string;
   address: string; city: string; state: string;
@@ -87,7 +84,7 @@ export default function FreeTrial() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
+          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-4">
             Get Started
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.4em)] font-light leading-[1.12] text-primary mb-4.5">
@@ -117,46 +114,46 @@ export default function FreeTrial() {
             <form onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">First Name <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} />
-                  <ErrorMsg msg={errors.firstName} />
+                  <label htmlFor="trial-firstName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">First Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="trial-firstName" type="text" placeholder="First name" value={fields.firstName} onChange={set("firstName")} className={inputClass(errors.firstName)} aria-required="true" aria-describedby={errors.firstName ? "terr-firstName" : undefined} />
+                  {errors.firstName && <p id="terr-firstName" className="text-[0.75em] text-red-500 mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} />
-                  <ErrorMsg msg={errors.lastName} />
+                  <label htmlFor="trial-lastName" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Last Name <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="trial-lastName" type="text" placeholder="Last name" value={fields.lastName} onChange={set("lastName")} className={inputClass(errors.lastName)} aria-required="true" aria-describedby={errors.lastName ? "terr-lastName" : undefined} />
+                  {errors.lastName && <p id="terr-lastName" className="text-[0.75em] text-red-500 mt-1">{errors.lastName}</p>}
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-400">*</span></label>
-                <input type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} />
-                <ErrorMsg msg={errors.phone} />
+                <label htmlFor="trial-phone" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Phone Number <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="trial-phone" type="tel" placeholder="(555) 555-5555" value={fields.phone} onChange={set("phone")} className={inputClass(errors.phone)} aria-required="true" aria-describedby={errors.phone ? "terr-phone" : undefined} />
+                {errors.phone && <p id="terr-phone" className="text-[0.75em] text-red-500 mt-1">{errors.phone}</p>}
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Address <span className="text-red-400">*</span></label>
-                <input type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} />
-                <ErrorMsg msg={errors.address} />
+                <label htmlFor="trial-address" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="trial-address" type="text" placeholder="Street address" value={fields.address} onChange={set("address")} className={inputClass(errors.address)} aria-required="true" aria-describedby={errors.address ? "terr-address" : undefined} />
+                {errors.address && <p id="terr-address" className="text-[0.75em] text-red-500 mt-1">{errors.address}</p>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">City <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} />
-                  <ErrorMsg msg={errors.city} />
+                  <label htmlFor="trial-city" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">City <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="trial-city" type="text" placeholder="City" value={fields.city} onChange={set("city")} className={inputClass(errors.city)} aria-required="true" aria-describedby={errors.city ? "terr-city" : undefined} />
+                  {errors.city && <p id="terr-city" className="text-[0.75em] text-red-500 mt-1">{errors.city}</p>}
                 </div>
                 <div>
-                  <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">State <span className="text-red-400">*</span></label>
-                  <input type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} />
-                  <ErrorMsg msg={errors.state} />
+                  <label htmlFor="trial-state" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">State <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <input id="trial-state" type="text" placeholder="State" value={fields.state} onChange={set("state")} className={inputClass(errors.state)} aria-required="true" aria-describedby={errors.state ? "terr-state" : undefined} />
+                  {errors.state && <p id="terr-state" className="text-[0.75em] text-red-500 mt-1">{errors.state}</p>}
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-400">*</span></label>
-                <input type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} />
-                <ErrorMsg msg={errors.email} />
+                <label htmlFor="trial-email" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Email Address <span className="text-red-400" aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                <input id="trial-email" type="email" placeholder="your@email.com" value={fields.email} onChange={set("email")} className={inputClass(errors.email)} aria-required="true" aria-describedby={errors.email ? "terr-email" : undefined} />
+                {errors.email && <p id="terr-email" className="text-[0.75em] text-red-500 mt-1">{errors.email}</p>}
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">I am a...</label>
-                <select value={fields.role} onChange={set("role")} className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
+                <label htmlFor="trial-role" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">I am a...</label>
+                <select id="trial-role" value={fields.role} onChange={set("role")} className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
                   <option value="">Select your role</option>
                   <option value="family">Family caregiver</option>
                   <option value="self">Individual managing my own care</option>
@@ -165,8 +162,8 @@ export default function FreeTrial() {
                 </select>
               </div>
               <div className="mb-4">
-                <label className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Which plan interests you?</label>
-                <select value={fields.plan} onChange={set("plan")} className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
+                <label htmlFor="trial-plan" className="block text-[0.8em] font-semibold text-primary mb-1.5 tracking-[0.3px]">Which plan interests you?</label>
+                <select id="trial-plan" value={fields.plan} onChange={set("plan")} className="w-full px-4 py-3 border border-border bg-white text-foreground rounded text-[0.9em] outline-none focus:border-accent transition-colors appearance-none">
                   <option value="">Select a plan</option>
                   <option value="basic">Basic — $14.99/month</option>
                   <option value="plus">Plus — $34.99/month</option>
@@ -180,7 +177,7 @@ export default function FreeTrial() {
               </button>
               
               <p className="text-[0.78em] text-muted-foreground mt-2.5 leading-[1.6]">
-                Fields marked <span className="text-red-400">*</span> are required. By submitting this form you agree to our <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link>. KasiaCare does not store medical data. We will follow up by email to get you started.
+                Fields marked <span className="text-red-400" aria-hidden="true">*</span> are required. By submitting this form you agree to our <Link href="/privacy" className="text-accent underline hover:text-primary">Privacy Policy</Link>. KasiaCare does not store medical data. We will follow up by email to get you started.
               </p>
             </form>
             )}
@@ -190,35 +187,35 @@ export default function FreeTrial() {
             <h2 className="font-serif text-[1.8em] font-light text-primary mb-5">We are here to help.</h2>
             
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">📧</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">📧</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Email</h4>
-                <a href="mailto:lilia@kasiacare.com" className="text-[0.86em] text-muted-foreground leading-[1.6] hover:text-accent">lilia@kasiacare.com</a>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Email</h3>
+                <a href="mailto:lilia@kasiacare.com" className="text-[0.86em] text-muted-foreground leading-[1.6] hover:text-accent underline">lilia@kasiacare.com</a>
               </div>
             </div>
             
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">🌐</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">🌐</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Website</h4>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Website</h3>
                 <div className="text-[0.86em] text-muted-foreground leading-[1.6]">
-                  <a href="https://kasiacare.com" className="hover:text-accent">KasiaCare.com</a> &nbsp;·&nbsp; <a href="https://kasia.care" className="hover:text-accent">Kasia.Care</a>
+                  <a href="https://kasiacare.com" className="hover:text-accent underline">KasiaCare.com</a> &nbsp;·&nbsp; <a href="https://kasia.care" className="hover:text-accent underline">Kasia.Care</a>
                 </div>
               </div>
             </div>
 
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">💙</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">💙</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Angels Program</h4>
-                <p className="text-[0.86em] text-muted-foreground leading-[1.6]">Want to volunteer? <Link href="/angels" className="text-accent hover:underline">Become a KasiaCare Angel.</Link></p>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Angels Program</h3>
+                <p className="text-[0.86em] text-muted-foreground leading-[1.6]">Want to volunteer? <Link href="/angels" className="text-accent underline hover:text-primary">Become a KasiaCare Angel.</Link></p>
               </div>
             </div>
 
             <div className="flex gap-3.5 mb-5.5 items-start">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0">🕐</div>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-[1.1em] flex-shrink-0" aria-hidden="true">🕐</div>
               <div>
-                <h4 className="text-[0.88em] font-bold text-primary mb-0.5">Response Time</h4>
+                <h3 className="text-[0.88em] font-bold text-primary mb-0.5">Response Time</h3>
                 <p className="text-[0.86em] text-muted-foreground leading-[1.6]">We typically respond within 1–2 business days. Plus subscribers receive priority support.</p>
               </div>
             </div>

@@ -108,7 +108,7 @@
   --secondary-foreground: 213 53% 23%;
 
   --muted: 31 47% 91%;
-  --muted-foreground: 30 14% 42%; /* muted text #7a6a58 */
+  --muted-foreground: 30 14% 36%; /* muted text — darkened for WCAG AA contrast */
 
   --accent: 349 42% 57%; /* rose #c4667a */
   --accent-foreground: 0 0% 100%;
@@ -257,6 +257,11 @@ button, [role="button"] {
   input, textarea, select {
     font-size: 16px !important;
   }
+}
+
+/* Accessible accent text color — darkened rose for WCAG AA contrast on light backgrounds */
+.text-accent-label {
+  color: hsl(349, 50%, 34%);
 }
 
 @layer utilities {

@@ -10,7 +10,7 @@ export default function Features() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
+          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-4">
             Features
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-primary mb-4.5">
@@ -63,8 +63,8 @@ export default function Features() {
           </div>
 
           <div className="text-center mb-12">
-            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Core Features</div>
-            <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Available in Basic &amp; Plus</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Core Features</div>
+            <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Available in Basic &amp; Plus</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
@@ -116,8 +116,8 @@ export default function Features() {
           </div>
 
           <div className="text-center mb-12">
-            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Plus Features</div>
-            <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Everything in Basic, plus:</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Plus Features</div>
+            <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Everything in Basic, plus:</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -156,10 +156,10 @@ export default function Features() {
 
         <FlowerStrip />
 
-        <section className="bg-secondary px-6 md:px-16 py-16 md:py-20">
+        <section aria-label="Calendars" className="bg-secondary px-6 md:px-16 py-16 md:py-20">
           <div className="text-center mb-12">
-            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Calendars</div>
-            <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Every calendar has a reminder option.</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Calendars</div>
+            <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Every calendar has a reminder option.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-[1000px] mx-auto">
             <div className="bg-white p-6 rounded shadow-[0_2px_12px_rgba(26,58,92,0.06)]">
@@ -201,7 +201,7 @@ export default function Features() {
           </div>
         </section>
 
-        <section className="bg-accent px-6 md:px-16 py-16 text-center">
+        <section aria-label="Start free trial" className="bg-accent px-6 md:px-16 py-16 text-center">
           <h2 className="font-serif text-4xl md:text-[2.2em] font-light text-white mb-3.5">
             Ready to start?
           </h2>

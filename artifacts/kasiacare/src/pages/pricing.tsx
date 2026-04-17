@@ -110,11 +110,11 @@ export default function Pricing() {
           </p>
         </div>
 
-        <section id="a-la-carte" className="bg-secondary px-6 md:px-16 py-16 md:py-20">
+        <section id="a-la-carte" aria-label="A La Carte Human Touch Services" className="bg-secondary px-6 md:px-16 py-16 md:py-20">
           <div className="max-w-[1080px] mx-auto">
             <div className="text-center mb-12">
-              <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">A La Carte — Human Touch Services</div>
-              <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Premium support,<br/>delivered by KasiaCare Angels.</div>
+              <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">A La Carte — Human Touch Services</div>
+              <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Premium support,<br/>delivered by KasiaCare Angels.</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[900px] mx-auto">
               <div className="bg-white p-6 rounded shadow-[0_2px_12px_rgba(26,58,92,0.06)] flex gap-4.5 items-start">
@@ -168,11 +168,11 @@ export default function Pricing() {
 
         <FlowerStrip />
 
-        <section className="px-6 md:px-16 py-16 md:py-20 bg-cream">
+        <section aria-label="Frequently Asked Questions" className="px-6 md:px-16 py-16 md:py-20 bg-cream">
           <div className="max-w-[720px] mx-auto">
             <div className="text-center mb-12">
-              <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Questions</div>
-              <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Frequently Asked</div>
+              <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-3.5">Questions</div>
+              <h2 className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Frequently Asked</h2>
             </div>
             
             <div className="border-b border-border py-5">
@@ -197,7 +197,7 @@ export default function Pricing() {
             </div>
             <div className="border-b border-border py-5">
               <div className="font-serif text-[1.15em] font-semibold text-primary mb-2">What is a KasiaCare Angel?</div>
-              <p className="text-[0.9em] leading-[1.8] text-muted-foreground">KasiaCare Angels are our volunteer and service team — named in honor of Kasia. They deliver A La Carte services, help families get started, and support the KasiaCare community. <Link href="/angels" className="text-accent hover:underline">Learn more about the Angels program.</Link></p>
+              <p className="text-[0.9em] leading-[1.8] text-muted-foreground">KasiaCare Angels are our volunteer and service team — named in honor of Kasia. They deliver A La Carte services, help families get started, and support the KasiaCare community. <Link href="/angels" className="text-accent underline hover:text-primary">Learn more about the Angels program.</Link></p>
             </div>
 
           </div>
