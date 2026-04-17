@@ -4,6 +4,46 @@ How to use this file: add a new entry at the top each time the site changes. Use
 
 ---
 
+## [v0.4.0] — April 17, 2026
+
+### Database Schema — All V1 Modules
+
+Full PostgreSQL schema built from the Data Dictionary v1.0. 13 tables created and pushed to the database:
+
+| Table | Module |
+|---|---|
+| `users` | User Account — links to Clerk auth, stores role, subscription tier, notification prefs |
+| `care_recipients` | Care Recipient Profile — name, photo, preferences, routine notes |
+| `care_team_members` | Care Team — junction table linking users to care recipients |
+| `emergency_contacts` | Emergency Contacts — priority-ordered contacts per recipient |
+| `tasks` | Tasks Calendar — recurring/one-off tasks with AM/PM/time-of-day, category, assignment |
+| `task_completions` | Real-Time Checklist — timestamp log of who completed what and when |
+| `meals` | Meals Calendar — breakfast/lunch/dinner/snack with completion tracking |
+| `medication_reminders` | Medication Calendar — time-based labels only (V1 PHI boundary respected) |
+| `medication_completions` | Medication completion log |
+| `activities` | Activities Calendar — outings, visits, entertainment |
+| `appointments` | Appointments — location, bring-items, Google Calendar event ID hook |
+| `caregiver_visits` | Caregiver Calendar — Plus tier only, visit scheduling |
+| `daily_notes` | Daily Care Notes — dated free-text notes by author |
+| `supply_needs` | Supply Needs — tracked items with resolved status |
+
+### Authentication
+
+- **Clerk auth integrated** across the full site — sign-in, sign-up, session management.
+- Branded sign-in and sign-up pages at `/sign-in` and `/sign-up` — match KasiaCare colors (navy, cream, rose) with Cormorant Garamond headings.
+- Google sign-in enabled by default (configurable in the Auth pane).
+- **All marketing pages remain fully public** — no login wall on the website.
+- `/dashboard` route now protected — redirects to sign-in if not authenticated.
+- API server updated with Clerk session middleware — protected routes can verify user identity server-side.
+- `requireAuth` middleware available for all protected API endpoints.
+
+### Infrastructure
+
+- Post-commit git hook: every commit now auto-pushes to GitHub using a stored Personal Access Token.
+- GitHub remote switched from SSH to HTTPS for reliable authentication.
+
+---
+
 ## [v0.3.0] — April 17, 2026
 
 ### Mobile Responsiveness — Phase 2
