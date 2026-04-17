@@ -3,6 +3,7 @@ export function DevBanner() {
     <>
       {/* Top header badge */}
       <div
+        className="text-base md:text-xs"
         style={{
           position: "fixed",
           top: 0,
@@ -11,7 +12,6 @@ export function DevBanner() {
           zIndex: 10000,
           background: "#c4667a",
           color: "#fff",
-          fontSize: "1rem",
           fontWeight: 700,
           letterSpacing: "0.16em",
           textTransform: "uppercase",
@@ -27,6 +27,7 @@ export function DevBanner() {
 
       {/* Bottom bar */}
       <div
+        className="text-base md:text-xs"
         style={{
           position: "fixed",
           bottom: 0,
@@ -36,7 +37,6 @@ export function DevBanner() {
           background: "linear-gradient(90deg, #1a3a5c 0%, #c4667a 100%)",
           color: "#fff",
           textAlign: "center",
-          fontSize: "1rem",
           fontWeight: 600,
           letterSpacing: "0.12em",
           textTransform: "uppercase",
