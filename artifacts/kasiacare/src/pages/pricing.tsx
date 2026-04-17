@@ -49,7 +49,7 @@ export default function Pricing() {
                   <li className="text-[0.86em] leading-[1.7] text-muted-foreground py-1.5 border-b border-border flex items-start gap-2 before:content-['✓'] before:text-sage before:font-bold before:flex-shrink-0 before:mt-0.5">Email Notifications</li>
                   <li className="text-[0.86em] leading-[1.7] text-muted-foreground py-1.5 border-b border-border flex items-start gap-2 before:content-['✓'] before:text-sage before:font-bold before:flex-shrink-0 before:mt-0.5">Video Tutorials &amp; Email Support</li>
                 </ul>
-                <Link href="/contact" className="block text-center py-3 rounded text-[0.88em] font-semibold border-1.5 border-primary text-primary hover:bg-primary hover:text-white transition-all mt-auto">
+                <Link href="/free-trial" className="block text-center py-3 rounded text-[0.88em] font-semibold border-1.5 border-primary text-primary hover:bg-primary hover:text-white transition-all mt-auto">
                   Sign Up for a Free Trial
                 </Link>
               </div>
@@ -76,7 +76,7 @@ export default function Pricing() {
                   <li className="text-[0.86em] leading-[1.7] text-muted-foreground py-1.5 border-b border-border flex items-start gap-2 before:content-['✓'] before:text-sage before:font-bold before:flex-shrink-0 before:mt-0.5">One-on-One Video Session included</li>
                   <li className="text-[0.86em] leading-[1.7] text-muted-foreground py-1.5 border-b border-border flex items-start gap-2 before:content-['✓'] before:text-sage before:font-bold before:flex-shrink-0 before:mt-0.5">Priority Support</li>
                 </ul>
-                <Link href="/contact" className="block text-center py-3 rounded text-[0.88em] font-semibold bg-primary text-white hover:bg-[#2c6fad] transition-all mt-auto">
+                <Link href="/free-trial" className="block text-center py-3 rounded text-[0.88em] font-semibold bg-primary text-white hover:bg-[#2c6fad] transition-all mt-auto">
                   Sign Up for a Free Trial
                 </Link>
               </div>

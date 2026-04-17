@@ -24,7 +24,7 @@ export function Footer() {
           <h4 className="text-xs tracking-wider uppercase text-[#c8952a] mb-3">Product</h4>
           <Link href="/features" className="text-sm text-[#8aaac8] hover:text-white mb-2 transition-colors">Features</Link>
           <Link href="/pricing" className="text-sm text-[#8aaac8] hover:text-white mb-2 transition-colors">Pricing</Link>
-          <Link href="/contact" className="text-sm text-[#8aaac8] hover:text-white mb-2 transition-colors">Sign Up for a Free Trial</Link>
+          <Link href="/free-trial" className="text-sm text-[#8aaac8] hover:text-white mb-2 transition-colors">Sign Up for a Free Trial</Link>
           <Link href="/angels" className="text-sm text-[#8aaac8] hover:text-white mb-2 transition-colors">Angels</Link>
         </div>
 

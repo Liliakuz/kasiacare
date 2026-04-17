@@ -212,7 +212,7 @@ export default function Features() {
             <Link href="/pricing" className="bg-white text-accent px-8 py-3 rounded text-[0.9em] font-semibold hover:bg-primary hover:text-white transition-all">
               View Pricing
             </Link>
-            <Link href="/contact" className="bg-transparent text-white px-8 py-3 rounded border border-white/50 text-[0.9em] hover:bg-white/10 transition-all">
+            <Link href="/free-trial" className="bg-transparent text-white px-8 py-3 rounded border border-white/50 text-[0.9em] hover:bg-white/10 transition-all">
               Sign Up for a Free Trial
             </Link>
           </div>
