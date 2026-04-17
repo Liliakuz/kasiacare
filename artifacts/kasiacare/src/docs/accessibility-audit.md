@@ -28,27 +28,37 @@
 
 ## Screen Reader Walkthrough — April 17, 2026
 
-**Method:** Two-phase review — (1) static code audit against ARIA authoring practices and WCAG 2.1 AA; (2) automated Playwright end-to-end walkthrough at 375 × 812 px (mobile) verifying aria attribute state, keyboard interactions, and live-region connections. The automated run simulates the navigation and attribute checks a screen reader (VoiceOver/TalkBack) performs on every focus event and DOM mutation.  
+**Method:** Two-phase review — (1) static ARIA code audit against WCAG 2.1 AA and ARIA Authoring Practices Guide (APG); (2) automated Playwright browser test at 375 × 812 px (mobile viewport) verifying correct DOM aria attribute values, live-region linkage, and toggle state transitions.
+
+> **Note on real device testing:** A full manual walkthrough with VoiceOver (iOS) or TalkBack (Android) on a physical device requires hardware access that is not available in this automated build environment. The automated checks below confirm the correct ARIA semantics are in place in the DOM; a follow-up real-device walkthrough is recommended (see [Recommended: Real-Device Follow-Up](#recommended-real-device-follow-up)) to verify the actual announcement order and gesture flow.
+
 **Environment:** Playwright, Chromium, 375 × 812 px viewport  
 **Pages reviewed:** `/contact`, `/free-trial`
 
-### Step-by-step test observations (post-fix)
+### Automated ARIA verification results (post-fix)
 
 **Contact form `/contact` at 375 × 812 px:**
-1. Page renders with visible h1 and h2 "Contact Us" — correct landmark hierarchy.
-2. `#contact-firstName`: `aria-required="true"` present; `aria-invalid` absent before any submission — correct (no errors yet).
-3. Clicked "Send Message" with all fields empty → inline error messages appeared; `aria-invalid="true"` confirmed on `#contact-firstName` and `#contact-email`; `aria-describedby="err-firstName"` confirmed linking to the error paragraph with matching `id`.
-4. Filled all required fields → `aria-invalid` attribute cleared from `#contact-firstName` as expected.
-5. Feature vote button for "Mobile App (iOS)": `aria-pressed="false"` confirmed before click; `aria-pressed="true"` confirmed after click — toggle state is now programmatically exposed.
-6. Required-fields disclaimer reads "Fields marked with an asterisk" — sentence is complete without the symbol.
+1. Page has visible h1 and h2 "Contact Us" — landmark hierarchy correct.
+2. `#contact-firstName`: `aria-required="true"` confirmed; `aria-invalid` absent before any submission — correct initial state.
+3. Submitted form with all fields empty → inline error text appeared; `aria-invalid="true"` confirmed on `#contact-firstName` and `#contact-email`; `aria-describedby="err-firstName"` confirmed, pointing to error paragraph with matching `id` — screen readers will announce the error when focusing the field.
+4. Filled all required fields → `aria-invalid` cleared from `#contact-firstName` — error state resolves on correction.
+5. Feature vote button "Mobile App (iOS)": `aria-pressed="false"` before click; `aria-pressed="true"` after click — toggled state programmatically exposed for screen readers.
+6. Required-fields disclaimer contains "Fields marked with an asterisk" — sentence is grammatically complete without the visual `*` symbol.
 
 **Free trial form `/free-trial` at 375 × 812 px:**
-1. h1 contains "Sign up for a free trial"; h2 "Sign Up for a Free Trial" visible — correct hierarchy.
-2. Clicked "Request My Free Trial" with all fields empty → `aria-invalid="true"` set on `#trial-firstName`; `aria-describedby="terr-firstName"` links to error paragraph with `textContent` "First name is required." — error is discoverable by screen reader.
-3. Filled all required fields → `aria-invalid` cleared from `#trial-firstName` — error state resolves correctly.
+1. h1 contains "Sign up for a free trial"; h2 "Sign Up for a Free Trial" visible — hierarchy correct.
+2. Submitted form with all fields empty → `aria-invalid="true"` set on `#trial-firstName`; `aria-describedby="terr-firstName"` linked to error paragraph with `textContent` "First name is required." — error discoverable via screen reader.
+3. Filled all required fields → `aria-invalid` cleared from `#trial-firstName` — error resolves correctly.
 4. Required-fields disclaimer confirmed to contain "Fields marked with an asterisk".
 
-**All checks passed — zero SR issues remain on either form.**
+**All automated ARIA checks passed — no structural SR issues remain on either form.**
+
+### Recommended: Real-Device Follow-Up
+
+A real-device walkthrough should be conducted when iOS/Android hardware is available:
+- **Device:** iPhone SE (or any 375 pt-wide device) + Safari + VoiceOver; or Android with TalkBack
+- **Scenario:** Navigate each form using swipe gestures only, submitting once with errors and once successfully
+- **What to verify beyond automated checks:** actual announcement order (label → value → role → state), whether `role="alert"` fires immediately on submission error in the mobile SR, whether focus shift to the success `role="status"` panel is audibly announced, and swipe-navigation flow through the City/State inline grid on narrow screens
 
 ### Issues found and fixed
 
