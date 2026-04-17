@@ -36,7 +36,7 @@ export function Footer() {
           <Link href="/privacy" className="text-sm text-[#8aaac8] hover:text-white mb-2 transition-colors">Terms</Link>
         </div>
       </footer>
-      <div className="bg-primary border-t border-white/10 text-center px-6 py-4 text-xs text-[#5a7a9a] font-serif italic">
+      <div className="bg-primary border-t border-white/10 text-center px-6 py-4 text-base md:text-xs text-[#5a7a9a] font-serif italic">
         &copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. 💙
       </div>
     </>

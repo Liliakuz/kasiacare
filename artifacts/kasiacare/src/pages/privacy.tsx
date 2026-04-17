@@ -18,9 +18,9 @@ export default function Privacy() {
         <FlowerStrip />
 
         <div className="max-w-[820px] mx-auto px-6 md:px-10 py-16 md:py-20">
-          <div className="text-[0.78em] text-muted-foreground mb-7">
+          <p className="text-[0.78em] text-muted-foreground mb-7">
             Last updated: April 2026 &nbsp;·&nbsp; Version 1 &nbsp;·&nbsp; Subject to attorney review before launch
-          </div>
+          </p>
 
           <div className="bg-white border border-border p-5 md:px-6 rounded mb-9 shadow-sm">
             <h4 className="text-[0.78em] font-bold uppercase tracking-[0.5px] text-primary mb-2.5">On This Page</h4>

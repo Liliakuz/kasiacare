@@ -87,7 +87,7 @@ export default function FreeTrial() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
+          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
             Get Started
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.4em)] font-light leading-[1.12] text-primary mb-4.5">

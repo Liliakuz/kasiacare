@@ -15,7 +15,7 @@ export default function Home() {
           <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full bg-secondary z-0" />
           
           <div className="relative z-10 lg:pr-16">
-            <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-5">
+            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-5">
               Care Plans for Every Caregiver
             </div>
             <h1 className="font-serif text-4xl md:text-[clamp(2.8em,5vw,4.2em)] font-light leading-[1.12] text-primary mb-6">
@@ -65,7 +65,7 @@ export default function Home() {
         {/* MISSION */}
         <section className="bg-primary text-white px-6 lg:px-16 py-16 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 items-center">
           <div>
-            <div className="text-xs tracking-[2px] uppercase text-[#c8952a] mb-2.5">Our Mission</div>
+            <div className="text-base md:text-xs tracking-[2px] uppercase text-[#c8952a] mb-2.5">Our Mission</div>
             <div className="font-serif text-3xl lg:text-4xl font-light leading-[1.25] text-white">
               Care with<br/>clarity.<br/>Care with<br/>joy.
             </div>
@@ -79,7 +79,7 @@ export default function Home() {
         {/* WHO IT'S FOR */}
         <section className="px-6 lg:px-16 py-20 bg-secondary">
           <div className="text-center mb-12">
-            <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Who It's For</div>
+            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Who It's For</div>
             <h2 className="font-serif text-3xl lg:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
               Built for every person<br/>in the circle of care.
             </h2>
@@ -108,7 +108,7 @@ export default function Home() {
         {/* FEATURES PREVIEW */}
         <section className="px-6 lg:px-16 py-20 bg-cream">
           <div className="text-center mb-12">
-            <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Features</div>
+            <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Features</div>
             <h2 className="font-serif text-3xl lg:text-[clamp(2em,3.5vw,2.8em)] font-light text-primary leading-[1.2]">
               Everything in one place.<br/>Simple enough for anyone.
             </h2>

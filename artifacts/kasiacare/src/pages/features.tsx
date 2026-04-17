@@ -10,7 +10,7 @@ export default function Features() {
       
       <main className="flex-1">
         <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
+          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent font-medium mb-4">
             Features
           </div>
           <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-primary mb-4.5">
@@ -28,7 +28,7 @@ export default function Features() {
           
           <div className="bg-primary text-white p-10 md:p-14 rounded-md mb-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
             <div>
-              <div className="text-[0.72em] tracking-[2px] uppercase text-[#c8952a] mb-2.5">Available in All Tiers</div>
+              <div className="text-base md:text-[0.72em] tracking-[2px] uppercase text-[#c8952a] mb-2.5">Available in All Tiers</div>
               <h2 className="font-serif text-[2.2em] font-light leading-[1.2] text-white mb-4.5">The Daily Dashboard</h2>
               <p className="text-[0.95em] leading-[1.85] text-[#c8d8e8] mb-3.5">
                 The heartbeat of KasiaCare. The moment you log in, you see your person's entire day — clearly, completely, and without searching. Confident caregivers walk through the door with joy.
@@ -63,7 +63,7 @@ export default function Features() {
           </div>
 
           <div className="text-center mb-12">
-            <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Core Features</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Core Features</div>
             <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Available in Basic &amp; Plus</div>
           </div>
           
@@ -116,7 +116,7 @@ export default function Features() {
           </div>
 
           <div className="text-center mb-12">
-            <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Plus Features</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Plus Features</div>
             <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Everything in Basic, plus:</div>
           </div>
 
@@ -158,7 +158,7 @@ export default function Features() {
 
         <section className="bg-secondary px-6 md:px-16 py-16 md:py-20">
           <div className="text-center mb-12">
-            <div className="text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Calendars</div>
+            <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent font-medium mb-3.5">Calendars</div>
             <div className="font-serif text-[clamp(1.8em,3vw,2.6em)] font-light text-primary leading-[1.2]">Every calendar has a reminder option.</div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-[1000px] mx-auto">
