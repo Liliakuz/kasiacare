@@ -1,137 +1,88 @@
+import { Link } from "wouter";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { FlowerStrip } from "@/components/FlowerStrip";
-import { motion } from "framer-motion";
-import { Link } from "wouter";
+
+function Cat({ title }: { title: string }) {
+  return (
+    <div style={{ background: "#102940", padding: "16px 20px" }}>
+      <h2 style={{ fontFamily: "Georgia, serif", fontSize: "1.2rem", fontWeight: 700, color: "#ffffff", margin: 0 }}>{title}</h2>
+    </div>
+  );
+}
 
 export default function About() {
   return (
-    <div className="min-h-screen flex flex-col pt-16 bg-cream">
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", paddingTop: 64 }}>
       <Nav />
-      
-      <main className="flex-1">
-        <div className="bg-secondary px-6 md:px-16 pt-[110px] pb-[70px]">
-          <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-4 ">
-            Our Story
-          </div>
-          <h1 className="font-serif text-4xl md:text-[clamp(2.4em,5vw,3.6em)] font-light leading-[1.12] text-primary mb-4.5">
-            Named for <em className="italic text-accent">Kasia.</em><br/>
-            Built for every family<br/>
-            like ours.
+      <main style={{ flex: 1 }}>
+
+        <div style={{ background: "#102940", padding: "40px 20px 36px" }}>
+          <p style={{ fontSize: "0.72rem", letterSpacing: "3px", textTransform: "uppercase", color: "#b07d10", fontWeight: 700, marginBottom: 14 }}>Care Plan Software</p>
+          <h1 style={{ fontFamily: "Georgia, serif", fontSize: "2.2rem", fontWeight: 700, color: "#ffffff", lineHeight: 1.15, marginBottom: 12 }}>
+            About <em style={{ fontStyle: "italic", color: "#c4667a" }}>KasiaCare</em>
           </h1>
-          <p className="text-base leading-[1.8] text-muted-foreground max-w-[560px]">
-            KasiaCare was born from thirty years of love, caregiving, and the quiet wish that someone had built a better way. This is that better way.
-          </p>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.82)", lineHeight: 1.8 }}>Built by a family caregiver, for every family caregiver.</p>
         </div>
 
-        <FlowerStrip />
-
-        <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-            <div className="relative h-[400px] md:h-[500px] hidden md:block">
-              <div className="w-[280px] h-[360px] bg-[#e0d5c5]/30 rounded absolute top-0 left-0 shadow-[14px_14px_44px_rgba(26,58,92,0.13)] flex items-center justify-center overflow-hidden">
-                <svg className="w-20 h-20 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div className="w-[220px] h-[280px] bg-[#e0d5c5]/40 rounded absolute bottom-0 right-0 shadow-[14px_14px_44px_rgba(26,58,92,0.13)] border-[6px] border-cream flex items-center justify-center overflow-hidden">
-                 <svg className="w-16 h-16 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              </div>
-              <motion.div 
-                className="absolute top-[46%] left-[46%] -translate-x-1/2 -translate-y-1/2 text-5xl z-10 select-none"
-                animate={{ y: ["-50%", "-60%", "-50%"], rotate: [-3, 3, -3], x: "-50%" }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              >🌻</motion.div>
-            </div>
-            
-            <div>
-              <div className="text-base md:text-xs tracking-[2.5px] uppercase text-accent-label font-medium mb-4 ">
-                Kasia — KAH-shah
-              </div>
-              <h2 className="font-serif text-[2.4em] font-light text-primary mb-5.5 leading-[1.15]">
-                The woman who<br/>inspired <em className="italic text-accent">everything.</em>
-              </h2>
-              <p className="text-[0.96em] leading-[1.88] text-muted-foreground mb-4">
-                <strong className="text-foreground font-semibold">Kasia</strong> was a beloved mother who lived with a disability and was cared for by her family for many years. She was full of warmth, laughter, and a love of flowers — the roses and gerberas that bloom throughout this website are hers.
-              </p>
-              <p className="text-[0.96em] leading-[1.88] text-muted-foreground mb-4">
-                Her daughter Lilia was her primary caregiver for over three decades — managing daily care schedules, medications, appointments, family coordination, and the thousand invisible details that caregiving requires. There was no app for that. There was no shared plan that traveled with Kasia wherever she went.
-              </p>
-              <p className="text-[0.96em] leading-[1.88] text-muted-foreground mb-4">
-                There were sticky notes. Phone calls between family members. The constant fear that something would fall through the cracks. The exhaustion of being the one person who held all the information.
-              </p>
-              <p className="text-[0.96em] leading-[1.88] text-muted-foreground mb-4">
-                Kasia passed away on <strong className="text-foreground font-semibold">February 7, 2023.</strong> KasiaCare is built in her memory — and for every family still in the middle of that journey.
-              </p>
-              <div className="bg-primary text-white p-6 md:px-7 md:py-6.5 rounded mt-6 font-serif italic text-[1.15em] leading-[1.7]">
-                "No one receiving care should feel unknown. No one providing care should feel unprepared. When caregivers are confident and prepared, they walk through the door with joy — and that joy is felt by the person they are there to love and serve."
-                <cite className="block mt-3 text-[0.75em] not-italic text-[#8aaac8] tracking-[0.5px]">— KasiaCare Mission Statement</cite>
-              </div>
-            </div>
+        <Cat title="Our Mission" />
+        <div style={{ background: "#f2e8d8", padding: "36px 20px" }}>
+          <p style={{ fontSize: "1rem", color: "#4a3828", lineHeight: 1.85, marginBottom: 14 }}>Every day, millions of caregivers wake up without a clear, shared plan. Medications get missed. Appointments get forgotten. A new caregiver walks through the door with no idea what that person's day looks like.</p>
+          <p style={{ fontSize: "1rem", color: "#4a3828", lineHeight: 1.85, marginBottom: 20 }}>KasiaCare was built to solve that — one care plan at a time.</p>
+          <div style={{ background: "#102940", borderRadius: 6, padding: "20px 22px" }}>
+            <p style={{ fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: "1.05rem", color: "#fff", lineHeight: 1.75, margin: 0 }}>"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+            <cite style={{ display: "block", marginTop: 10, fontSize: "0.75rem", color: "#8aaac8", fontStyle: "normal" }}>— KasiaCare Mission Statement</cite>
           </div>
         </div>
 
-        <div className="bg-primary text-white px-6 md:px-16 py-16 my-5">
-          <div className="max-w-[1080px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 md:gap-12 items-start">
-            <div>
-              <div className="text-base md:text-[0.72em] tracking-[2px] uppercase text-[#c8952a] mb-2.5">Mission</div>
-              <div className="font-serif text-[2.4em] font-light leading-[1.2] text-white">
-                Care with clarity.<br/>Care with joy.
-              </div>
+        <Cat title="Our Story" />
+        <div style={{ background: "#ffffff", padding: "36px 20px" }}>
+          <p style={{ fontSize: "1rem", color: "#4a3828", lineHeight: 1.85, marginBottom: 14 }}>KasiaCare is named in honor of <strong>Kasia</strong> — pronounced <em>KAH-shah</em> — a beloved mother who lived with a disability and was cared for by her family for many years. She had a radiant smile, a love of flowers, and an unshakeable spirit.</p>
+          <p style={{ fontSize: "1rem", color: "#4a3828", lineHeight: 1.85, marginBottom: 14 }}>Her daughter <strong>Lilia Kuzmicz</strong> was her primary caregiver for over thirty years. There was no shared care plan. No app that traveled with Kasia wherever she went — whether she was at the hospital, the doctor's office, or visiting family. Every handoff meant starting over.</p>
+          <p style={{ fontSize: "1rem", color: "#4a3828", lineHeight: 1.85 }}>Kasia passed away on <strong>February 7, 2023.</strong> KasiaCare is Lilia's way of making sure no other family has to coordinate care the hard way.</p>
+        </div>
+
+        <Cat title="What Makes Us Different" />
+        <div style={{ background: "#f2e8d8", padding: "36px 20px" }}>
+          {[
+            ["💙","Built from Real Caregiving","KasiaCare is not built by a tech company that studied caregiving. It is built by someone who lived it for thirty years — every medication, every appointment, every caregiver handoff, every late night."],
+            ["🌿","Designed for Everyone in the Circle","Family members, personal aids, agency caregivers, and the individuals themselves — everyone gets a view that is right for them. No technical knowledge required."],
+            ["🔒","Privacy First — Always","Version 1 stores no medical data. Printable reports use initials and state only. You control who sees what. We never sell your information."],
+            ["📍","Care Anywhere","At home, at the hospital, at the doctor's office, or visiting family — the care plan travels with the person. Wherever care happens, KasiaCare is there."],
+          ].map(([icon, title, body]) => (
+            <div key={title} style={{ background: "#fff", borderRadius: 6, padding: 20, borderLeft: "5px solid #b03060", marginBottom: 12 }}>
+              <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>{icon}</div>
+              <h3 style={{ fontFamily: "Georgia, serif", fontSize: "1.1rem", fontWeight: 700, color: "#102940", marginBottom: 6 }}>{title}</h3>
+              <p style={{ fontSize: "0.97rem", color: "#4a3828", lineHeight: 1.8, margin: 0 }}>{body}</p>
             </div>
-            <div>
-              <p className="text-[0.97em] leading-[1.9] text-[#c8d8e8] mb-4">
-                KasiaCare exists to improve the quality of life and independence of every person receiving care — by giving caregivers, families, individuals, and care teams <strong className="text-white font-semibold">one simple, shared place</strong> to build, follow, and carry their care plan wherever life takes them.
-              </p>
-              <p className="text-[0.97em] leading-[1.9] text-[#c8d8e8] mb-4">
-                Just as Lilia was an assistant to her mother — organizing, planning, remembering, reminding — <strong className="text-white font-semibold">KasiaCare is an assistant to every caregiver</strong> who is planning and caring for other people's lives.
-              </p>
-              <p className="text-[0.97em] leading-[1.9] text-[#c8d8e8]">
-                This is not just software. It is a belief that caregiving, when supported well, can be done with <strong className="text-white font-semibold">confidence, dignity, and joy.</strong>
-              </p>
-            </div>
+          ))}
+        </div>
+
+        <Cat title="Meet the Founder" />
+        <div style={{ background: "#102940", padding: "36px 20px" }}>
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: "1.6rem", fontWeight: 700, color: "#fff", marginBottom: 4 }}>Lilia Kuzmicz</h2>
+          <p style={{ fontSize: "0.88rem", color: "#8aaac8", marginBottom: 18 }}>Founder, KasiaCare · Kasia's Daughter</p>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.82)", lineHeight: 1.85, marginBottom: 14 }}>Lilia Kuzmicz is a serial entrepreneur with over 30 years of experience in technology and caregiving. She served as CEO of Reverse Polarity LLC (2008–2019) and Media and Company Services (1997–2023).</p>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.82)", lineHeight: 1.85, marginBottom: 14 }}>She holds certifications from MIT, Harvard, IBM, Google, Kennesaw State University, and Infosec — bringing both professional credibility and deep human empathy to everything she builds.</p>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.82)", lineHeight: 1.85, marginBottom: 20 }}>Most importantly, she was Kasia's daughter — the person who gave her mother her morning medications, took her to every appointment, and held her hand at the end. KasiaCare is built from that love.</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            {["MIT","Harvard","IBM","Google","Kennesaw State","Infosec"].map(c => (
+              <span key={c} style={{ background: "rgba(255,255,255,0.12)", color: "#fff", fontSize: "0.82rem", fontWeight: 600, padding: "5px 12px", borderRadius: 4 }}>{c}</span>
+            ))}
           </div>
         </div>
 
-        <FlowerStrip />
-
-        <div className="max-w-[1080px] mx-auto px-6 md:px-10 py-16 md:py-20">
-          <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10 md:gap-14 items-start">
-            <div className="w-full md:w-[220px] h-[280px] bg-[#e0d5c5]/30 rounded shadow-[12px_12px_40px_rgba(26,58,92,0.12)] flex items-center justify-center overflow-hidden">
-               <svg className="w-20 h-20 text-primary/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </div>
-            <div>
-              <div className="text-base md:text-[0.72em] tracking-[2.5px] uppercase text-accent-label font-medium mb-4 ">
-                The Founder
-              </div>
-              <h2 className="font-serif text-3xl md:text-[2em] font-light text-primary mb-1.5">Lilia Kuzmicz</h2>
-              <div className="text-base md:text-[0.82em] text-muted-foreground mb-5 tracking-[0.3px]">
-                Founder &amp; CEO, KasiaCare &nbsp;·&nbsp; Kasia's Daughter
-              </div>
-              <p className="text-[0.95em] leading-[1.85] text-muted-foreground mb-3.5">
-                Lilia Kuzmicz is a serial entrepreneur with over 30 years of experience in technology and caregiving. She served as CEO of <strong className="text-foreground font-semibold">Reverse Polarity LLC</strong> (2008–2019) and <strong className="text-foreground font-semibold">Media and Company Services</strong> (1997–2023).
-              </p>
-              <p className="text-[0.95em] leading-[1.85] text-muted-foreground mb-3.5">
-                She brings both technical expertise and deeply personal caregiving experience to KasiaCare — having managed her mother's care for over thirty years while simultaneously building businesses, navigating the healthcare system, and coordinating care teams.
-              </p>
-              <p className="text-[0.95em] leading-[1.85] text-muted-foreground mb-3.5">
-                Lilia is currently in cancer remission and building KasiaCare within her disability limitations — a testament to her belief that this platform is needed now, and that the right tools make everything possible.
-              </p>
-              <div className="flex flex-wrap gap-2 my-4">
-                <span className="inline-block bg-secondary text-primary text-[0.78em] font-medium px-3 py-1 rounded">MIT</span>
-                <span className="inline-block bg-secondary text-primary text-[0.78em] font-medium px-3 py-1 rounded">Harvard</span>
-                <span className="inline-block bg-secondary text-primary text-[0.78em] font-medium px-3 py-1 rounded">IBM</span>
-                <span className="inline-block bg-secondary text-primary text-[0.78em] font-medium px-3 py-1 rounded">Google</span>
-                <span className="inline-block bg-secondary text-primary text-[0.78em] font-medium px-3 py-1 rounded">Kennesaw State</span>
-                <span className="inline-block bg-secondary text-primary text-[0.78em] font-medium px-3 py-1 rounded">Infosec</span>
-              </div>
-              <Link href="/contact" className="inline-block bg-primary text-white px-7 py-3 rounded text-[0.88em] font-medium hover:bg-[#2c6fad] transition-colors mt-2">
-                Get in Touch
-              </Link>
-            </div>
-          </div>
+        <div style={{ background: "#b03060", padding: "48px 20px", textAlign: "center" }}>
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: "1.9rem", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: 12 }}>
+            Ready to bring <em style={{ fontStyle: "italic" }}>joy</em> back to caregiving?
+          </h2>
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.9)", marginBottom: 22 }}>Join our waitlist. We will reach out personally when your trial is ready.</p>
+          <Link href="/contact" style={{ display: "inline-block", background: "#fff", color: "#b03060", fontWeight: 700, padding: "14px 32px", borderRadius: 4, fontSize: "1rem", marginBottom: 12 }}>
+            Sign Up Today
+          </Link>
+          <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.7)" }}>No credit card · No commitment · Your info is never sold.</p>
         </div>
 
       </main>
-      
       <Footer />
     </div>
   );
