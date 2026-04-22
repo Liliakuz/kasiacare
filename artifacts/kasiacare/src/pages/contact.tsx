@@ -23,6 +23,9 @@ const empty: Fields = {
 
 export default function Contact() {
   const [votes, setVotes] = useState<Record<string, boolean>>({});
+  const [pollSubmitted, setPollSubmitted] = useState(false);
+  const [pollSending, setPollSending] = useState(false);
+  const [pollError, setPollError] = useState("");
   const [fields, setFields] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Partial<Fields>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -38,6 +41,29 @@ export default function Contact() {
 
   const toggleVote = (feature: string) => {
     setVotes(prev => ({ ...prev, [feature]: !prev[feature] }));
+  };
+
+  const handlePollSubmit = async () => {
+    const selected = features.filter(f => votes[f]);
+    if (selected.length === 0) {
+      setPollError("Please select at least one feature before sending.");
+      return;
+    }
+    setPollSending(true);
+    setPollError("");
+    try {
+      const res = await fetch("/api/poll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ features: selected }),
+      });
+      if (!res.ok) throw new Error("Server error");
+      setPollSubmitted(true);
+    } catch {
+      setPollError("Something went wrong. Please try again.");
+    } finally {
+      setPollSending(false);
+    }
   };
 
   const features = [
@@ -236,23 +262,42 @@ export default function Contact() {
             <div>
               <h3 className="font-serif text-[1.3em] font-normal text-primary mb-3">What should we build next?</h3>
               <p className="text-[0.86em] text-muted-foreground mb-3.5 leading-[1.6]">Vote for the features you want most. We read every vote.</p>
-              <div className="flex flex-wrap gap-2">
-                {features.map((feature) => (
-                  <button 
-                    key={feature}
+              {pollSubmitted ? (
+                <div className="text-center py-4 bg-secondary rounded border border-border">
+                  <div className="text-2xl mb-2" aria-hidden="true">🙌</div>
+                  <p className="text-[0.9em] font-semibold text-primary">Thanks for voting!</p>
+                  <p className="text-[0.8em] text-muted-foreground mt-1">Your selections have been sent to the team.</p>
+                </div>
+              ) : (
+                <>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {features.map((feature) => (
+                      <button 
+                        key={feature}
+                        type="button"
+                        onClick={() => toggleVote(feature)}
+                        aria-pressed={!!votes[feature]}
+                        className={`px-3.5 py-1.5 rounded-full text-[0.8em] cursor-pointer transition-all select-none border ${
+                          votes[feature] 
+                            ? "bg-accent text-white border-accent" 
+                            : "bg-white border-border text-primary hover:border-accent hover:text-accent hover:bg-[#fff5f7]"
+                        }`}
+                      >
+                        {feature}
+                      </button>
+                    ))}
+                  </div>
+                  {pollError && <p role="alert" className="text-[0.78em] text-red-500 mb-2">{pollError}</p>}
+                  <button
                     type="button"
-                    onClick={() => toggleVote(feature)}
-                    aria-pressed={!!votes[feature]}
-                    className={`px-3.5 py-1.5 rounded-full text-[0.8em] cursor-pointer transition-all select-none border ${
-                      votes[feature] 
-                        ? "bg-accent text-white border-accent" 
-                        : "bg-white border-border text-primary hover:border-accent hover:text-accent hover:bg-[#fff5f7]"
-                    }`}
+                    onClick={handlePollSubmit}
+                    disabled={pollSending}
+                    className="w-full py-2.5 mt-1 bg-primary text-white border-none rounded text-[0.85em] font-semibold cursor-pointer hover:bg-[#2c6fad] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {feature}
+                    {pollSending ? "Sending…" : "Send my answers"}
                   </button>
-                ))}
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>

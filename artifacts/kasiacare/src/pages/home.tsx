@@ -163,13 +163,6 @@ export default function Home() {
             Start your free 14-day trial. No credit card required. Cancel anytime.
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
-            <label htmlFor="cta-email" className="sr-only">Your email address</label>
-            <input 
-              id="cta-email"
-              type="email" 
-              placeholder="Your email address" 
-              className="px-5.5 py-3 border-none rounded text-sm w-72 outline-none text-foreground" 
-            />
             <Link href="/free-trial" className="px-7 py-3 bg-primary text-white border-none rounded text-sm font-medium hover:bg-[#0f2540] transition-colors cursor-pointer">
               Sign Up for a Free Trial
             </Link>

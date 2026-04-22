@@ -92,4 +92,30 @@ router.post("/angels", async (req, res) => {
   }
 });
 
+router.post("/poll", async (req, res) => {
+  try {
+    const { features } = req.body;
+    if (!features || !Array.isArray(features) || features.length === 0) {
+      return res.status(400).json({ ok: false, error: "No features selected" });
+    }
+    const resend = getResend();
+    await resend.emails.send({
+      from: FROM,
+      to: TO,
+      subject: `New Feature Poll Submission`,
+      html: `
+        <h2>Feature Poll Submission</h2>
+        <p>A visitor voted for the following features to be built next:</p>
+        <ul>
+          ${features.map((f: string) => `<li>${f}</li>`).join("")}
+        </ul>
+      `,
+    });
+    res.json({ ok: true });
+  } catch (err: any) {
+    console.error("Poll email error:", err);
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
+
 export default router;
