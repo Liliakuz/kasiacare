@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>Features — KasiaCare</title>
+<style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+body { font-family: Georgia, serif; background: #faf7f2; color: #2c2010; line-height: 1.7; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; }
+
+.nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #fff; }
+.nav-logo span { color: #b03060; }
+.nav-btn { background: #b03060; color: #fff; padding: 10px 18px; border-radius: 4px; font-size: 0.9rem; font-weight: 700; display: inline-block; }
+
+.hero { background: #102940; padding: 40px 20px 36px; }
+.hero-label { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 14px; }
+.hero h1 { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+.hero h1 em { font-style: italic; color: #b03060; }
+.hero-sub { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.8; margin-bottom: 24px; }
+.hero-rose { background: #b03060; }
+.hero-rose .hero-label { color: rgba(255,255,255,0.7); }
+.hero-rose h1 { color: #fff; }
+.hero-rose h1 em { color: #f2e8d8; }
+
+.btn-rose { display: block; background: #b03060; color: #fff; font-weight: 700; padding: 15px 20px; border-radius: 4px; font-size: 1rem; text-align: center; margin-bottom: 12px; }
+.btn-outline { display: block; color: #fff; font-weight: 600; padding: 14px 20px; border-radius: 4px; border: 2px solid rgba(255,255,255,0.5); font-size: 1rem; text-align: center; margin-bottom: 12px; }
+.btn-white { display: block; background: #fff; color: #b03060; font-weight: 700; padding: 14px 20px; border-radius: 4px; font-size: 1rem; text-align: center; margin-bottom: 12px; }
+.btn-navy { display: block; background: #102940; color: #fff; font-weight: 700; padding: 14px 20px; border-radius: 4px; font-size: 1rem; text-align: center; margin-bottom: 12px; }
+
+.cat { background: #102940; padding: 16px 20px; }
+.cat h2 { font-family: Georgia, serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0; }
+.cat p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 4px 0 0; font-style: italic; }
+
+.section { padding: 36px 20px; }
+.section.warm { background: #f2e8d8; }
+.section.white { background: #fff; }
+.section.navy { background: #102940; }
+.section.rose { background: #b03060; }
+
+.section p { font-size: 1rem; color: #4a3828; line-height: 1.85; margin-bottom: 14px; }
+.section.navy p { color: rgba(255,255,255,0.82); }
+.section.rose p { color: rgba(255,255,255,0.9); }
+.section p:last-child { margin-bottom: 0; }
+.section h2 { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 700; color: #102940; margin-bottom: 10px; }
+.section.navy h2 { color: #fff; }
+
+.quote-box { background: #102940; border-radius: 6px; padding: 20px 22px; margin-bottom: 12px; }
+.quote-box p { font-family: Georgia, serif; font-style: italic; font-size: 1.05rem; color: #fff; line-height: 1.75; margin: 0; }
+.quote-box cite { display: block; margin-top: 10px; font-size: 0.75rem; color: #8aaac8; font-style: normal; }
+.quote-box.light { background: rgba(255,255,255,0.08); }
+.quote-box.light p { color: rgba(255,255,255,0.9); }
+
+.who-card { background: #fff; border-radius: 6px; padding: 20px; border-left: 5px solid #b03060; margin-bottom: 12px; }
+.who-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+.who-card h3 { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #102940; margin-bottom: 6px; }
+.who-card p { font-size: 0.97rem; color: #4a3828; line-height: 1.8; margin: 0; }
+
+.feat-card { background: #fff; border-radius: 6px; padding: 18px; margin-bottom: 10px; }
+.feat-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 8px; }
+.t-all { background: #fff3d0; color: #8a6a00; }
+.t-plus { background: #dceaf8; color: #102940; }
+.feat-card h3 { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #102940; margin-bottom: 6px; }
+.feat-card p { font-size: 0.95rem; color: #4a3828; line-height: 1.8; margin: 0; }
+
+.med-slot { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; background: #f2e8d8; border-radius: 6px; padding: 14px 16px; }
+.med-slot .slot-icon { font-size: 1.6rem; flex-shrink: 0; }
+.med-slot strong { color: #102940; font-size: 1rem; display: block; margin-bottom: 2px; }
+.med-slot span { font-size: 0.9rem; color: #4a3828; line-height: 1.6; }
+
+.task-badges { margin-bottom: 16px; }
+.task-badge { display: inline-block; background: #f2e8d8; color: #4a3828; font-size: 0.82rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin: 3px 4px 3px 0; }
+
+.price-box { background: #fff; border-radius: 6px; padding: 28px 20px; margin-bottom: 14px; border-top: 5px solid #b03060; }
+.price-box.featured { background: #102940; border-top-color: #b07d10; }
+.price-tier { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b03060; margin-bottom: 8px; }
+.price-box.featured .price-tier { color: #b07d10; }
+.price-amt { font-family: Georgia, serif; font-size: 3rem; font-weight: 700; color: #102940; line-height: 1; margin-bottom: 4px; }
+.price-box.featured .price-amt { color: #fff; }
+.price-per { font-size: 0.88rem; color: #7a6a58; margin-bottom: 14px; }
+.price-box.featured .price-per { color: #8aaac8; }
+.price-desc { font-size: 0.95rem; color: #4a3828; line-height: 1.75; margin-bottom: 14px; }
+.price-box.featured .price-desc { color: rgba(255,255,255,0.82); }
+.price-list { list-style: none; margin-bottom: 18px; padding: 0; }
+.price-list li { font-size: 0.95rem; color: #4a3828; padding: 5px 0; border-bottom: 1px solid #f2e8d8; display: flex; gap: 8px; }
+.price-box.featured .price-list li { color: rgba(255,255,255,0.82); border-bottom-color: rgba(255,255,255,0.1); }
+.price-check { color: #2d6b2d; font-weight: 700; flex-shrink: 0; }
+.price-box.featured .price-check { color: #b07d10; }
+
+.info-card { background: #fff; border-radius: 6px; padding: 18px; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+.info-card .info-icon { font-size: 1.6rem; flex-shrink: 0; }
+.info-card h3 { font-family: Georgia, serif; font-size: 1rem; font-weight: 700; color: #102940; margin-bottom: 4px; }
+.info-card p { font-size: 0.95rem; color: #4a3828; margin: 0; }
+
+.faq-card { background: #f2e8d8; border-radius: 6px; padding: 18px; border-left: 4px solid #b03060; margin-bottom: 10px; }
+.faq-card h3 { font-family: Georgia, serif; font-size: 1rem; font-weight: 700; color: #102940; margin-bottom: 6px; }
+.faq-card p { font-size: 0.95rem; color: #4a3828; line-height: 1.8; margin: 0; }
+
+.option-card { background: #fff; border-radius: 6px; border-left: 5px solid #c8b89a; padding: 18px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.2s; }
+.option-card.selected { border-left-color: #b03060; background: #fdf0f4; }
+.option-card label { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; }
+.option-card input[type=checkbox] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 3px; accent-color: #b03060; }
+.option-card h3 { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #102940; margin-bottom: 4px; }
+.option-card p { font-size: 0.95rem; color: #4a3828; line-height: 1.7; margin: 0 0 8px; }
+
+.badge-sm { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; }
+.b-trial { background: #e0f0e0; color: #2d6b2d; }
+.b-angels { background: #fde8d0; color: #8a3800; }
+.b-list { background: #dceaf8; color: #102940; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 0.88rem; font-weight: 700; color: #102940; margin-bottom: 6px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 13px 14px; border: 2px solid #c8b89a;
+  background: #faf7f2; color: #2c2010; border-radius: 6px;
+  font-size: 1rem; font-family: Georgia, serif; outline: none;
+}
+.form-group textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+.divider { height: 2px; background: #c8b89a; margin: 24px 0; border-radius: 2px; }
+
+.signup-strip { background: #b03060; padding: 48px 20px; text-align: center; }
+.signup-strip h2 { font-family: Georgia, serif; font-size: 1.9rem; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 12px; }
+.signup-strip h2 em { font-style: italic; }
+.signup-strip p { font-size: 1rem; color: rgba(255,255,255,0.9); margin-bottom: 22px; }
+.signup-note { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 10px; }
+
+.creds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.cred { background: rgba(255,255,255,0.12); color: #fff; font-size: 0.82rem; font-weight: 600; padding: 5px 12px; border-radius: 4px; }
+
+.footer { background: #102940; color: #a8c0d8; padding: 36px 20px 20px; }
+.footer-logo { font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
+.footer-logo span { color: #b03060; }
+.footer p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 6px; }
+.footer-col { margin-top: 22px; }
+.footer-col h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 10px; }
+.footer-col a { display: block; font-size: 0.9rem; color: #a8c0d8; margin-bottom: 8px; }
+.footer-bottom { background: #102940; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 14px 20px; font-size: 0.82rem; color: #5a7a9a; font-style: italic; }
+
+.add-cal-note { background: #102940; border-radius: 6px; padding: 16px 18px; margin-top: 6px; }
+.add-cal-note p { font-family: Georgia, serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.9); margin: 0; }
+
+.success-box { background: #fff; border-radius: 8px; border: 2px solid #2d6b2d; padding: 36px 20px; text-align: center; display: none; }
+.success-box.visible { display: block; }
+.success-icon { font-size: 3rem; margin-bottom: 16px; }
+.success-box h2 { font-family: Georgia, serif; font-size: 1.9rem; font-weight: 700; color: #102940; margin-bottom: 12px; }
+.success-box p { font-size: 1rem; color: #4a3828; line-height: 1.8; margin-bottom: 8px; }
+.back-link { display: inline-block; color: #b03060; font-weight: 700; font-size: 1rem; margin-top: 16px; }
+
+.error-msg { color: #b03060; font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; display: none; }
+.submit-btn { width: 100%; background: #b03060; color: #fff; font-weight: 700; padding: 15px 20px; border-radius: 4px; font-size: 1rem; border: none; cursor: pointer; font-family: Georgia, serif; }
+.form-note { font-size: 0.82rem; color: #7a6a58; margin-top: 10px; line-height: 1.6; }
+
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
+  <a href="signup.html" class="nav-btn">Sign Up</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">What KasiaCare Does</div>
+  <h1>KasiaCare <em>Features</em></h1>
+  <p class="hero-sub">Everything in one place — simple enough for anyone to use from day one.</p>
+</div>
+
+<div class="cat"><h2>Daily Dashboard</h2><p>Your person's entire day — AM to Bedtime</p></div>
+<div class="section white">
+  <p>The Daily Dashboard is the first thing you see when you open KasiaCare — a quick view of where you are today in your care plan. AM Care, Tasks, PM Care, Activities, Appointments, and Reminders — everything organized from morning to night.</p>
+  <p>Mark each task done the moment it is complete. Time recorded automatically. Every care team member sees exactly what was done and when. Nothing is assumed. Nothing is forgotten.</p>
+</div>
+
+<div class="cat"><h2>Care Calendars</h2><p>One for everything you track — no fixed number</p></div>
+<div class="section warm">
+  <p>Any item being tracked in KasiaCare can become a Care Calendar. There is no fixed number. The calendar system grows as the care plan grows. <strong>If you are tracking it — it has a calendar.</strong></p>
+  <p>Every calendar includes its own reminder option.</p>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>📅 Appointment Calendar</h3>
+  <p>Doctor visits, specialist appointments, check-ups, and any scheduled meeting. Syncs with Google Calendar.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🎯 Activity Calendar</h3>
+  <p>Outings, social events, recreation, therapy sessions, and daily activities.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🍽 Meal Calendar</h3>
+  <p>Meal times, meal details, dietary notes, and food preferences.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>💊 Med Box Reminders Calendar</h3>
+  <p>Six slots matching the physical med box — AM · Breakfast · Lunch · Supper · PM · Bedtime.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>✅ Task Calendar</h3>
+  <p>Personal care, household tasks, daily routines — with reminders so nothing is forgotten.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>📝 Notes Calendar</h3>
+  <p>Scheduled notes, observations, and check-ins. The caregiver's own words and voice.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🤝 Service Calendar</h3>
+  <p>Vendor and service appointments — home aids, transportation, pharmacy, cleaning, and more.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>📋 Schedule Calendar</h3>
+  <p>Any scheduled item that does not fit another category. Flexible and open.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-pro">Pro Plan</span>
+  <h3>👤 Caregiver Hub</h3>
+  <p>Full caregiver scheduling, shift management, and visit tracking. Caregivers can update and maintain care plan data during their visit.</p>
+</div>
+  <div class="add-cal-note">
+    <p>➕ Add a Calendar — any new tracking category you add automatically generates its own calendar. Physical Therapy, Speech Therapy, Family Visits, and more. Any category you track gets its own calendar.</p>
+  </div>
+</div>
+
+<div class="cat"><h2>Med Box Reminders</h2><p>Six slots — matching your physical med box</p></div>
+<div class="section white">
+  <p>KasiaCare organizes med reminders around the natural rhythm of the day and meal schedule — because taking medication with food matters.</p>
+  <div class="med-slot"><div class="slot-icon">🌅</div><div><strong>AM Med</strong><span>Early morning — fasting or time-based medications</span></div></div>
+  <div class="med-slot"><div class="slot-icon">🍳</div><div><strong>Breakfast Med</strong><span>Take with breakfast meal</span></div></div>
+  <div class="med-slot"><div class="slot-icon">🥗</div><div><strong>Lunch Med</strong><span>Take with lunch meal</span></div></div>
+  <div class="med-slot"><div class="slot-icon">🍽</div><div><strong>Supper Med</strong><span>Take with evening meal</span></div></div>
+  <div class="med-slot"><div class="slot-icon">🌆</div><div><strong>PM Med</strong><span>Afternoon — time-based, between meals</span></div></div>
+  <div class="med-slot"><div class="slot-icon">🌙</div><div><strong>Bedtime Med</strong><span>End of day medications</span></div></div>
+  <p style="font-size:0.88rem;color:#7a6a58;font-style:italic;margin-top:14px;">Note: In the Basic Plan and Pro Plan, Med Box Reminders store time-based reminders with user-written labels only. No medication names or medical data are stored. Detailed medication information and medical data are available in the Med Basic Plan and Med Pro Plan — coming soon. Please contact us if you are interested.</p>
+</div>
+
+<div class="cat"><h2>Notification System</h2><p>Stay informed without notification overload</p></div>
+<div class="section warm">
+  <p>Every notification has its own on/off switch. You choose exactly what you are alerted about — and when. Never everything on. Never everything off. Configured per person, per category.</p>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>💊 Med Box Reminders</h3>
+  <p>Each of the 6 med slots has its own reminder — on or off independently.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>📅 Appointments</h3>
+  <p>Same day reminder and 1 hour before.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🎯 Activities</h3>
+  <p>Reminders for scheduled activities and at-risk activity alerts.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>✅ Tasks</h3>
+  <p>Task reminders and Update Daily Task alerts.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>📋 Not Updated Alert</h3>
+  <p>Item has no completion recorded. Clears the moment it is marked done.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🍽 Meals</h3>
+  <p>Meal time reminders — each meal slot individually toggleable.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🚩 At-Risk Flag</h3>
+  <p>Manually set on any item that needs special attention.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🛒 Supplies &amp; Orders</h3>
+  <p>Supply low alerts and order reminders.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>🏆 Goals &amp; Goal Settings</h3>
+  <p>Goal reached celebrations and milestone progress.</p>
+</div>
+  
+</div>
+
+<div class="cat"><h2>Task Types</h2><p>Every category has its own task</p></div>
+<div class="section white">
+  <p>Every category of care in KasiaCare has its own task type. The word task ties everything together — and each type tells the caregiver exactly what kind of item needs attention.</p>
+  <div class="task-badges">
+    <span class="task-badge">📅 Appointment Task</span>
+    <span class="task-badge">🎯 Activity Task</span>
+    <span class="task-badge">💊 Med Task</span>
+    <span class="task-badge">🤝 Service Task</span>
+    <span class="task-badge">🍽 Meal Task</span>
+    <span class="task-badge">👤 Personal Task</span>
+    <span class="task-badge">📋 Schedule Task</span>
+    <span class="task-badge">📝 Notes Task</span>
+  </div>
+  <p>Notes Task is special — it is the only task that IS the note itself. The caregiver's own words, their own voice, their own observations — captured as part of the care record.</p>
+</div>
+
+<div class="cat"><h2>Notes</h2><p>Add a note to any info update — typed or by voice</p></div>
+<div class="section warm">
+  <p>Any updatable field in KasiaCare offers the option to add a note. When marking an item done the caregiver is asked: <strong>"Would you like to add a note to this info update?"</strong></p>
+  <p>Notes can be typed or recorded by voice — tap the microphone and speak. The recording is transcribed and saved with the update.</p>
+  <p><em>"Nothing is ever without context — and feedback — of our care, of all caregivers."</em></p>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>Notes on Any Info Update</h3>
+  <p>Optional note on every task completion, every update, every item. Simple, never forced.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-all">All Plans</span>
+  <h3>Voice Notes</h3>
+  <p>Record a note by voice instead of typing. Transcribed and saved automatically.</p>
+</div>
+  <div class="feat-card">
+  <span class="feat-tag t-pro">Pro Plan</span>
+  <h3>Incident Notes</h3>
+  <p>Structured incident logging — falls, unusual symptoms, behavioral changes, medical events.</p>
+</div>
+</div>
+
+<div class="cat"><h2>All Features</h2><p>All Plans</p></div>
+<div class="section white">
+
+  <p style="font-size:0.95rem;color:#4a3828;margin-bottom:18px;">Every feature listed below is included in the Basic Plan and carries forward into every plan above it.</p>
+
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Daily Dashboard</h3>
+    <p>A quick view of where you are today in your care plan — AM Care, Tasks, PM Care, Activities, Appointments, and Reminders.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Tasks</h3>
+    <p>Everything that needs to happen today, clearly listed and easy to check off in real time.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Activities</h3>
+    <p>Outings, recreation, therapy sessions, and daily activities — all part of the day.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Schedules</h3>
+    <p>AM care, PM care, meals, and routines — organized from morning to night.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Appointments</h3>
+    <p>Doctor visits, specialist appointments, and check-ups — scheduled and visible to the whole care team.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Reminders</h3>
+    <p>Med Box Reminders, appointment reminders, and task reminders — each with its own on/off switch.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Care Calendars</h3>
+    <p>One for everything you track. Any task, activity, appointment, or routine can have its own calendar. If you are tracking it — it has a calendar.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Notes</h3>
+    <p>Attach a note to any task, any update, or any item. Typed or recorded by voice.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Care Plan Sharing</h3>
+    <p>Role-based access for family members, personal aids, and caregivers. Everyone on the care team sees the same plan.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Supplies &amp; Vendors</h3>
+    <p>List supply needs and vendor services.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Google Calendar Integration</h3>
+    <p>Appointments sync to Google Calendar automatically.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-all">All Plans</span>
+    <h3>Printable Care Report</h3>
+    <p>User selects fields to include, adds a note area, prints or saves as PDF. Identified by initials and state only. Available in Basic and all plans above.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-pro">Pro Plan</span>
+    <h3>Caregiver Hub</h3>
+    <p>Full caregiver scheduling, shift management, and visit tracking. Caregivers can update and maintain care plan data during their visit.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-pro">Pro Plan</span>
+    <h3>Extended Dashboard &amp; Reports</h3>
+    <p>Deeper visibility into the care plan with more detailed reports and care summaries.</p>
+  </div>
+
+  <div class="feat-card">
+    <span class="feat-tag t-med">Med Basic Plan</span>
+    <h3>Medication Information</h3>
+    <p>Medication names and basic details added to the care plan alongside daily tasks and routines. Everything in Basic and Pro, plus a medical information layer.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-med">Med Basic Plan</span>
+    <h3>Basic Vital Signs</h3>
+    <p>A simple layer of basic medical information added alongside the daily care plan. Nothing clinical — just the essentials.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-med">Med Basic Plan</span>
+    <h3>Medical Reporting</h3>
+    <p>Basic reporting on medical information tracked in the care plan.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-medpro">Med Pro Plan</span>
+    <h3>Agency Caregiver Hub</h3>
+    <p>Everything in Med Basic, plus an extended Caregiver Hub designed for agency use. The agency operates under one umbrella account with multiple caregivers beneath it.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-medpro">Med Pro Plan</span>
+    <h3>Agency Oversight</h3>
+    <p>The agency can view and manage all care plans and caregiver activity across their account.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-medpro">Med Pro Plan</span>
+    <h3>AI Trend Viewer</h3>
+    <p>Monitors basic health patterns and flags items that may need attention.</p>
+  </div>
+  <div class="feat-card">
+    <span class="feat-tag t-medpro">Med Pro Plan</span>
+    <h3>Extended Vital Signs</h3>
+    <p>Builds on Med Basic vital signs with additional tracking options.</p>
+  </div>
+  <div class="note-box" style="margin-top:14px;">Med Basic Plan and Med Pro Plan are coming soon — launching when full HIPAA compliance is in place. Please <a href="contact.html" style="color:#b07d10;font-weight:700;">contact us</a> if you are interested.</div>
+
+</div>
+
+<div class="signup-strip">
+  <h2>Ready to bring <em>joy</em> back to caregiving?</h2>
+  <p>Join our waitlist. We will reach out personally when your trial is ready.</p>
+  <a href="signup.html" class="btn-white">Sign Up Today</a>
+  <p class="signup-note">No credit card &middot; No commitment &middot; Your info is never sold.</p>
+</div>
+
+<div class="footer">
+  <a href="index.html" class="footer-logo">Kasia<span>Care</span></a>
+  <p>Care Plan Software for Families, Caregivers &amp; Care Teams.</p>
+  <p style="font-style:italic;color:#6a8aaa;margin-top:10px;">"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="features.html">Features</a>
+    <a href="subscriptions.html">Subscriptions</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="angels.html">Angels Program</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="about.html">About KasiaCare</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy &amp; AI Policy</a>
+  </div>
+</div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Founded by Lilia Kuzmicz &middot; Built for Kasia. Built for every family like ours. 💙<br><span style="font-size:0.72rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.2.0 · April 2026 · Features</span></div>
+
+</body>
+</html>
