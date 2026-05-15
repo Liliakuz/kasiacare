@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>KasiaCare — Subscriptions</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+body { font-family: Georgia, serif; background: #faf7f2; color: #2c2010; line-height: 1.75; }
+a { text-decoration: none; }
+
+.nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #fff; white-space: nowrap; }
+.nav-logo span { color: #b03060; }
+.nav-btn { background: #b03060; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; display: inline-block; white-space: nowrap; }
+
+.hero { background: #102940; padding: 40px 20px 36px; }
+.hero h1 { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+.hero h1 em { font-style: italic; color: #b03060; }
+.hero-sub { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.8; margin-bottom: 22px; }
+
+/* TOP CALLOUT */
+.top-callout {
+  background: #b03060;
+  padding: 28px 20px;
+  text-align: center;
+}
+.top-callout h2 {
+  font-family: Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.top-callout p {
+  font-size: 0.97rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+.btn-white { display: inline-block; background: #fff; color: #b03060; font-weight: 700; padding: 13px 28px; border-radius: 4px; font-size: 1rem; }
+
+.cat { background: #102940; padding: 16px 20px; }
+.cat h2 { font-family: Georgia, serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0; }
+.cat p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 4px 0 0; font-style: italic; }
+
+.section { padding: 36px 20px; }
+.warm { background: #f2e8d8; }
+.white { background: #fff; }
+
+.section p { font-size: 0.97rem; color: #4a3828; line-height: 1.85; margin-bottom: 12px; }
+.section p:last-child { margin-bottom: 0; }
+
+/* PRICE BOX */
+.price-box {
+  background: #fff;
+  border-radius: 6px;
+  padding: 26px 20px;
+  margin-bottom: 16px;
+  border-top: 5px solid #b03060;
+}
+.price-box.coming {
+  border-top-color: #6b2d8a;
+}
+.price-tier {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #b03060; margin-bottom: 6px;
+}
+.price-box.coming .price-tier { color: #6b2d8a; }
+.price-amt {
+  font-family: Georgia, serif; font-size: 2.8rem;
+  font-weight: 700; color: #102940; line-height: 1; margin-bottom: 4px;
+}
+.price-box.coming .price-amt {
+  font-size: 1.6rem; color: #6b2d8a;
+}
+.price-per { font-size: 0.88rem; color: #7a6a58; margin-bottom: 14px; }
+.price-desc { font-size: 0.95rem; color: #4a3828; line-height: 1.75; margin-bottom: 14px; }
+.price-list { list-style: none; margin-bottom: 18px; padding: 0; }
+.price-list li {
+  font-size: 0.93rem; color: #4a3828;
+  padding: 5px 0; border-bottom: 1px solid #f2e8d8;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.price-list li:last-child { border-bottom: none; }
+.price-check { color: #2d6b2d; font-weight: 700; flex-shrink: 0; }
+.price-box.coming .price-check { color: #6b2d8a; }
+.btn-rose { display: block; background: #b03060; color: #fff; font-weight: 700; padding: 14px 20px; border-radius: 4px; font-size: 1rem; text-align: center; }
+
+/* NOTE BOX */
+.note-box {
+  background: #f8f4ec; border-left: 4px solid #b07d10;
+  border-radius: 0 4px 4px 0; padding: 12px 16px;
+  margin-bottom: 18px; font-size: 0.88rem; color: #4a3828; line-height: 1.75;
+}
+
+/* A LA CARTE */
+.alc-item {
+  background: #fff; border-radius: 6px; padding: 16px 18px;
+  margin-bottom: 10px; border-left: 4px solid #b03060;
+}
+.alc-item h3 { font-family: Georgia, serif; font-size: 1rem; font-weight: 700; color: #102940; margin-bottom: 4px; }
+.alc-item p { font-size: 0.93rem; color: #4a3828; line-height: 1.75; margin: 0; }
+
+/* BOTTOM ANGELS CTA */
+.angels-cta { background: #102940; padding: 48px 20px; text-align: center; }
+.angels-cta h2 { font-family: Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 12px; }
+.angels-cta h2 em { font-style: italic; color: #b03060; }
+.angels-cta p { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.8; margin-bottom: 22px; }
+.btn-rose-lg { display: inline-block; background: #b03060; color: #fff; font-weight: 700; padding: 15px 32px; border-radius: 4px; font-size: 1rem; margin-bottom: 12px; }
+.angels-note { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+/* FOOTER */
+.footer { background: #102940; color: #a8c0d8; padding: 36px 20px 20px; }
+.footer-logo { font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
+.footer-logo span { color: #b03060; }
+.footer > p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 6px; }
+.footer-col { margin-top: 22px; }
+.footer-col h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 10px; }
+.footer-col a { display: block; font-size: 0.9rem; color: #a8c0d8; margin-bottom: 8px; }
+.footer-bottom { background: #102940; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 14px 20px; font-size: 0.82rem; color: #5a7a9a; font-style: italic; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
+  <a href="logon.html" class="nav-btn">Log On</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>KasiaCare <em>Subscriptions</em></h1>
+  <p class="hero-sub">Simple, honest pricing. Start with the pure care plan. Grow when you are ready. No surprises — ever.</p>
+</div>
+
+<!-- TOP CALLOUT -->
+<div class="top-callout">
+  <h2>Be among the first to try KasiaCare.</h2>
+  <p>Sign up today and we will reach out personally when your free trial is ready. No credit card. No commitment. Just a care plan that works.</p>
+  <a href="signup.html" class="btn-white">Sign Up for Free Trial</a>
+</div>
+
+<!-- SUBSCRIPTIONS -->
+<div class="cat"><h2>Subscriptions</h2><p>Four tiers — built to grow with your needs</p></div>
+<div class="section warm">
+
+  <!-- BASIC -->
+  <div class="price-box">
+    <div class="price-tier">Basic Plan</div>
+    <div class="price-amt">$14.99</div>
+    <div class="price-per">per month &middot; 14-day free trial</div>
+    <p class="price-desc">The pure care plan — everything needed to build, follow, and share a real-time care plan from day one.</p>
+    <ul class="price-list">
+      <li><span class="price-check">✓</span> Daily Dashboard</li>
+      <li><span class="price-check">✓</span> Tasks</li>
+      <li><span class="price-check">✓</span> Activities</li>
+      <li><span class="price-check">✓</span> Schedules</li>
+      <li><span class="price-check">✓</span> Appointments</li>
+      <li><span class="price-check">✓</span> Reminders</li>
+      <li><span class="price-check">✓</span> Care Calendars — one for everything you track</li>
+      <li><span class="price-check">✓</span> Notes — typed or recorded by voice</li>
+      <li><span class="price-check">✓</span> Care Plan Sharing</li>
+      <li><span class="price-check">✓</span> Supplies &amp; Vendors</li>
+      <li><span class="price-check">✓</span> Google Calendar Integration</li>
+      <li><span class="price-check">✓</span> Printable Care Report</li>
+    </ul>
+    <a href="signup.html" class="btn-rose">Free Trial Sign Up</a>
+  </div>
+
+  <!-- PRO -->
+  <div class="price-box">
+    <div class="price-tier">Pro Plan</div>
+    <div class="price-amt">$34.99</div>
+    <div class="price-per">per month &middot; 14-day free trial</div>
+    <p class="price-desc">Everything in Basic, plus the Caregiver Hub for families and care teams managing more complex care situations.</p>
+    <ul class="price-list">
+      <li><span class="price-check">✓</span> Everything in Basic</li>
+      <li><span class="price-check">✓</span> Caregiver Hub — shift scheduling</li>
+      <li><span class="price-check">✓</span> Caregiver dashboard and reporting</li>
+      <li><span class="price-check">✓</span> Notes and alerts for caregivers</li>
+            <li><span class="price-check">✓</span> Priority Support &amp; One-on-One Onboarding</li>
+    </ul>
+    <a href="signup.html" class="btn-rose">Free Trial Sign Up</a>
+  </div>
+
+  <!-- MED BASIC -->
+  <div class="price-box coming">
+    <div class="price-tier">Med Basic Plan</div>
+    <div class="price-amt">Coming Soon</div>
+    <div class="price-per">Year 2 launch &middot; Pricing TBD</div>
+    <p class="price-desc">Everything in Basic and Pro, plus a medical information layer added to the care plan. Requires full HIPAA compliance before launch.</p>
+    <ul class="price-list">
+      <li><span class="price-check">✓</span> Everything in Basic and Pro</li>
+      <li><span class="price-check">✓</span> Medication information — names and basic details</li>
+      <li><span class="price-check">✓</span> Basic vital signs tracking</li>
+      <li><span class="price-check">✓</span> Medical reporting</li>
+      <li><span class="price-check">✓</span> Expanded notes for health observations</li>
+    </ul>
+    <a href="signup.html" class="btn-rose">Sign Up to Be Notified</a>
+  </div>
+
+  <!-- MED PRO -->
+  <div class="price-box coming">
+    <div class="price-tier">Med Pro Plan</div>
+    <div class="price-amt">Coming Soon</div>
+    <div class="price-per">Year 3–5 launch &middot; Pricing TBD</div>
+    <p class="price-desc">Everything in Med Basic, plus an extended Agency Caregiver Hub. Built for caregiver agencies subscribing for their caregivers under one umbrella account.</p>
+    <ul class="price-list">
+      <li><span class="price-check">✓</span> Everything in Med Basic</li>
+      <li><span class="price-check">✓</span> Agency Caregiver Hub — multiple caregivers under one account</li>
+      <li><span class="price-check">✓</span> Agency oversight of all care plans and caregiver activity</li>
+      <li><span class="price-check">✓</span> AI Trend Viewer — monitors health patterns, flags items needing attention</li>
+      <li><span class="price-check">✓</span> Extended vital signs tracking</li>
+    </ul>
+    <a href="signup.html" class="btn-rose">Sign Up to Be Notified</a>
+  </div>
+
+  <div class="note-box">Med Basic and Med Pro require full HIPAA review and attorney approval before launch. No medical data features will be developed or launched until compliance infrastructure is complete. KasiaCare is committed to doing this right — in the right order, at the right time.</div>
+
+</div>
+
+<!-- A LA CARTE -->
+<div class="cat"><h2>A La Carte Services</h2><p>Additional support — available for all subscriptions</p></div>
+<div class="section warm">
+
+  <div class="price-box">
+    <div class="price-tier">A La Carte</div>
+    <div class="price-amt" style="font-size:1.6rem;color:#102940;">A La Carte Services</div>
+    <div class="price-per">Available for all subscriptions</div>
+    <p class="price-desc">A La Carte services are premium human-touch support sessions delivered personally by KasiaCare Angels via Zoom or Google Meet. Purchased separately from your subscription. Available to every subscription.</p>
+    <ul class="price-list">
+      <li><span class="price-check">✓</span> One-on-One Video Onboarding — a personal session to get started on KasiaCare from day one</li>
+      <li><span class="price-check">✓</span> Care Plan Data Input Service — we help enter and organize your care plan information for you</li>
+      <li><span class="price-check">✓</span> Scheduling Assistance — help setting up calendars, reminders, and care team access</li>
+      <li><span class="price-check">✓</span> Monthly Care Plan Help &amp; Setup — ongoing hands-on assistance keeping the care plan current</li>
+      <li><span class="price-check">✓</span> 3-Month Coaching Program — ongoing support and guidance over three months</li>
+      <li><span class="price-check">✓</span> Individual Training — one-on-one training tailored to your specific care plan needs</li>
+    </ul>
+    <a href="signup.html" class="btn-rose">Sign Up to Learn More</a>
+  </div>
+
+  <p style="font-size:0.88rem;color:#7a6a58;font-style:italic;margin-top:6px;">A La Carte services for Med Basic and Med Pro are To Be Determined — pending research and development planning.</p>
+
+</div>
+
+<!-- ANGELS CTA -->
+<div class="angels-cta">
+  <h2>Be one of the <em>first.</em></h2>
+  <p>Sign up to become a KasiaCare Angel — test the software, give feedback, and help build something that matters. Early access. Direct line to Lilia. Your feedback shapes the product.</p>
+  <a href="signup.html" class="btn-rose-lg">Sign Up as an Angel</a>
+  <p class="angels-note">No cost · No commitment · Your info is never sold.</p>
+  <p style="margin-top:14px;"><a href="angels.html" style="color:rgba(255,255,255,0.7);font-size:0.9rem;text-decoration:underline;">Learn more about the Angels Program →</a></p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <a href="index.html" class="footer-logo">Kasia<span>Care</span></a>
+  <p>Care Plan Software for Families, Caregivers &amp; Care Teams.</p>
+  <p style="font-style:italic;color:#6a8aaa;margin-top:8px;">"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="features.html">Features</a>
+    <a href="subscriptions.html">Subscriptions</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="angels.html">Angels Program</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="about.html">About KasiaCare</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy &amp; AI Policy</a>
+  </div>
+</div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Founded by Lilia Kuzmicz &middot; Built for Kasia. Built for every family like ours. 💙<br><span style="font-size:0.72rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.3.0 · <span id="kc-date"></span> · Subscriptions</span></div>
+
+<script id="kc-date-script">
+var d = new Date();
+var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var el = document.getElementById('kc-date');
+if (el) el.textContent = months[d.getMonth()] + ' ' + d.getFullYear();
+</script>
+</body>
+</html>
