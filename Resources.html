@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>KasiaCare — Our Commitment</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+body { font-family: Georgia, serif; background: #faf7f2; color: #2c2010; line-height: 1.75; }
+a { text-decoration: none; }
+
+.nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
+.nav-logo span { color: #b03060; }
+.nav-btn { background: #b03060; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; }
+
+.hero { background: #102940; padding: 40px 20px 36px; text-align: center; border-bottom: 5px solid #b03060; }
+.hero h1 { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+.hero h1 em { font-style: italic; color: #b03060; }
+.hero-sub { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.8; }
+
+.cat { background: #102940; padding: 16px 20px; text-align: center; }
+.cat h2 { font-family: Georgia, serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0; }
+.cat p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 4px 0 0; font-style: italic; }
+
+.section { padding: 36px 20px; }
+.warm { background: #f2e8d8; }
+.white { background: #fff; }
+.navy { background: #102940; }
+
+.section p { font-size: 1rem; color: #4a3828; line-height: 1.88; margin-bottom: 14px; }
+.section.navy p { color: rgba(255,255,255,0.82); }
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: #102940; }
+.section.navy p strong { color: #fff; }
+
+.commit-card { background: #fff; border-radius: 6px; padding: 20px; border-left: 5px solid #b03060; margin-bottom: 14px; }
+.commit-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+.commit-card h3 { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #102940; margin-bottom: 8px; }
+.commit-card p { font-size: 0.97rem; color: #4a3828; line-height: 1.8; margin: 0; }
+
+.success-item { padding: 10px 0; border-bottom: 1px solid #e8dcc8; display: flex; gap: 12px; align-items: flex-start; }
+.success-item:last-child { border-bottom: none; }
+.success-item .check { color: #2d6b2d; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+.success-item p { font-size: 0.97rem; color: #4a3828; line-height: 1.8; margin: 0; }
+
+.quote-box { background: #102940; border-radius: 6px; padding: 20px 22px; margin: 16px 0; text-align: center; }
+.quote-box p { font-family: Georgia, serif; font-style: italic; font-size: 1.05rem; color: #fff; line-height: 1.8; margin: 0; }
+.quote-box cite { display: block; margin-top: 10px; font-size: 0.75rem; color: #8aaac8; font-style: normal; }
+
+.trace-badge { display: inline-block; background: #f2e8d8; border: 1px solid #c8b89a; border-radius: 4px; padding: 10px 14px; margin-bottom: 10px; width: 100%; }
+.trace-badge strong { color: #102940; font-size: 0.95rem; }
+.trace-badge span { color: #4a3828; font-size: 0.88rem; display: block; margin-top: 3px; line-height: 1.6; }
+
+.signup-strip { background: #b03060; padding: 48px 20px; text-align: center; }
+.signup-strip h2 { font-family: Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 12px; }
+.signup-strip h2 em { font-style: italic; }
+.signup-strip p { font-size: 1rem; color: rgba(255,255,255,0.9); margin-bottom: 22px; }
+.btn-white { display: inline-block; background: #fff; color: #b03060; font-weight: 700; padding: 14px 32px; border-radius: 4px; font-size: 1rem; }
+.signup-note { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 10px; }
+
+.footer { background: #102940; color: #a8c0d8; padding: 36px 20px 20px; }
+.footer-logo { font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
+.footer-logo span { color: #b03060; }
+.footer > p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 6px; }
+.footer-col { margin-top: 22px; }
+.footer-col h4 { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 10px; }
+.footer-col a { display: block; font-size: 0.9rem; color: #a8c0d8; margin-bottom: 8px; }
+.footer-bottom { background: #102940; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 14px 20px; font-size: 0.82rem; color: #5a7a9a; font-style: italic; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
+  <a href="logon.html" class="nav-btn">Log On</a>
+</nav>
+
+<div class="hero">
+  <div style="display:inline-block;background:#b07d10;color:#fff;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:3px;margin-bottom:18px;">Care Plan Software</div>
+  <h1>Our <em>Commitment</em></h1>
+  <p class="hero-sub">This is what success looks like for KasiaCare — and how we hold ourselves accountable to the families, individuals, and caregivers who trust us with something that matters deeply.</p>
+</div>
+
+<div class="cat"><h2>What We Are Building Toward</h2><p>Our definition of success</p></div>
+<div class="section warm">
+  <p>Most software companies measure success in subscribers and revenue. Those things matter — but they are not what gets us up in the morning. KasiaCare succeeds when the people it serves feel the difference in their daily lives.</p>
+  <div class="quote-box">
+    <p>"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+    <cite>— KasiaCare Mission Statement</cite>
+  </div>
+  <p>That is our north star. Everything we build, every feature we add, every decision we make — we ask ourselves: does this bring us closer to that?</p>
+</div>
+
+<div class="cat"><h2>Success for the Person Receiving Care</h2></div>
+<div class="section white">
+  <div class="success-item"><span class="check">✓</span><p>Their preferences, routines, and needs are documented and followed — by every caregiver, every visit.</p></div>
+  <div class="success-item"><span class="check">✓</span><p>Their daily schedule is clear and consistent — medications, meals, appointments, and activities all tracked and completed.</p></div>
+  <div class="success-item"><span class="check">✓</span><p>They feel known. Not just cared for — but truly known as a whole person.</p></div>
+</div>
+
+<div class="cat"><h2>Success for the Caregiver or Personal Aid</h2></div>
+<div class="section warm">
+  <div class="success-item"><span class="check">✓</span><p>They walk through the door with confidence — the care plan is right there, current and clear, the moment they log in.</p></div>
+  <div class="success-item"><span class="check">✓</span><p>Updating the care plan is fast and easy — it does not add burden to an already demanding day.</p></div>
+  <div class="success-item"><span class="check">✓</span><p>They never start from scratch — the handoff between caregivers is seamless and nothing falls through the cracks.</p></div>
+</div>
+
+<div class="cat"><h2>Success for the Family</h2></div>
+<div class="section white">
+  <div class="success-item"><span class="check">✓</span><p>They have peace of mind — they can see what is happening without making phone calls or sending text messages.</p></div>
+  <div class="success-item"><span class="check">✓</span><p>They trust that the information is current — the care plan reflects today, not last week.</p></div>
+  <div class="success-item"><span class="check">✓</span><p>Everyone on the care team is on the same page — no information silos, no guessing, no missed details.</p></div>
+</div>
+
+<div class="cat"><h2>Our Commitments to You</h2><p>How we hold ourselves accountable</p></div>
+<div class="section warm">
+  <div class="commit-card">
+    <div class="icon">🔧</div>
+    <h3>We Build It to Work</h3>
+    <p>KasiaCare must work reliably on every device — especially older Android phones in real homes, not just the latest technology. If something breaks we fix it fast. Every page, every reminder, every form submission — it has to work every time.</p>
+  </div>
+  <div class="commit-card">
+    <div class="icon">👂</div>
+    <h3>We Listen to Real Caregivers</h3>
+    <p>KasiaCare is not built in a boardroom. It is built from thirty years of lived caregiving experience — and from the ongoing feedback of our Angels and users. When you tell us something is not working, we listen. Every message sent to contact@kasiacare.com is read personally.</p>
+  </div>
+  <div class="commit-card">
+    <div class="icon">🌿</div>
+    <h3>We Keep It Simple</h3>
+    <p>The software must be simple enough for anyone to use from day one — no training required. If it is confusing, we fix it. Simplicity is not a feature. It is a promise to every caregiver who is already managing too much.</p>
+  </div>
+  <div class="commit-card">
+    <div class="icon">🔒</div>
+    <h3>We Protect Your Privacy</h3>
+    <p>KasiaCare currently does not store any personal health information. We never sell your data. We never will. When we introduce medical features in future plans, full HIPAA compliance will be in place before a single line of medical data is stored. We do this right — in the right order.</p>
+  </div>
+  <div class="commit-card">
+    <div class="icon">💙</div>
+    <h3>We Stay True to the Mission</h3>
+    <p>KasiaCare is named for Kasia — a beloved mother who lived with a disability and was cared for by her family for over thirty years. That story is not a marketing angle. It is the reason this company exists. Every decision we make is held up against that truth.</p>
+  </div>
+</div>
+
+<div class="cat"><h2>How We Monitor Our Progress</h2><p>Accountability built in from day one</p></div>
+<div class="section white">
+  <p>KasiaCare has adopted the <strong>TRACE post-deployment monitoring framework</strong> — developed by the Aspen Policy Academy in January 2026 — as the foundation for how we track whether we are delivering on our promises. We adapted it specifically for KasiaCare's context.</p>
+  <p>We monitor five things continuously:</p>
+
+  <div class="trace-badge">
+    <strong>T — Technical Reliability</strong>
+    <span>Is the software working correctly and consistently for every user on every device?</span>
+  </div>
+  <div class="trace-badge">
+    <strong>R — Real-World Use</strong>
+    <span>Are people actually using KasiaCare daily — and is it making caregiving easier?</span>
+  </div>
+  <div class="trace-badge">
+    <strong>A — Accuracy &amp; Alignment</strong>
+    <span>Do our features match what real caregivers need — and do we stay current as needs change?</span>
+  </div>
+  <div class="trace-badge">
+    <strong>C — Care Plan Fairness</strong>
+    <span>Does KasiaCare work equally well for all users — every age, ability, device, and care situation?</span>
+  </div>
+  <div class="trace-badge">
+    <strong>E — Escalation &amp; Response</strong>
+    <span>When something goes wrong, do we have a clear process to fix it fast and learn from it?</span>
+  </div>
+
+  <p style="margin-top:16px;font-size:0.88rem;color:#7a6a58;font-style:italic;">We review our progress against these standards daily, weekly, monthly, and quarterly. Our Angels community is a key part of this process — their feedback directly shapes what we build next.</p>
+</div>
+
+<div class="signup-strip">
+  <h2>Be part of <em>something that matters.</em></h2>
+  <p>Sign up as a KasiaCare Angel — help us test, give feedback, and hold us to our commitments.</p>
+  <a href="signup.html" class="btn-white">Sign Up as an Angel</a>
+  <p class="signup-note">No cost · No commitment · Your feedback shapes the product.</p>
+</div>
+
+<div class="footer">
+  <a href="index.html" class="footer-logo">Kasia<span>Care</span></a>
+  <p>Care Plan Software for Individuals, Families, Caregivers &amp; Care Teams.</p>
+  <p style="font-style:italic;color:#6a8aaa;margin-top:8px;">"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="features.html">Features</a>
+    <a href="subscriptions.html">Subscriptions</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="angels.html">Angels Program</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="about.html">About KasiaCare</a>
+    <a href="commitment.html">Our Commitment</a>
+    <a href="family-heals.html">Family Heals</a>
+    <a href="resources.html">External Resources</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
+  </div>
+</div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. 💙<br>
+<span style="font-size:0.72rem;color:#3a5a7a;">KasiaCare Website v1.3.0 · <span id="kc-date"></span> · Our Commitment</span></div>
+
+<script>
+var d = new Date();
+var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var el = document.getElementById('kc-date');
+if (el) el.textContent = months[d.getMonth()] + ' ' + d.getFullYear();
+</script>
+
+</body>
+</html>
