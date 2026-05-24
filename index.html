@@ -16,14 +16,14 @@ a { text-decoration: none; }
 .nav-logo span { color: #b03060; }
 .nav-btn { background: #b03060; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; display: inline-block; white-space: nowrap; }
 
-.hero { background: #102940; padding: 40px 20px 36px; }
+.hero { background: #102940; padding: 40px 20px 36px; text-align: center; }
 .hero h1 { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 16px; }
 .hero h1 em { font-style: italic; color: #b03060; }
 .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.8; margin-bottom: 28px; }
 .btn-rose { display: block; background: #b03060; color: #fff; font-weight: 700; padding: 15px 20px; border-radius: 4px; font-size: 1rem; text-align: center; margin-bottom: 12px; }
 .btn-outline { display: block; color: #fff; font-weight: 600; padding: 14px 20px; border-radius: 4px; border: 2px solid rgba(255,255,255,0.5); font-size: 1rem; text-align: center; }
 
-.cat { background: #102940; padding: 16px 20px; }
+.cat { background: #102940; padding: 16px 20px; text-align: center; }
 .cat h2 { font-family: Georgia, serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0; }
 .cat p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 4px 0 0; font-style: italic; }
 
@@ -37,7 +37,7 @@ a { text-decoration: none; }
 .section p:last-child { margin-bottom: 0; }
 .section h2 { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
 
-.quote-box { background: #102940; border-radius: 6px; padding: 20px 22px; margin: 16px 0; }
+.quote-box { background: #102940; border-radius: 6px; padding: 20px 22px; margin: 16px 0; text-align: center; }
 .quote-box p { font-family: Georgia, serif; font-style: italic; font-size: 1.05rem; color: #fff; line-height: 1.8; margin: 0; }
 .quote-box cite { display: block; margin-top: 10px; font-size: 0.75rem; color: #8aaac8; font-style: normal; }
 .quote-box.light { background: rgba(255,255,255,0.08); }
@@ -97,6 +97,7 @@ a { text-decoration: none; }
 
 <!-- HERO -->
 <div class="hero">
+  <div style="display:inline-block;background:#b07d10;color:#fff;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:3px;margin-bottom:18px;">Care Plan Software</div>
   <h1>Caring is <em>easier</em> when everyone knows the plan.</h1>
   <p class="hero-sub">KasiaCare gives families, caregivers, personal aids, and individuals one simple, shared place to build and follow a real-time care plan — wherever care happens, and whenever it needs to happen.</p>
   <a href="signup.html" class="btn-rose">Sign Up — Be Part of the Plan</a>
@@ -148,8 +149,8 @@ a { text-decoration: none; }
   <!-- BASIC -->
   <div class="price-box">
     <div class="price-tier">Basic</div>
-    <div class="price-amt">$14.99</div>
-    <div class="price-per">per month</div>
+    <div class="price-amt">Free</div>
+    <div class="price-per">$24.99 one-time setup &middot; $10/year membership</div>
     <p class="price-desc">The pure care plan — simple, clean, and built for everyone from day one.</p>
     <ul class="price-list">
       <li><span class="price-check">✓</span> Daily Dashboard</li>
@@ -162,14 +163,14 @@ a { text-decoration: none; }
       <li><span class="price-check">✓</span> Google Calendar Integration</li>
       <li><span class="price-check">✓</span> Printable Care Report</li>
     </ul>
-    <a href="signup.html" class="btn-rose">Free Trial Sign Up</a>
+    <a href="signup.html" class="btn-rose">Sign Up for Free</a>
   </div>
 
   <!-- PRO -->
   <div class="price-box">
     <div class="price-tier">Pro</div>
-    <div class="price-amt">$34.99</div>
-    <div class="price-per">per month</div>
+    <div class="price-amt">TBD</div>
+    <div class="price-per">$24.99 one-time setup &middot; $10/year membership</div>
     <p class="price-desc">Everything in Basic, plus the Caregiver Hub.</p>
     <ul class="price-list">
       <li><span class="price-check">✓</span> Everything in Basic</li>
@@ -178,7 +179,7 @@ a { text-decoration: none; }
       <li><span class="price-check">✓</span> Extended notifications</li>
       <li><span class="price-check">✓</span> Priority Support &amp; Onboarding</li>
     </ul>
-    <a href="signup.html" class="btn-rose">Free Trial Sign Up</a>
+    <a href="signup.html" class="btn-rose">Sign Up for Free</a>
   </div>
 
   <!-- MED BASIC & MED PRO -->
@@ -194,7 +195,7 @@ a { text-decoration: none; }
       <li><span class="price-check" style="color:#8a6a00;">✓</span> Agency Caregiver Hub — Med Pro</li>
       <li><span class="price-check" style="color:#8a6a00;">✓</span> AI Trend Viewer — Med Pro</li>
     </ul>
-    <a href="signup.html" class="btn-rose">Free Trial Sign Up</a>
+    <a href="signup.html" class="btn-rose">Sign Up for Free</a>
   </div>
 
   <a href="subscriptions.html" style="display:block;text-align:center;color:#b03060;font-weight:700;font-size:0.95rem;margin-top:6px;">View full subscription details →</a>
@@ -236,14 +237,17 @@ a { text-decoration: none; }
     <h4>Product</h4>
     <a href="features.html">Features</a>
     <a href="subscriptions.html">Subscriptions</a>
-    <a href="signup.html">Sign Up</a>
+    <a href="signup.html">Log On</a>
     <a href="angels.html">Angels Program</a>
   </div>
   <div class="footer-col">
     <h4>Company</h4>
     <a href="about.html">About KasiaCare</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy &amp; AI Policy</a>
+    <a href="commitment.html">Our Commitment</a>
+    <a href="family-heals.html">Family Heals</a>
+    <a href="resources.html">External Resources</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
   </div>
 </div>
 <div class="footer-bottom">&copy; 2026 KasiaCare &middot; Founded by Lilia Kuzmicz &middot; Built for Kasia. Built for every family like ours. 💙<br><span style="font-size:0.72rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.3.0 · <span id="kc-date"></span> · Home</span></div>
