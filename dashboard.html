@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<meta name="theme-color" content="#102940">
+<title>KasiaCare — Care Plan Demo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+body { font-family: Verdana, Geneva, sans-serif; background: #0a1f33; color: #fff; }
+input, select, button { font-family: Verdana, Geneva, sans-serif; }
+input[type="date"], input[type="time"] { color-scheme: dark; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// Suppress Babel development warning
+const _warn = console.warn;
+console.warn = (...args) => { if(args[0]&&args[0].includes&&args[0].includes('Babel')) return; _warn(...args); };
+</script>
+<script type="text/babel">
+const { useState, useRef, useEffect } = React;
+
+const C = {
+  navy:"#102940", rose:"#b03060", gold:"#b07d10",
+  green:"#2d6b2d", purple:"#6b2d8a", teal:"#1a7a6a", brown:"#8a4a10",
+};
+
+const TODAY = new Date();
+const fmt      = (d) => new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric"});
+const fmtTime  = (d) => new Date(d).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+const fmtFull  = (d) => new Date(d).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+const fmtClock = (d) => new Date(d).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"});
+const isToday  = (date) => { const d=new Date(date); return d.getDate()===TODAY.getDate()&&d.getMonth()===TODAY.getMonth()&&d.getFullYear()===TODAY.getFullYear(); };
+const dayLabel = (date) => { const d=new Date(date); const diff=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()))/86400000); if(diff===0)return"Today"; if(diff===1)return"Tomorrow"; return fmt(date); };
+const getGreeting = () => { const h=new Date().getHours(); if(h<12)return"Good morning"; if(h<17)return"Good afternoon"; return"Good evening"; };
+
+const CATS = {
+  appointment:{label:"Appointments", icon:"📅", color:C.rose},
+  task:       {label:"Tasks",         icon:"🪴", color:C.green},
+  activity:   {label:"Activities",    icon:"🚴‍♀️",color:C.teal},
+  med:        {label:"Med Reminders", icon:"🧃", color:C.purple},
+  meal:       {label:"Meals",         icon:"🥣", color:C.gold},
+  notes:      {label:"Notes",         icon:"📝", color:C.navy},
+  order:      {label:"Orders",        icon:"📦", color:C.brown},
+};
+
+const MED_SLOTS = [
+  {id:"am",        label:"AM Med",        time:"7:00 AM",  icon:"🌅"},
+  {id:"breakfast", label:"Breakfast Med", time:"8:30 AM",  icon:"🥣"},
+  {id:"lunch",     label:"Lunch Med",     time:"12:00 PM", icon:"☀️"},
+  {id:"supper",    label:"Supper Med",    time:"5:30 PM",  icon:"🌇"},
+  {id:"pm",        label:"PM Med",        time:"8:00 PM",  icon:"🌙"},
+  {id:"bedtime",   label:"Bedtime Med",   time:"10:00 PM", icon:"😴"},
+];
+
+const INITIAL_ITEMS = [
+  {id:1, type:"appointment",title:"Dr. Williams checkup",   date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),10,30),done:false,note:"Bring medication list"},
+  {id:2, type:"task",       title:"Morning routine",        date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(), 8, 0),done:true, note:""},
+  {id:3, type:"activity",   title:"Afternoon walk — 20 min",date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),14, 0),done:false,note:"Around the block"},
+  {id:4, type:"meal",       title:"Breakfast",              date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(), 8,30),done:true, note:"Oatmeal and fruit"},
+  {id:5, type:"meal",       title:"Lunch",                  date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),12, 0),done:false,note:""},
+  {id:6, type:"notes",      title:"Caregiver handoff note", date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),16, 0),done:false,note:"Energy was good today"},
+  {id:7, type:"order",      title:"Reorder medical supplies",date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),11, 0),done:false,note:"Gloves, wipes"},
+  {id:8, type:"appointment",title:"Physical therapy",       date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+2,9,0),done:false,note:""},
+  {id:9, type:"task",       title:"Laundry",                date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+1,10,0),done:false,note:""},
+  {id:10,type:"activity",   title:"Family visit",           date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+3,14,0),done:false,note:"Sister coming over"},
+];
+
+const INITIAL_MEDS = [
+  {id:1,slot:"am",       label:"Morning reminder",done:true, note:"Take with water"},
+  {id:2,slot:"breakfast",label:"With breakfast",  done:true, note:""},
+  {id:3,slot:"lunch",    label:"Midday reminder", done:false,note:""},
+  {id:4,slot:"supper",   label:"Evening reminder",done:false,note:"With food"},
+  {id:5,slot:"pm",       label:"Night reminder",  done:false,note:""},
+  {id:6,slot:"bedtime",  label:"Bedtime reminder",done:false,note:""},
+];
+
+const inp = {width:"100%",padding:"14px 12px",border:"2px solid #fff",borderRadius:"8px",fontSize:"1.05rem",fontFamily:"Verdana,Geneva,sans-serif",color:"#102940",background:"#fff",outline:"none",boxSizing:"border-box",fontWeight:700};
+const lbl = {display:"block",fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"8px",textTransform:"uppercase",letterSpacing:"1px"};
+
+const GoldBanner = ({title,count}) => (
+  <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",margin:"14px 0 10px",display:"flex",alignItems:"center",justifyContent:"center",gap:"10px"}}>
+    <div style={{fontSize:"0.82rem",fontWeight:700,color:"#fff",textTransform:"uppercase",letterSpacing:"1px",whiteSpace:"nowrap"}}>{title}</div>
+    {count!==undefined&&<div style={{background:"#fff",color:C.gold,borderRadius:"20px",padding:"2px 10px",fontSize:"0.82rem",fontWeight:700}}>{count}</div>}
+  </div>
+);
+
+function App() {
+  const [items,setItems]         = useState(INITIAL_ITEMS);
+  const [meds,setMeds]           = useState(INITIAL_MEDS);
+  const [view,setView]           = useState("dashboard");
+  const [activeCat,setActiveCat] = useState(null);
+  const [prevView,setPrevView]   = useState("dashboard");
+  const [calMonth,setCalMonth]   = useState(new Date(TODAY.getFullYear(),TODAY.getMonth(),1));
+  const [formType,setFormType]   = useState("task");
+  const [selectedDay,setSelectedDay] = useState(null);
+  const [now,setNow]             = useState(new Date());
+
+  useEffect(()=>{const t=setInterval(()=>setNow(new Date()),1000);return()=>clearInterval(t);},[]);
+
+  const navigate=(newView,cat)=>{setPrevView(view);if(cat)setActiveCat(cat);setView(newView);window.scrollTo(0,0);};
+  const goBack=()=>{setView(prevView||"dashboard");window.scrollTo(0,0);};
+  const toggleItem=(id)=>setItems(p=>p.map(i=>i.id===id?{...i,done:!i.done}:i));
+  const toggleMed=(id)=>setMeds(p=>p.map(m=>m.id===id?{...m,done:!m.done}:m));
+  const todayItems=items.filter(i=>isToday(i.date));
+
+  const calDays=()=>{const y=calMonth.getFullYear(),m=calMonth.getMonth();const first=new Date(y,m,1).getDay(),total=new Date(y,m+1,0).getDate();const days=[];for(let i=0;i<first;i++)days.push(null);for(let d=1;d<=total;d++)days.push(d);return days;};
+  const hasOnDay=(day,cat)=>{if(!day)return false;return items.filter(i=>!cat||i.type===cat).some(i=>{const d=new Date(i.date);return d.getDate()===day&&d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear();});};
+  const isTodayDay=(day)=>day&&day===TODAY.getDate()&&calMonth.getMonth()===TODAY.getMonth()&&calMonth.getFullYear()===TODAY.getFullYear();
+
+  const ItemCard=({item})=>(
+    <div style={{background:C.navy,borderRadius:"8px",padding:"14px",marginBottom:"8px",borderLeft:`5px solid ${CATS[item.type].color}`,display:"flex",gap:"12px",alignItems:"flex-start"}}>
+      <button onClick={()=>toggleItem(item.id)} style={{width:"28px",height:"28px",borderRadius:"50%",border:`2px solid ${item.done?C.gold:"#fff"}`,background:item.done?C.gold:"transparent",cursor:"pointer",color:"#fff",fontSize:"0.85rem",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:"2px"}}>{item.done?"✓":""}</button>
+      <div style={{fontSize:"1.3rem",flexShrink:0}}>{CATS[item.type].icon}</div>
+      <div style={{flex:1}}>
+        <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",textDecoration:item.done?"line-through":"none",marginBottom:"4px"}}>{item.title}</div>
+        <div style={{marginBottom:"3px"}}>
+          <span style={{background:CATS[item.type].color,color:"#fff",fontSize:"0.65rem",fontWeight:700,padding:"2px 8px",borderRadius:"3px",textTransform:"uppercase",letterSpacing:"1px"}}>{CATS[item.type].label}</span>
+        </div>
+        <div style={{fontSize:"0.78rem",color:"#fff",fontWeight:700,marginBottom:"2px"}}>{dayLabel(item.date)}</div>
+        <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700}}>{fmtTime(item.date)}</div>
+        {item.note?<div style={{fontSize:"0.82rem",color:"#fff",marginTop:"4px"}}>{item.note}</div>:null}
+      </div>
+    </div>
+  );
+
+  const CalView=({cat})=>(
+    <div style={{background:C.navy,borderRadius:"10px",padding:"16px",marginBottom:"16px"}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
+        <button onClick={()=>setCalMonth(new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1))} style={{background:"none",border:"none",fontSize:"1.4rem",cursor:"pointer",color:"#fff"}}>‹</button>
+        <div style={{fontSize:"1rem",fontWeight:700,color:"#fff"}}>{calMonth.toLocaleDateString("en-US",{month:"long",year:"numeric"})}</div>
+        <button onClick={()=>setCalMonth(new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1))} style={{background:"none",border:"none",fontSize:"1.4rem",cursor:"pointer",color:"#fff"}}>›</button>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"3px"}}>
+        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d=><div key={d} style={{textAlign:"center",fontSize:"0.65rem",fontWeight:700,color:"#fff",padding:"4px 0",textTransform:"uppercase"}}>{d}</div>)}
+        {calDays().map((day,i)=>{const isSel=selectedDay===day&&calMonth.getMonth()===TODAY.getMonth();return(
+          <div key={i} onClick={()=>day&&hasOnDay(day,cat)?setSelectedDay(selectedDay===day?null:day):null}
+            style={{background:isSel?C.gold:isTodayDay(day)?C.rose:hasOnDay(day,cat)?"rgba(176,125,16,0.3)":"rgba(255,255,255,0.05)",borderRadius:"6px",padding:"7px 3px",textAlign:"center",fontSize:"0.88rem",color:"#fff",fontWeight:isTodayDay(day)||isSel?700:400,minHeight:"34px",border:isSel?`2px solid ${C.gold}`:isTodayDay(day)?"2px solid #fff":"2px solid transparent",cursor:hasOnDay(day,cat)?"pointer":"default"}}>
+            {day}
+            {hasOnDay(day,cat)&&!isTodayDay(day)&&!isSel?<div style={{width:"5px",height:"5px",borderRadius:"50%",background:C.rose,margin:"2px auto 0"}}></div>:null}
+          </div>);})}
+      </div>
+      {selectedDay&&(
+        <div style={{marginTop:"14px"}}>
+          <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",marginBottom:"10px",fontSize:"0.88rem",fontWeight:700,color:"#fff",textAlign:"center",textTransform:"uppercase",letterSpacing:"1.5px"}}>{calMonth.toLocaleDateString("en-US",{month:"long"})} {selectedDay}</div>
+          {items.filter(i=>{const d=new Date(i.date);return d.getDate()===selectedDay&&d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear()&&(!cat||i.type===cat);}).sort((a,b)=>new Date(a.date)-new Date(b.date)).map(item=>(
+            <div key={item.id} style={{background:"rgba(255,255,255,0.08)",borderRadius:"8px",padding:"12px",marginBottom:"6px",borderLeft:`4px solid ${CATS[item.type].color}`,display:"flex",gap:"10px",alignItems:"flex-start"}}>
+              <div style={{fontSize:"1.2rem"}}>{CATS[item.type].icon}</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:"0.95rem",fontWeight:700,color:"#fff",marginBottom:"4px"}}>{item.title}</div>
+                <div style={{marginBottom:"2px"}}><span style={{background:CATS[item.type].color,padding:"2px 8px",borderRadius:"3px",fontSize:"0.65rem",fontWeight:700,textTransform:"uppercase",letterSpacing:"1px",color:"#fff"}}>{CATS[item.type].label}</span></div>
+                <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff"}}>{dayLabel(item.date)}</div>
+                <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700}}>{fmtTime(item.date)}</div>
+                {item.note?<div style={{fontSize:"0.78rem",color:"#fff",marginTop:"3px"}}>{item.note}</div>:null}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const Header=()=>(
+    <div style={{background:C.navy,padding:"12px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:100,boxShadow:"0 2px 12px rgba(0,0,0,0.4)"}}>
+      <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+      <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
+        <div onClick={()=>navigate("calendar")} style={{background:C.gold,color:"#fff",fontSize:"0.62rem",fontWeight:700,letterSpacing:"1.5px",textTransform:"uppercase",padding:"6px 14px",borderRadius:"3px",cursor:"pointer"}}>Calendar</div>
+        <button onClick={()=>navigate("add")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"6px",padding:"7px 14px",fontSize:"0.82rem",fontWeight:700,cursor:"pointer"}}>+</button>
+      </div>
+    </div>
+  );
+
+  const GreetingBar=()=>(
+    <div style={{background:C.navy,padding:"8px 16px 10px",borderBottom:"1px solid rgba(255,255,255,0.08)",textAlign:"center"}}>
+      <div style={{fontSize:"0.88rem",fontWeight:700,color:"#fff"}}>{getGreeting()} <span style={{color:"#b03060",fontSize:"1.1rem"}}>♥</span></div>
+      <div style={{fontSize:"0.75rem",fontWeight:700,color:"#fff",marginTop:"2px"}}>{fmtFull(TODAY)}</div>
+      <div style={{fontSize:"0.72rem",fontWeight:700,color:"#fff",marginTop:"2px"}}>{fmtClock(now)}</div>
+    </div>
+  );
+
+  const BackBar=({title})=>(
+    <div style={{background:C.navy,padding:"10px 16px",borderBottom:`3px solid ${C.rose}`}}>
+      <button onClick={goBack} style={{background:C.rose,border:"none",borderRadius:"4px",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"0.72rem",padding:"4px 10px",marginBottom:"6px",display:"inline-block"}}>Back</button>
+      <div style={{fontSize:"1rem",fontWeight:700,color:"#fff"}}>{title}</div>
+    </div>
+  );
+
+  const Dashboard=()=>(
+    <div style={{padding:"16px"}}>
+      <div style={{background:C.navy,borderRadius:"10px",padding:"16px",marginBottom:"16px"}}>
+        <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",marginBottom:"12px",fontSize:"0.88rem",fontWeight:700,color:"#fff",textTransform:"uppercase",letterSpacing:"1.5px",textAlign:"center"}}>Today's Care Plan</div>
+        {Object.entries(CATS).map(([type,cfg])=>{
+          const count=type==="med"?meds.length:todayItems.filter(i=>i.type===type).length;
+          const done=type==="med"?meds.filter(m=>m.done).length:todayItems.filter(i=>i.type===type&&i.done).length;
+          return(
+            <div key={type} onClick={()=>navigate("category",type)} style={{display:"flex",alignItems:"center",gap:"12px",padding:"13px 12px",background:"rgba(255,255,255,0.08)",borderRadius:"8px",marginBottom:"6px",cursor:"pointer",borderLeft:`5px solid ${cfg.color}`}}>
+              <div style={{fontSize:"1.5rem",width:"34px",textAlign:"center"}}>{cfg.icon}</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:"1rem",fontWeight:700,color:"#fff"}}>{cfg.label}</div>
+                <div style={{fontSize:"0.78rem",color:"#fff",fontWeight:700,marginTop:"1px"}}>{count>0?`${done} of ${count} complete`:"Nothing scheduled"}</div>
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+                <div style={{background:count>0?cfg.color:"rgba(255,255,255,0.15)",color:"#fff",borderRadius:"20px",padding:"4px 14px",fontSize:"1rem",fontWeight:700,minWidth:"32px",textAlign:"center"}}>{count}</div>
+                <div style={{color:"#fff",fontSize:"1.1rem",fontWeight:700}}>›</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {items.filter(i=>!isToday(i.date)&&new Date(i.date)>=TODAY).length>0&&(
+        <>
+          <GoldBanner title="Coming Up" />
+          {items.filter(i=>!isToday(i.date)&&new Date(i.date)>=TODAY).sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(0,3).map(item=><ItemCard key={item.id} item={item}/>)}
+        </>
+      )}
+      <div style={{background:C.rose,borderRadius:"8px",padding:"12px 16px",marginTop:"20px",textAlign:"center"}}>
+        <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"6px",textTransform:"uppercase",letterSpacing:"1px"}}>Demo Mode</div>
+        <div style={{fontSize:"0.82rem",color:"#fff",lineHeight:1.7}}>This is a KasiaCare preview. Data resets when you close. <a href="signup.html" style={{color:"#fff",fontWeight:700,textDecoration:"underline"}}>Sign up free</a> to be first when we launch.</div>
+      </div>
+    </div>
+  );
+
+  const CategoryView=()=>{
+    if(!activeCat)return null;
+    if(activeCat==="med"){
+      const doneCount=meds.filter(m=>m.done).length;
+      return(
+        <div>
+          <div style={{background:C.navy,padding:"10px 16px",borderBottom:`3px solid ${C.rose}`}}>
+            <button onClick={goBack} style={{background:C.rose,border:"none",borderRadius:"4px",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"0.72rem",padding:"4px 10px",marginBottom:"6px",display:"inline-block"}}>Back</button>
+            <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"2px"}}>{fmtFull(TODAY)}</div>
+            <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"4px"}}>{doneCount} of {meds.length} complete</div>
+            <GoldBanner title="Daily Med Schedule"/>
+          </div>
+          <div style={{padding:"16px"}}>
+            <div style={{background:C.navy,borderRadius:"10px",padding:"14px",marginBottom:"16px"}}>
+              {MED_SLOTS.map(slot=>{
+                const reminder=meds.find(m=>m.slot===slot.id);
+                return(
+                  <div key={slot.id} style={{display:"flex",alignItems:"center",gap:"12px",padding:"13px 12px",background:reminder?.done?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.1)",borderRadius:"8px",marginBottom:"6px",borderLeft:`5px solid ${reminder?(reminder.done?C.gold:C.rose):"rgba(255,255,255,0.2)"}`}}>
+                    <div style={{fontSize:"1.3rem",width:"30px",textAlign:"center"}}>{slot.icon}</div>
+                    <div style={{flex:1}}>
+                      <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:"2px"}}>{slot.label}</div>
+                      <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700}}>{slot.time}{reminder?` · ${reminder.label}`:" · No reminder set"}{reminder?.note?` · ${reminder.note}`:""}</div>
+                    </div>
+                    {reminder?<button onClick={()=>toggleMed(reminder.id)} style={{width:"28px",height:"28px",borderRadius:"50%",border:`2px solid ${reminder.done?C.gold:"#fff"}`,background:reminder.done?C.gold:"transparent",cursor:"pointer",color:"#fff",fontSize:"0.8rem",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{reminder.done?"✓":""}</button>:null}
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{background:C.gold,borderRadius:"6px",padding:"12px 16px",marginBottom:"16px"}}>
+              <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700,lineHeight:1.75}}>Med reminders use brief labels only. Medication names and dosages are not stored.</div>
+            </div>
+            <button onClick={()=>navigate("addmed")} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>+ Add Med Reminder</button>
+          </div>
+        </div>
+      );
+    }
+    const cfg=CATS[activeCat];
+    const catItems=items.filter(i=>i.type===activeCat).sort((a,b)=>new Date(a.date)-new Date(b.date));
+    const todayCat=catItems.filter(i=>isToday(i.date));
+    const upcoming=catItems.filter(i=>!isToday(i.date)&&new Date(i.date)>=TODAY);
+    return(
+      <div>
+        <BackBar title={`${cfg.icon} ${cfg.label}`}/>
+        <div style={{padding:"16px"}}>
+          <CalView cat={activeCat}/>
+          {todayCat.length>0?<><GoldBanner title="Today" count={todayCat.length}/>{todayCat.map(item=><ItemCard key={item.id} item={item}/>)}</>:null}
+          {upcoming.length>0?<><GoldBanner title="Upcoming" count={upcoming.length}/>{upcoming.map(item=><ItemCard key={item.id} item={item}/>)}</>:null}
+          {todayCat.length===0&&upcoming.length===0?<div style={{background:C.navy,borderRadius:"8px",padding:"32px 20px",textAlign:"center"}}><div style={{fontSize:"1rem",color:"#fff",fontWeight:700}}>Nothing scheduled yet.</div><div style={{fontSize:"0.88rem",color:"#fff",marginTop:"6px"}}>Tap + Add to get started.</div></div>:null}
+        </div>
+      </div>
+    );
+  };
+
+  const FullCalView=()=>{
+    const monthItems=items.filter(i=>{const d=new Date(i.date);return d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear();}).sort((a,b)=>new Date(a.date)-new Date(b.date));
+    return(
+      <div>
+        <div style={{background:C.navy,padding:"10px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
+            <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Home</button>
+          </div>
+          <GoldBanner title="Full Care Plan"/>
+        </div>
+        <div style={{padding:"16px"}}>
+          <CalView cat={null}/>
+          <GoldBanner title="This Month" count={monthItems.length}/>
+          {monthItems.length===0?<div style={{background:C.navy,borderRadius:"8px",padding:"32px 20px",textAlign:"center"}}><div style={{fontSize:"1rem",color:"#fff",fontWeight:700}}>Nothing scheduled this month.</div></div>:monthItems.map(item=><ItemCard key={item.id} item={item}/>)}
+        </div>
+      </div>
+    );
+  };
+
+  const AddForm=()=>{
+    const titleRef2=useRef();const dateRef2=useRef();const timeRef2=useRef();const noteRef2=useRef();
+    const save=()=>{
+      const title=titleRef2.current?.value?.trim();const date=dateRef2.current?.value;const time=timeRef2.current?.value;const note=noteRef2.current?.value?.trim()||"";
+      if(!title||!date)return;
+      setItems(p=>[...p,{id:Date.now(),type:formType,title,date:new Date(`${date}T${time||"08:00"}`),done:false,note}]);
+      setView(prevView||"dashboard");
+    };
+    return(
+      <div style={{minHeight:"100vh",background:"#0a1f33"}}>
+        <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
+            <div style={{fontSize:"1.2rem",fontWeight:700,color:"#fff"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Home</button>
+          </div>
+          <GoldBanner title="Add to Care Plan"/>
+        </div>
+        <div style={{padding:"20px 16px"}}>
+          <div style={{marginBottom:"20px"}}>
+            <div style={lbl}>Type</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>
+              {Object.entries(CATS).map(([type,cfg])=>(
+                <button key={type} onClick={()=>setFormType(type)} style={{padding:"10px 14px",borderRadius:"8px",border:`2px solid ${formType===type?cfg.color:"rgba(255,255,255,0.3)"}`,background:formType===type?cfg.color:"transparent",cursor:"pointer",fontSize:"0.82rem",fontWeight:700,color:"#fff"}}>{cfg.icon} {cfg.label}</button>
+              ))}
+            </div>
+          </div>
+          <div style={{marginBottom:"18px"}}><label style={lbl}>Name</label><input ref={titleRef2} style={inp} placeholder={`Brief ${CATS[formType].label.toLowerCase()} name`}/></div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px",marginBottom:"18px"}}>
+            <div><label style={lbl}>Date</label><input type="date" ref={dateRef2} style={inp}/></div>
+            <div><label style={lbl}>Time</label><input type="time" ref={timeRef2} style={inp}/></div>
+          </div>
+          <div style={{marginBottom:"24px"}}><label style={lbl}>Notes (optional)</label><input ref={noteRef2} style={inp} placeholder="Any notes..."/></div>
+          <button onClick={save} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"16px",fontSize:"1.1rem",fontWeight:700,cursor:"pointer",marginBottom:"10px"}}>Save to Care Plan</button>
+          <button onClick={goBack} style={{width:"100%",background:"transparent",color:"#fff",border:"2px solid #fff",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>Cancel</button>
+        </div>
+      </div>
+    );
+  };
+
+  const AddMedForm=()=>{
+    const labelRef2=useRef();const noteRef2=useRef();const slotRef2=useRef();
+    const save=()=>{
+      const label=labelRef2.current?.value?.trim();const note=noteRef2.current?.value?.trim()||"";const slot=slotRef2.current?.value||"am";
+      if(!label)return;
+      setMeds(p=>[...p,{id:Date.now(),slot,label,done:false,note}]);
+      setView(prevView||"dashboard");
+    };
+    return(
+      <div style={{minHeight:"100vh",background:"#0a1f33"}}>
+        <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.purple}`}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
+            <div style={{fontSize:"1.2rem",fontWeight:700,color:"#fff"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Home</button>
+          </div>
+          <GoldBanner title="Add Med Reminder"/>
+        </div>
+        <div style={{padding:"20px 16px"}}>
+          <div style={{marginBottom:"18px"}}><label style={lbl}>Time Slot</label><select ref={slotRef2} style={{...inp,background:"#1a3a5c",color:"#fff",border:"2px solid #fff"}} defaultValue="am">{MED_SLOTS.map(s=><option key={s.id} value={s.id}>{s.icon} {s.label} — {s.time}</option>)}</select></div>
+          <div style={{marginBottom:"18px"}}><label style={lbl}>Brief Med Name or Label</label><input ref={labelRef2} style={inp} placeholder="Brief med name or label"/></div>
+          <div style={{marginBottom:"24px"}}><label style={lbl}>Notes (optional)</label><input ref={noteRef2} style={inp} placeholder="e.g. Take with water..."/></div>
+          <div style={{background:C.gold,borderRadius:"6px",padding:"12px 16px",marginBottom:"24px"}}><div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700,lineHeight:1.75}}>Med reminders use brief labels only. Medication names and dosages are not stored.</div></div>
+          <button onClick={save} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"16px",fontSize:"1.1rem",fontWeight:700,cursor:"pointer",marginBottom:"10px"}}>Save Med Reminder</button>
+          <button onClick={goBack} style={{width:"100%",background:"transparent",color:"#fff",border:"2px solid #fff",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>Cancel</button>
+        </div>
+      </div>
+    );
+  };
+
+
+  const AppFooter=()=>(
+    <div style={{background:C.navy,borderTop:"3px solid rgba(255,255,255,0.08)",padding:"16px 20px",marginTop:"20px",textAlign:"center"}}>
+      <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:"6px"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+      <div style={{fontSize:"0.72rem",color:"#fff",marginBottom:"12px"}}>Care Plan Software · Demo v1.0 · May 2026</div>
+      <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap",gap:"14px",marginBottom:"12px"}}>
+        <a href="index.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Home</a>
+        <a href="privacy.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Privacy Policy</a>
+        <a href="contact.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Contact Us</a>
+        <a href="signup.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Sign Up</a>
+      </div>
+      <div style={{fontSize:"0.72rem",color:"#fff",fontStyle:"italic"}}>Demo data resets when you close. No information is saved or stored.</div>
+      <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"6px",fontStyle:"italic"}}>"No one receiving care should feel unknown. No one providing care should feel unprepared."</div>
+      <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"10px",borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:"10px"}}>© 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style={{color:"#b03060"}}>♥</span></div>
+    </div>
+  );
+
+  return(
+    <div style={{fontFamily:"Verdana,Geneva,sans-serif",background:"#0a1f33",minHeight:"100vh",color:"#fff"}}>
+      {view!=="add"&&view!=="addmed"&&<Header/>}
+      {view==="dashboard"&&<GreetingBar/>}
+      {view==="dashboard"&&<Dashboard/>}
+      {view==="category"&&activeCat&&<CategoryView/>}
+      {view==="calendar"&&<FullCalView/>}
+      {view==="add"&&<AddForm/>}
+      {view==="addmed"&&<AddMedForm/>}
+      <AppFooter/>
+    </div>
+  );
+}
+
+ReactDOM.render(React.createElement(App), document.getElementById('root'));
+</script>
+</body>
+</html>
