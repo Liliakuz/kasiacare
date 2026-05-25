@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>KasiaCare Demo — Read Me First</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JKYSYM2RC5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JKYSYM2RC5');
+</script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+body { font-family: Verdana, Geneva, sans-serif; background: #0a1f33; color: #fff; min-height: 100vh; line-height: 1.75; }
+a { text-decoration: none; }
+
+/* NAV */
+.nav { background: #102940; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+.nav-logo { font-size: 1.2rem; font-weight: 700; color: #fff; }
+.nav-logo span { color: #b03060; }
+.nav-btn { background: #b03060; color: #fff; padding: 7px 16px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; }
+
+/* HERO */
+.hero { background: #102940; padding: 0 20px 20px; text-align: center; border-bottom: 4px solid #b03060; }
+.gold-tag { display: inline-block; background: #b07d10; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 3px; margin-bottom: 12px; }
+.hero h1 { font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 8px; }
+.hero h1 em { font-style: italic; color: #b03060; }
+.hero p { font-size: 0.88rem; color: #fff; line-height: 1.85; max-width: 480px; margin: 0 auto 16px; }
+
+/* PINK SECTION DIVIDER */
+.pink-line { height: 4px; background: #b03060; }
+.gold-line { height: 4px; background: #b07d10; }
+.cream-line { height: 4px; background: #f2e8d8; }
+
+/* NOTICE BOX */
+.notice { background: #b03060; padding: 16px 20px; text-align: center; }
+.notice p { font-size: 0.88rem; color: #fff; font-weight: 700; line-height: 1.75; }
+.notice a { color: #fff; text-decoration: underline; font-weight: 700; }
+
+/* SECTION */
+.section { background: #102940; padding: 20px; margin-bottom: 0; }
+.section-head { background: #b07d10; padding: 10px 20px; font-size: 0.82rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; margin-bottom: 16px; }
+
+/* FEATURE TABLE */
+.feat-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+.feat-table th { background: #102940; color: #b07d10; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 10px 12px; text-align: left; border-bottom: 2px solid #b07d10; }
+.feat-table th:last-child, .feat-table th:nth-last-child(2) { text-align: center; }
+.feat-table td { padding: 12px; font-size: 0.82rem; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+.feat-table td:last-child, .feat-table td:nth-last-child(2) { text-align: center; }
+.feat-table tr:last-child td { border-bottom: none; }
+.feat-table tr:hover td { background: rgba(255,255,255,0.04); }
+
+/* CHECK MARKS */
+.yes { color: #2d6b2d; font-size: 1.2rem; font-weight: 700; }
+.no { color: rgba(255,255,255,0.2); font-size: 1.2rem; }
+.soon { color: #b07d10; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+/* CATEGORY BADGE */
+.cat-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 1px; color: #fff; margin-bottom: 2px; }
+
+/* NOTE BOX */
+.note-box { background: rgba(255,255,255,0.06); border-left: 4px solid #b07d10; padding: 14px 16px; margin-bottom: 16px; font-size: 0.82rem; color: #fff; line-height: 1.85; }
+
+/* BUTTON */
+.btn-demo { display: block; background: #b03060; color: #fff; font-weight: 700; padding: 16px 20px; border-radius: 4px; font-size: 1rem; text-align: center; margin-bottom: 10px; border: 2px solid #fff; }
+.btn-secondary { display: block; background: #b07d10; color: #fff; font-weight: 700; padding: 14px 20px; border-radius: 4px; font-size: 0.88rem; text-align: center; margin-bottom: 20px; }
+
+/* FOOTER */
+.footer { background: #102940; color: #fff; padding: 32px 20px 20px; margin-top: 0; }
+.footer-logo { font-size: 1.3rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
+.footer-logo span { color: #b03060; }
+.footer p { font-size: 0.88rem; line-height: 1.7; margin-bottom: 6px; color: #fff; }
+.footer-cols { display: flex; gap: 32px; margin-top: 20px; flex-wrap: wrap; }
+.footer-col h4 { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 10px; }
+.footer-col a { display: block; font-size: 0.88rem; color: #fff; margin-bottom: 8px; }
+.footer-bottom { background: #102940; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 14px 20px; font-size: 0.78rem; color: #fff; font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
+  <a href="logon.html" class="nav-btn">Log On · Demo</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="gold-tag">Care Plan Software · Demo Guide</div>
+  <h1>Please Read <em>Before</em> You Try the Demo</h1>
+  <p>This guide tells you exactly what is in the current demo, what you can start using right now, and what is coming in the next version. Reading this first will help you get the most out of your experience.</p>
+</div>
+
+<div class="pink-line"></div>
+
+<!-- NOTICE -->
+<div class="notice">
+  <p>The KasiaCare app is currently in development. This demo is a working preview — not the final product. Your feedback helps us build something better for every family that comes after. <br>Thank you for being here. <span style="color:#f2e8d8;">♥</span></p>
+</div>
+
+<div class="gold-line"></div>
+
+<!-- WHAT IS THE DEMO -->
+<div class="section">
+  <div class="section-head">What Is the Demo?</div>
+  <div class="note-box">
+    The KasiaCare demo is a working care plan dashboard. It shows you how the app will look and feel when it launches. You can add items, check them off, view your calendar, and explore all seven care plan categories. All data is temporary — it resets when you close the app. Nothing is saved or stored.
+  </div>
+  <div class="note-box" style="border-color:#b03060;">
+    <strong>Important:</strong> This demo runs in your mobile browser. For the best experience open it in Chrome or Samsung Browser on your phone. Some keyboard behavior may vary by device — this will be fully resolved in the official app launch.
+  </div>
+</div>
+
+<div class="cream-line"></div>
+
+<!-- FEATURE STATUS TABLE -->
+<div class="section">
+  <div class="section-head">What Can You Try Right Now?</div>
+
+  <!-- APPOINTMENTS -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">📅</span>
+      <span class="cat-badge" style="background:#b03060;">Appointments</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Add an appointment with name, date and time</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>View appointments on calendar</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Mark appointment as complete</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Tap a calendar date to see appointments</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Appointment reminders and notifications</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+      <tr><td>Recurring appointments</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+    </table>
+  </div>
+
+  <!-- TASKS -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">🪴</span>
+      <span class="cat-badge" style="background:#2d6b2d;">Tasks</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Add a task with name, date and time</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Check off completed tasks</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>View tasks on calendar</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Task reminders and notifications</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+      <tr><td>Recurring tasks</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">🚴‍♀️</span>
+      <span class="cat-badge" style="background:#1a7a6a;">Activities</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Add an activity with name, date and time</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>View activities on calendar</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Mark activity as complete</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Activity tracking and history</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+    </table>
+  </div>
+
+  <!-- MED REMINDERS -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">🧃</span>
+      <span class="cat-badge" style="background:#6b2d8a;">Med Reminders</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Six daily Med Box slots — AM Med through Bedtime Med</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Add a brief med name or label to each slot</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Check off med reminders as completed</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Progress counter — 2 of 6 complete</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Push notifications for med reminders</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+      <tr><td>Medication names and dosages stored</td><td><span class="no">—</span></td><td><span class="soon">App Launch</span></td></tr>
+    </table>
+  </div>
+
+  <!-- MEALS -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">🥣</span>
+      <span class="cat-badge" style="background:#b07d10;">Meals</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Add a meal with name, date and time</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>View meals on calendar</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Mark meal as complete</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Meal planning and nutrition tracking</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+    </table>
+  </div>
+
+  <!-- NOTES -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">📝</span>
+      <span class="cat-badge" style="background:#102940;border:1px solid rgba(255,255,255,0.3);">Notes</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Add a note with name, date and time</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Caregiver handoff notes</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>View notes on calendar</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Voice notes</td><td><span class="no">—</span></td><td><span class="soon">App Launch</span></td></tr>
+      <tr><td>Caregiver Hub — shared notes between care team</td><td><span class="no">—</span></td><td><span class="soon">Pro Plan</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ORDERS -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:1.4rem;">📦</span>
+      <span class="cat-badge" style="background:#8a4a10;">Orders</span>
+    </div>
+    <table class="feat-table">
+      <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+      <tr><td>Add an order or supply item</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Track order status</td><td><span class="yes">✓</span></td><td></td></tr>
+      <tr><td>Supplies & Vendors management</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+      <tr><td>Reorder reminders</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="cream-line"></div>
+
+<!-- NAVIGATION FEATURES -->
+<div class="section">
+  <div class="section-head">Navigation & Calendar Features</div>
+  <table class="feat-table">
+    <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+    <tr><td>Daily Dashboard — Today's Care Plan summary</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Full Care Plan Calendar view</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Tap a date to see items for that day</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Navigate forward and back through months</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Coming Up section — next 3 upcoming items</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Today / Tomorrow / date labels on items</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Live clock and greeting</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Notifications panel</td><td><span class="no">—</span></td><td><span class="soon">Next Demo</span></td></tr>
+    <tr><td>At-Risk Flag alerts</td><td><span class="no">—</span></td><td><span class="soon">Pro Plan</span></td></tr>
+    <tr><td>Goals & Goal Settings</td><td><span class="no">—</span></td><td><span class="soon">Pro Plan</span></td></tr>
+  </table>
+</div>
+
+<div class="cream-line"></div>
+
+<!-- ACCOUNT FEATURES -->
+<div class="section">
+  <div class="section-head">Account & Data Features</div>
+  <table class="feat-table">
+    <tr><th>Feature</th><th>In Demo</th><th>Coming Soon</th></tr>
+    <tr><td>Try demo without login</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>Demo data resets on close — nothing stored</td><td><span class="yes">✓</span></td><td></td></tr>
+    <tr><td>User account and login</td><td><span class="no">—</span></td><td><span class="soon">App Launch</span></td></tr>
+    <tr><td>Save and sync care plan data</td><td><span class="no">—</span></td><td><span class="soon">App Launch</span></td></tr>
+    <tr><td>Multiple care plan profiles</td><td><span class="no">—</span></td><td><span class="soon">App Launch</span></td></tr>
+    <tr><td>Caregiver Hub — share with care team</td><td><span class="no">—</span></td><td><span class="soon">Pro Plan</span></td></tr>
+    <tr><td>Care team invitations</td><td><span class="no">—</span></td><td><span class="soon">Pro Plan</span></td></tr>
+  </table>
+</div>
+
+<div class="gold-line"></div>
+
+<!-- CTA -->
+<div style="background:#102940;padding:28px 20px;text-align:center;">
+  <div style="font-size:0.78rem;font-weight:700;color:#b07d10;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Ready to Try It?</div>
+  <p style="font-size:0.88rem;color:#fff;line-height:1.85;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto;">Now that you know what is in the demo — go ahead and try it. Your feedback helps us build a better app for every family that comes after.</p>
+  <a href="dashboard.html" class="btn-demo">Try the Demo Now</a>
+  <a href="signup.html" class="btn-secondary">Early Bird — Sign Up for Free</a>
+  <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);font-style:italic;">Demo data resets when you close. No information is saved or stored.</p>
+</div>
+
+<div class="pink-line"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <a href="index.html" class="footer-logo">Kasia<span>Care</span></a>
+  <p>Care Plan Software for Individuals, Families, Caregivers &amp; Care Teams.</p>
+  <p style="font-style:italic;color:rgba(255,255,255,0.6);margin-top:8px;">"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="features.html">Features</a>
+      <a href="subscriptions.html">Subscriptions</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="angels.html">Angels Program</a>
+      <a href="logon.html">Log On · Demo</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="about.html">About KasiaCare</a>
+      <a href="commitment.html">Our Commitment</a>
+      <a href="family-heals.html">Family Heals</a>
+      <a href="resources.html">External Resources</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">&copy; 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br>
+<span style="font-size:0.72rem;">KasiaCare Website v1.4.0 · Demo README v1.0.0</span></div>
+
+</body>
+</html>
