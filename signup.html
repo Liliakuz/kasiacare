@@ -25,7 +25,7 @@ a { text-decoration: none; }
 .nav-logo span { color: #b03060; }
 .nav-btn { background: #b03060; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; display: inline-block; white-space: nowrap; }
 
-.hero { background: #102940; padding: 40px 20px 36px; text-align: center; }
+.hero { background: #102940; padding: 16px 20px 32px; text-align: center; }
 .hero-label { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 14px; }
 .hero h1 { font-family: Verdana, Geneva, sans-serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 14px; }
 .hero h1 em { font-style: italic; color: #b03060; }
@@ -178,7 +178,6 @@ a { text-decoration: none; }
   <p class="hero-sub">Choose how you would like to be part of KasiaCare. Select one or more options. Sign Up for Free members receive a full <strong style="color:#fff;">free use when KasiaCare launches</strong> when KasiaCare launches — no credit card required.</p>
 </div>
 
-<div class="cat"><h2>Choose Your Options</h2><p>Select one or more</p></div>
 <div class="section warm" id="signup-section">
   <div id="main-form">
 
@@ -192,23 +191,7 @@ a { text-decoration: none; }
 
   <form id="signup-form" action="https://formspree.io/f/xgodzdnq" method="POST">
 
-    <div class="option-card" id="card-trial">
-      <label><input type="checkbox" name="signup_type" value="Sign Up for Free" onchange="toggleCard('trial')">
-        <div><h3>Early Bird — Sign Up for Free</h3><p>The KasiaCare app is currently in development. Sign up now as an early supporter and we will waive the one-time $24.99 setup fee. The Basic Plan is free to use — just a $10 annual membership billed after your first year.</p><span class="badge-sm b-trial">Setup Fee Waived · No Monthly Fee</span></div>
-      </label>
-    </div>
-    <div class="option-card" id="card-angels">
-      <label><input type="checkbox" name="signup_type" value="Angels Team" onchange="toggleCard('angels'); toggleAngels()">
-        <div><h3>Angels Team</h3><p>Sign up to become a KasiaCare Angel — an early supporter who helps shape the product through feedback, testing, and community.</p><span class="badge-sm b-angels">Early Access · Shape the Product</span></div>
-      </label>
-    </div>
-    <div class="option-card" id="card-list">
-      <label><input type="checkbox" name="signup_type" value="Mailing List" onchange="toggleCard('list')">
-        <div><h3>Mailing List</h3><p>Stay informed about KasiaCare news, launch updates, and caregiving resources. No spam — ever.</p><span class="badge-sm b-list">Updates Only</span></div>
-      </label>
-    </div>
 
-    <div class="divider"></div>
 
     <div class="form-group"><label>First Name <span style="color:#b03060">*</span></label><input type="text" name="first_name" placeholder="Your first name" required></div>
     <div class="form-group"><label>Last Name <span style="color:#b03060">*</span></label><input type="text" name="last_name" placeholder="Your last name" required></div>
@@ -244,9 +227,27 @@ a { text-decoration: none; }
     <div class="form-group">
       <label>Anything you'd like to share? <span style="font-weight:400;color:#7a6a58">(optional)</span></label>
       <textarea name="message" placeholder="Tell us about your caregiving situation, or anything on your mind. Every message is read personally." style="min-height:160px;"></textarea>
-      <p class="form-note">Every message is read personally.</p>
     </div>
 
+    <div class="divider"></div>
+    <p style="font-weight:700;color:#fff;background:#102940;padding:10px 14px;border-radius:6px;margin-bottom:12px;">Check the boxes for what you would like to sign up for.</p>
+    <div class="option-card" id="card-trial">
+      <label><input type="checkbox" name="signup_type" value="Sign Up for Free" onchange="toggleCard('trial')">
+        <div><h3>Early Bird — Sign Up for Free</h3><p>The KasiaCare app is currently in development. Sign up now as an early supporter and we will waive the one-time $24.99 setup fee. The Basic Plan is free to use — just a $10 annual membership billed after your first year.</p><span class="badge-sm b-trial">Setup Fee Waived · No Monthly Fee</span></div>
+      </label>
+    </div>
+    <div class="option-card" id="card-angels">
+      <label><input type="checkbox" name="signup_type" value="Angels Team" onchange="toggleCard('angels'); toggleAngels()">
+        <div><h3>Angels Team</h3><p>Sign up to become a KasiaCare Angel — an early supporter who helps shape the product through feedback, testing, and community.</p><span class="badge-sm b-angels">Early Access · Shape the Product</span></div>
+      </label>
+    </div>
+    <div class="option-card" id="card-list">
+      <label><input type="checkbox" name="signup_type" value="Mailing List" onchange="toggleCard('list')">
+        <div><h3>Mailing List</h3><p>Stay informed about KasiaCare news, launch updates, and caregiving resources. No spam — ever.</p><span class="badge-sm b-list">Updates Only</span></div>
+      </label>
+    </div>
+
+    <p class="form-note" style="margin-bottom:10px;">Every message is read personally.</p>
     <input type="text" name="_gotcha" style="display:none">
     <button type="submit" class="submit-btn">Submit Sign Up</button>
     <p class="form-note" style="margin-top:10px;">Your information is never sold or shared. No spam — ever. <a href="privacy.html" style="color:#b03060;">Privacy, Data &amp; AI Policy</a></p>
@@ -263,8 +264,9 @@ a { text-decoration: none; }
     <h4>Product</h4>
     <a href="features.html">Features</a>
     <a href="subscriptions.html">Subscriptions</a>
-    <a href="logon.html">Log On · Demo</a>
+    <a href="signup.html">Sign Up</a>
     <a href="angels.html">Angels Program</a>
+    <a href="logon.html">Log On · Demo</a>
   </div>
   <div class="footer-col">
     <h4>Company</h4>
