@@ -1,43 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JKYSYM2RC5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JKYSYM2RC5');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>KasiaCare — Individual Care Resources</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 18px; -webkit-text-size-adjust: 100%; }
-body { font-family: Georgia, serif; background: #faf7f2; color: #2c2010; line-height: 1.75; }
+body { font-family: Verdana, Geneva, sans-serif; background: #faf7f2; color: #2c2010; line-height: 1.75; }
 a { text-decoration: none; }
 .nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-.nav-logo { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
+.nav-logo { font-family: Verdana, Geneva, sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
 .nav-logo span { color: #b03060; }
 .nav-btn { background: #b03060; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; }
 .hero { padding: 36px 20px 28px; text-align: center; border-bottom: 4px solid #b03060; }
-.hero h1 { font-family: Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+.hero h1 { font-family: Verdana, Geneva, sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 10px; }
 .hero h1 em { font-style: italic; color: #f2e8d8; }
 .hero-sub { font-size: 0.97rem; color: rgba(255,255,255,0.82); line-height: 1.8; }
 .back-link { display: block; background: rgba(255,255,255,0.1); padding: 10px 20px; font-size: 0.82rem; color: rgba(255,255,255,0.7); }
 .back-link:hover { background: rgba(255,255,255,0.15); }
 .cat { padding: 14px 20px; text-align: center; }
-.cat h2 { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0; }
+.cat h2 { font-family: Verdana, Geneva, sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0; }
 .cat p { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin: 3px 0 0; font-style: italic; }
 .section { padding: 24px 20px; }
 .warm { background: #f2e8d8; }
 .white { background: #fff; }
 .section p { font-size: 0.97rem; color: #4a3828; line-height: 1.85; margin-bottom: 12px; }
 .res-card { background: #fff; border-radius: 6px; padding: 18px 18px 14px; margin-bottom: 12px; border-left: 5px solid #b03060; }
-.res-card h3 { font-family: Georgia, serif; font-size: 1rem; font-weight: 700; color: #102940; margin-bottom: 4px; }
+.res-card h3 { font-family: Verdana, Geneva, sans-serif; font-size: 1rem; font-weight: 700; color: #102940; margin-bottom: 4px; }
 .res-card p { font-size: 0.9rem; color: #4a3828; line-height: 1.75; margin-bottom: 10px; }
 .res-card a.res-link { display: inline-block; background: #102940; color: #fff; font-size: 0.78rem; font-weight: 700; padding: 6px 14px; border-radius: 4px; }
 .res-card .phone { display: block; font-size: 0.82rem; color: #b03060; font-weight: 700; margin-top: 6px; }
 .highlight-box { background: #f0f8f0; border: 2px solid #2d6b2d; border-radius: 6px; padding: 16px 18px; margin-bottom: 14px; }
-.highlight-box h3 { font-family: Georgia, serif; font-size: 0.95rem; font-weight: 700; color: #2d6b2d; margin-bottom: 6px; }
+.highlight-box h3 { font-family: Verdana, Geneva, sans-serif; font-size: 0.95rem; font-weight: 700; color: #2d6b2d; margin-bottom: 6px; }
 .highlight-box p { font-size: 0.88rem; color: #4a3828; line-height: 1.75; margin: 0; }
 .note { background: #f8f4ec; border-left: 4px solid #b07d10; padding: 12px 16px; margin: 0 0 20px; border-radius: 0 4px 4px 0; font-size: 0.85rem; color: #4a3828; line-height: 1.75; }
 .back-btn { display: block; text-align: center; background: #f2e8d8; color: #102940; font-weight: 700; padding: 14px 20px; margin: 20px; border-radius: 6px; font-size: 0.95rem; }
 .footer { background: #102940; color: #a8c0d8; padding: 36px 20px 20px; }
-.footer-logo { font-family: Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
+.footer-logo { font-family: Verdana, Geneva, sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
 .footer-logo span { color: #b03060; }
 .footer > p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 6px; }
 .footer-col { margin-top: 22px; }
@@ -51,7 +59,7 @@ a { text-decoration: none; }
 <body>
 <nav class="nav">
   <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
-  <a href="logon.html" class="nav-btn">Log On</a>
+  <a href="logon.html" class="nav-btn">Log On · Demo</a>
 </nav>
 <a href="resources.html" class="back-link">← Back to All Resources</a>
 <div class="hero">
@@ -110,8 +118,8 @@ a { text-decoration: none; }
     <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
   </div>
 </div>
-<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. 💙<br>
-<span style="font-size:0.72rem;color:#3a5a7a;">KasiaCare Website v1.3.0 · <span id="kc-date"></span></span></div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br>
+<span style="font-size:0.72rem;color:#3a5a7a;">KasiaCare Website v1.4.0 · <span id="kc-date"></span></span></div>
 <script>
 var d=new Date();var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var el=document.getElementById('kc-date');if(el)el.textContent=months[d.getMonth()]+' '+d.getFullYear();
