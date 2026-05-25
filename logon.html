@@ -7,66 +7,121 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 18px; -webkit-text-size-adjust: 100%; }
-body { font-family: Georgia, serif; background: #102940; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+body { font-family: Verdana, Geneva, sans-serif; background: #0a1f33; color: #fff; min-height: 100vh; line-height: 1.75; }
+a { text-decoration: none; }
 
-.nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.nav-logo { font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; color: #fff; text-decoration: none; white-space: nowrap; }
-.nav-logo span.pink { color: #b03060; }
-.nav-logo span.page { font-size: 0.68rem; color: #8aaac8; font-weight: 400; margin-left: 6px; }
-.nav-btn { background: #b03060; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-size: 1.2rem; font-weight: 700; color: #fff; }
+.nav-logo span { color: #b03060; }
+.nav-home { background: #b03060; color: #fff; padding: 7px 16px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; }
 
-.main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px; text-align: center; }
-.coming-tag { display: inline-block; background: #b07d10; color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 3px; margin-bottom: 24px; }
-h1 { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 14px; }
-h1 em { font-style: italic; color: #b03060; }
-.sub { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.85; margin-bottom: 32px; max-width: 400px; }
-.btn-rose { display: inline-block; background: #b03060; color: #fff; font-weight: 700; padding: 15px 32px; border-radius: 4px; font-size: 1rem; text-decoration: none; margin-bottom: 14px; }
-.btn-back { display: inline-block; color: rgba(255,255,255,0.6); font-size: 0.9rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
-.quote { max-width: 380px; margin: 40px auto 0; padding: 20px 22px; background: rgba(255,255,255,0.06); border-radius: 6px; border-left: 3px solid #b03060; text-align: left; }
-.quote p { font-family: Georgia, serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.75; margin: 0; }
-.quote cite { display: block; margin-top: 8px; font-size: 0.75rem; color: #8aaac8; font-style: normal; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 14px 20px; font-size: 0.82rem; color: #5a7a9a; font-style: italic; }
+.gold-tag { display: inline-block; background: #b07d10; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 3px; margin: 24px auto 0; display: block; width: fit-content; margin-left: auto; margin-right: auto; }
+
+.hero { text-align: center; padding: 32px 20px 40px; }
+.hero h1 { font-size: 2.2rem; font-weight: 700; color: #fff; line-height: 1.15; margin: 16px 0 14px; }
+.hero h1 em { font-style: italic; color: #b03060; }
+.hero p { font-size: 0.97rem; color: #fff; line-height: 1.85; max-width: 480px; margin: 0 auto 28px; }
+
+/* DEMO CARD */
+.demo-card { background: #102940; border-radius: 10px; padding: 28px 20px; margin: 0 16px 20px; border-top: 5px solid #b03060; text-align: center; }
+.demo-card .icon { font-size: 2.5rem; margin-bottom: 14px; display: block; }
+.demo-card h2 { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.demo-card p { font-size: 0.88rem; color: #fff; line-height: 1.8; margin-bottom: 20px; }
+.btn-demo { display: block; background: #b03060; color: #fff; font-weight: 700; padding: 16px 20px; border-radius: 8px; font-size: 1.05rem; text-align: center; margin-bottom: 10px; }
+.demo-note { font-size: 0.75rem; color: #fff; font-style: italic; }
+
+/* FEATURE LIST */
+.features { background: #102940; border-radius: 10px; padding: 20px; margin: 0 16px 20px; }
+.feat-head { background: #b07d10; border-radius: 6px; padding: 8px 14px; margin-bottom: 14px; font-size: 0.82rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; }
+.feat-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.feat-item:last-child { border-bottom: none; }
+.feat-icon { font-size: 1.3rem; flex-shrink: 0; }
+.feat-text { font-size: 0.88rem; color: #fff; font-weight: 700; line-height: 1.6; }
+
+/* COMING SOON */
+.coming { background: #102940; border-radius: 10px; padding: 20px; margin: 0 16px 20px; border-top: 5px solid #b07d10; text-align: center; }
+.coming h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.coming p { font-size: 0.85rem; color: #fff; line-height: 1.8; margin-bottom: 16px; }
+.btn-signup { display: block; background: #b07d10; color: #fff; font-weight: 700; padding: 14px 20px; border-radius: 8px; font-size: 0.95rem; text-align: center; }
+
+/* FOOTER */
+.footer { background: #102940; color: #a8c0d8; padding: 32px 20px 20px; margin-top: 20px; }
+.footer-logo { font-size: 1.3rem; font-weight: 700; color: #fff; display: block; margin-bottom: 10px; }
+.footer-logo span { color: #b03060; }
+.footer p { font-size: 0.88rem; line-height: 1.7; margin-bottom: 6px; color: #fff; }
+.footer-col { margin-top: 20px; }
+.footer-col h4 { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #b07d10; font-weight: 700; margin-bottom: 10px; }
+.footer-col a { display: block; font-size: 0.88rem; color: #fff; margin-bottom: 8px; }
+.footer-bottom { background: #102940; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; padding: 14px 20px; font-size: 0.78rem; color: #fff; font-style: italic; }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">Kasia<span class="pink">Care</span></a>
-  <a href="index.html" class="nav-btn">Home</a>
+  <a href="index.html" class="nav-logo">Kasia<span>Care</span></a>
+  <a href="index.html" class="nav-home">Home</a>
 </nav>
 
-<div class="main">
-  <div class="coming-tag">Coming Soon</div>
-  <h1>The KasiaCare <em>app</em><br>is on its <em>way.</em></h1>
-  <p class="sub">We are building something simple, clear, and built for every caregiver, family, and individual who needs a care plan that works. Sign up to be among the first to try it.</p>
-  <a href="signup.html" class="btn-rose">Sign Up to Be a Tester</a>
-  <div class="quote">
-    <p>"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
-    <cite>— KasiaCare Mission Statement</cite>
-  </div>
+<div class="gold-tag">Care Plan Software</div>
+
+<div class="hero">
+  <h1>Try <em>KasiaCare</em><br>Right Now</h1>
+  <p>The KasiaCare app is in development. While we build it — try our working demo. No login. No signup. Just tap and explore a real care plan dashboard.</p>
 </div>
 
-<div style="background:#102940;color:#a8c0d8;padding:36px 20px 20px;">
-  <a href="index.html" style="font-family:Georgia,serif;font-size:1.4rem;font-weight:700;color:#fff;text-decoration:none;display:block;margin-bottom:10px;">Kasia<span style="color:#b03060;">Care</span></a>
-  <p style="font-size:0.9rem;line-height:1.7;margin-bottom:6px;">Care Plan Software for Families, Caregivers &amp; Care Teams.</p>
-  <p style="font-style:italic;color:#6a8aaa;margin-top:8px;font-size:0.9rem;">"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
-  <div style="margin-top:22px;">
-    <p style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:#b07d10;font-weight:700;margin-bottom:10px;">Product</p>
-    <a href="features.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">Features</a>
-    <a href="subscriptions.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">Subscriptions</a>
-    <a href="signup.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">Sign Up</a>
-    <a href="angels.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">Angels Program</a>
+<!-- DEMO CARD -->
+<div class="demo-card">
+  <span class="icon">💙</span>
+  <h2>KasiaCare Demo</h2>
+  <p>Experience the care plan dashboard — add appointments, tasks, med reminders, meals, activities, notes, and orders. See exactly how KasiaCare works for your family.</p>
+  <a href="dashboard.html" class="btn-demo">Try the Demo — No Login Required</a>
+  <p class="demo-note">Demo data resets when you close. No information is saved or stored.</p>
+</div>
+
+<!-- WHAT YOU CAN TRY -->
+<div class="features">
+  <div class="feat-head">What You Can Try in the Demo</div>
+  <div class="feat-item"><span class="feat-icon">📅</span><div class="feat-text">Add and track appointments — see them on a full calendar</div></div>
+  <div class="feat-item"><span class="feat-icon">🪴</span><div class="feat-text">Create daily tasks and check them off as they are completed</div></div>
+  <div class="feat-item"><span class="feat-icon">🚴‍♀️</span><div class="feat-text">Schedule activities — outings, visits, recreation, therapy</div></div>
+  <div class="feat-item"><span class="feat-icon">🧃</span><div class="feat-text">Set med reminders across 6 daily time slots — AM through Bedtime</div></div>
+  <div class="feat-item"><span class="feat-icon">🥣</span><div class="feat-text">Track meals — breakfast, lunch, dinner, and more</div></div>
+  <div class="feat-item"><span class="feat-icon">📝</span><div class="feat-text">Add care notes — handoff notes, daily updates, observations</div></div>
+  <div class="feat-item"><span class="feat-icon">📦</span><div class="feat-text">Track orders and supplies that need to be reordered</div></div>
+</div>
+
+<!-- COMING SOON / SIGN UP -->
+<div class="coming">
+  <h3>Want to be first when we launch?</h3>
+  <p>Sign up now — we are waiving the one-time setup fee for everyone who gets on board early.</p>
+  <a href="signup.html" class="btn-signup">Early Bird — Sign Up for Free</a>
+</div>
+
+<div class="footer">
+  <a href="index.html" class="footer-logo">Kasia<span>Care</span></a>
+  <p>Care Plan Software for Individuals, Families, Caregivers &amp; Care Teams.</p>
+  <p style="font-style:italic;color:#8aaac8;margin-top:8px;">"No one receiving care should feel unknown. No one providing care should feel unprepared."</p>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="features.html">Features</a>
+    <a href="subscriptions.html">Subscriptions</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="angels.html">Angels Program</a>
   </div>
-  <div style="margin-top:22px;">
-    <p style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:#b07d10;font-weight:700;margin-bottom:10px;">Company</p>
-    <a href="about.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">About KasiaCare</a>
-    <a href="contact.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">Contact Us</a>
-    <a href="privacy.html" style="display:block;font-size:0.9rem;color:#a8c0d8;margin-bottom:8px;text-decoration:none;">Privacy, Data &amp; AI Policy</a>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="about.html">About KasiaCare</a>
+    <a href="commitment.html">Our Commitment</a>
+    <a href="family-heals.html">Family Heals</a>
+    <a href="resources.html">External Resources</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
   </div>
 </div>
-<div style="background:#102940;border-top:1px solid rgba(255,255,255,0.08);text-align:center;padding:14px 20px;font-size:0.82rem;color:#5a7a9a;font-style:italic;">&copy; 2026 KasiaCare &middot; Founded by Lilia Kuzmicz &middot; Built for Kasia. Built for every family like ours. 💙<br><span style="font-size:0.72rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.3.0 · <span id="kc-date"></span> · Log On</span></div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. 💙<br>
+<span style="font-size:0.72rem;">KasiaCare Website v1.3.0 · <span id="kc-date"></span> · Log On</span></div>
 
-<script id="kc-date-script">
+<script>
 var d = new Date();
 var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 var el = document.getElementById('kc-date');
