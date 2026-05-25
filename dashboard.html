@@ -202,6 +202,7 @@ function App() {
   const Dashboard=()=>(
     <div style={{padding:"16px"}}>
       <div style={{background:C.navy,borderRadius:"10px",padding:"16px",marginBottom:"16px"}}>
+        <a href="demo-readme.html" style={{display:"block",background:C.rose,color:"#fff",fontWeight:700,padding:"10px 14px",borderRadius:"6px",marginBottom:"8px",fontSize:"0.88rem",textAlign:"center",textDecoration:"none"}}>Read Me First</a>
         <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",marginBottom:"12px",fontSize:"0.88rem",fontWeight:700,color:"#fff",textTransform:"uppercase",letterSpacing:"1.5px",textAlign:"center"}}>Today's Care Plan</div>
         {Object.entries(CATS).map(([type,cfg])=>{
           const count=type==="med"?meds.length:todayItems.filter(i=>i.type===type).length;
@@ -229,7 +230,8 @@ function App() {
       )}
       <div style={{background:C.rose,borderRadius:"8px",padding:"12px 16px",marginTop:"20px",textAlign:"center"}}>
         <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"6px",textTransform:"uppercase",letterSpacing:"1px"}}>Demo Mode</div>
-        <div style={{fontSize:"0.82rem",color:"#fff",lineHeight:1.7}}>This is a KasiaCare preview. Data resets when you close. <a href="signup.html" style={{color:"#fff",fontWeight:700,textDecoration:"underline"}}>Sign up free</a> to be first when we launch.</div>
+        <div style={{fontSize:"0.82rem",color:"#fff",lineHeight:1.75,marginBottom:"10px"}}>This is a KasiaCare Demo. Data resets when you close. <a href="signup.html" style={{color:"#fff",fontWeight:700,textDecoration:"underline"}}>Sign up free</a> — be the first when we launch.</div>
+        <a href="demo-readme.html" style={{display:"block",background:"#fff",color:C.rose,fontWeight:700,padding:"10px 14px",borderRadius:"6px",fontSize:"0.88rem",textAlign:"center",textDecoration:"none"}}>Read Me First</a>
       </div>
     </div>
   );
@@ -294,7 +296,7 @@ function App() {
         <div style={{background:C.navy,padding:"10px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
             <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Home</button>
+            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Website</button>
           </div>
           <GoldBanner title="Full Care Plan"/>
         </div>
@@ -320,7 +322,7 @@ function App() {
         <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
             <div style={{fontSize:"1.2rem",fontWeight:700,color:"#fff"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Home</button>
+            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Website</button>
           </div>
           <GoldBanner title="Add to Care Plan"/>
         </div>
@@ -359,14 +361,14 @@ function App() {
         <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.purple}`}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
             <div style={{fontSize:"1.2rem",fontWeight:700,color:"#fff"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Home</button>
+            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Website</button>
           </div>
           <GoldBanner title="Add Med Reminder"/>
         </div>
         <div style={{padding:"20px 16px"}}>
           <div style={{marginBottom:"18px"}}><label style={lbl}>Time Slot</label><select ref={slotRef2} style={{...inp,background:"#1a3a5c",color:"#fff",border:"2px solid #fff"}} defaultValue="am">{MED_SLOTS.map(s=><option key={s.id} value={s.id}>{s.icon} {s.label} — {s.time}</option>)}</select></div>
           <div style={{marginBottom:"18px"}}><label style={lbl}>Brief Med Name or Label</label><input ref={labelRef2} style={inp} placeholder="Brief med name or label"/></div>
-          <div style={{marginBottom:"24px"}}><label style={lbl}>Notes (optional)</label><input ref={noteRef2} style={inp} placeholder="e.g. Take with water..."/></div>
+          <div style={{marginBottom:"24px"}}><label style={lbl}>Notes (optional)</label><input ref={noteRef2} style={inp} placeholder="e.g. Take with food..."/></div>
           <div style={{background:C.gold,borderRadius:"6px",padding:"12px 16px",marginBottom:"24px"}}><div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700,lineHeight:1.75}}>Med reminders use brief labels only. Medication names and dosages are not stored.</div></div>
           <button onClick={save} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"16px",fontSize:"1.1rem",fontWeight:700,cursor:"pointer",marginBottom:"10px"}}>Save Med Reminder</button>
           <button onClick={goBack} style={{width:"100%",background:"transparent",color:"#fff",border:"2px solid #fff",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>Cancel</button>
@@ -383,6 +385,8 @@ function App() {
       <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap",gap:"14px",marginBottom:"12px"}}>
         <a href="index.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Home</a>
         <a href="privacy.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Privacy Policy</a>
+        <a href="family-heals.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Family Heals</a>
+        <a href="resources.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>External Resources</a>
         <a href="contact.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Contact Us</a>
         <a href="signup.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Sign Up</a>
       </div>
