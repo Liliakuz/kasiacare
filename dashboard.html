@@ -59,12 +59,12 @@ const CATS = {
 };
 
 const MED_SLOTS = [
-  {id:"am",        label:"AM Med",        time:"7:00 AM",  icon:"🌅"},
-  {id:"breakfast", label:"Breakfast Med", time:"8:30 AM",  icon:"🥣"},
-  {id:"lunch",     label:"Lunch Med",     time:"12:00 PM", icon:"☀️"},
-  {id:"supper",    label:"Supper Med",    time:"5:30 PM",  icon:"🌇"},
-  {id:"pm",        label:"PM Med",        time:"8:00 PM",  icon:"🌙"},
-  {id:"bedtime",   label:"Bedtime Med",   time:"10:00 PM", icon:"😴"},
+  {id:"breakfast",     label:"Breakfast Med",      time:"8:30 AM",  icon:"🥣"},
+  {id:"morningsnack",  label:"Morning Snack Med",  time:"10:30 AM", icon:"🍎"},
+  {id:"lunch",         label:"Lunch Med",          time:"12:00 PM", icon:"☀️"},
+  {id:"afternoonsnack",label:"Afternoon Snack Med",time:"3:00 PM",  icon:"🍊"},
+  {id:"supper",        label:"Supper Med",         time:"5:30 PM",  icon:"🥣"},
+  {id:"bedtimesnack",  label:"Bedtime Snack Med",  time:"8:00 PM",  icon:"🍎"},
 ];
 
 const INITIAL_ITEMS = [
@@ -81,12 +81,12 @@ const INITIAL_ITEMS = [
 ];
 
 const INITIAL_MEDS = [
-  {id:1,slot:"am",       label:"Morning reminder",done:true, note:"Take with water"},
-  {id:2,slot:"breakfast",label:"With breakfast",  done:true, note:""},
-  {id:3,slot:"lunch",    label:"Midday reminder", done:false,note:""},
-  {id:4,slot:"supper",   label:"Evening reminder",done:false,note:"With food"},
-  {id:5,slot:"pm",       label:"Night reminder",  done:false,note:""},
-  {id:6,slot:"bedtime",  label:"Bedtime reminder",done:false,note:""},
+  {id:1,slot:"breakfast",    label:"With breakfast",       done:true, note:"Take with food"},
+  {id:2,slot:"morningsnack", label:"Morning snack",         done:true, note:""},
+  {id:3,slot:"lunch",        label:"With lunch",            done:false,note:"Take with food"},
+  {id:4,slot:"afternoonsnack",label:"Afternoon snack",      done:false,note:""},
+  {id:5,slot:"supper",       label:"With supper",           done:false,note:"Take with food"},
+  {id:6,slot:"bedtimesnack", label:"Bedtime snack",         done:false,note:"Take with food"},
 ];
 
 const inp = {width:"100%",padding:"14px 12px",border:"2px solid #fff",borderRadius:"8px",fontSize:"1.05rem",fontFamily:"Verdana,Geneva,sans-serif",color:"#102940",background:"#fff",outline:"none",boxSizing:"border-box",fontWeight:700};
@@ -293,11 +293,8 @@ function App() {
     const monthItems=items.filter(i=>{const d=new Date(i.date);return d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear();}).sort((a,b)=>new Date(a.date)-new Date(b.date));
     return(
       <div>
-        <div style={{background:C.navy,padding:"10px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
-            <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Website</button>
-          </div>
+        <div style={{background:C.navy,padding:"10px 16px",borderBottom:`3px solid ${C.rose}`}}>
+          <button onClick={()=>setView("dashboard")} style={{background:C.rose,border:"none",borderRadius:"4px",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"0.72rem",padding:"4px 10px",marginBottom:"6px",display:"inline-block"}}>Back</button>
           <GoldBanner title="Full Care Plan"/>
         </div>
         <div style={{padding:"16px"}}>
@@ -321,8 +318,8 @@ function App() {
       <div style={{minHeight:"100vh",background:"#0a1f33"}}>
         <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
-            <div style={{fontSize:"1.2rem",fontWeight:700,color:"#fff"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Website</button>
+            <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+            <button onClick={()=>setView("dashboard")} style={{background:C.gold,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Care Plan</button>
           </div>
           <GoldBanner title="Add to Care Plan"/>
         </div>
@@ -360,8 +357,8 @@ function App() {
       <div style={{minHeight:"100vh",background:"#0a1f33"}}>
         <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.purple}`}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
-            <div style={{fontSize:"1.2rem",fontWeight:700,color:"#fff"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Website</button>
+            <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
+            <button onClick={()=>setView("dashboard")} style={{background:C.gold,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Care Plan</button>
           </div>
           <GoldBanner title="Add Med Reminder"/>
         </div>
@@ -381,9 +378,10 @@ function App() {
   const AppFooter=()=>(
     <div style={{background:C.navy,borderTop:"3px solid rgba(255,255,255,0.08)",padding:"16px 20px",marginTop:"20px",textAlign:"center"}}>
       <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:"6px"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-      <div style={{fontSize:"0.72rem",color:"#fff",marginBottom:"12px"}}>Care Plan Software · Demo v1.0 · May 2026</div>
+      <div style={{fontSize:"0.72rem",color:"#fff",marginBottom:"12px"}}>Care Plan Software · Demo v1.5.6 · May 2026</div>
       <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap",gap:"14px",marginBottom:"12px"}}>
-        <a href="index.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Home</a>
+        <a href="#" onClick={(e)=>{e.preventDefault();setView("dashboard");window.scrollTo(0,0);}} style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Home</a>
+        <a href="https://kasiacare.com" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Website</a>
         <a href="privacy.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Privacy Policy</a>
         <a href="family-heals.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Family Heals</a>
         <a href="resources.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>External Resources</a>
@@ -392,7 +390,7 @@ function App() {
       </div>
       <div style={{fontSize:"0.72rem",color:"#fff",fontStyle:"italic"}}>Demo data resets when you close. No information is saved or stored.</div>
       <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"6px",fontStyle:"italic"}}>"No one receiving care should feel unknown. No one providing care should feel unprepared."</div>
-      <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"10px",borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:"10px"}}>© 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style={{color:"#b03060"}}>♥</span> · Demo v1.4.0</div>
+      <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"10px",borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:"10px"}}>© 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style={{color:"#b03060"}}>♥</span> · Demo v1.5.6</div>
     </div>
   );
 
