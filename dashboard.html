@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#102940">
+<title>KasiaCare — Care Plan Demo</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKYSYM2RC5"></script>
 <script>
@@ -9,406 +13,840 @@
   gtag('js', new Date());
   gtag('config', 'G-JKYSYM2RC5');
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<meta name="theme-color" content="#102940">
-<title>KasiaCare — Care Plan Demo</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 18px; -webkit-text-size-adjust: 100%; }
-body { font-family: Verdana, Geneva, sans-serif; background: #0a1f33; color: #fff; }
-input, select, button { font-family: Verdana, Geneva, sans-serif; }
-input[type="date"], input[type="time"] { color-scheme: dark; }
+body { font-family: Verdana, Geneva, sans-serif; background: #0a1f33; color: #fff; min-height: 100vh; }
+input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
+
+/* NAV */
+.nav { background: #102940; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+.nav-logo { font-size: 1.2rem; font-weight: 700; color: #fff; cursor: pointer; }
+.nav-logo span { color: #b03060; }
+.nav-btns { display: flex; gap: 10px; align-items: center; }
+.btn-gold { background: #b07d10; color: #fff; border: none; border-radius: 4px; padding: 6px 14px; font-size: 0.72rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
+.btn-rose { background: #b03060; color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+.btn-rose-lg { background: #b03060; color: #fff; border: none; border-radius: 8px; padding: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; display: block; text-align: center; margin-bottom: 10px; }
+.btn-outline { background: transparent; color: #fff; border: 2px solid #fff; border-radius: 8px; padding: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; width: 100%; display: block; text-align: center; }
+.btn-cancel { background: transparent; color: #fff; border: 2px solid #fff; border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
+
+/* GREETING */
+.greeting { background: #102940; padding: 4px 16px 6px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: center; }
+.greeting-main { font-size: 0.88rem; font-weight: 700; color: #fff; }
+.greeting-date { font-size: 0.75rem; font-weight: 700; color: #fff; margin-top: 0; }
+.greeting-time { font-size: 0.72rem; font-weight: 700; color: #fff; margin-top: 0; }
+
+/* GOLD BANNER */
+.gold-banner { background: #b07d10; border-radius: 6px; padding: 8px 14px; margin: 14px 0 10px; text-align: center; font-size: 0.82rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+
+/* PINK SECTION HEADER */
+.pink-header { background: #b03060; padding: 14px 20px; margin: 0 -16px 14px; text-align: center; font-size: 1rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* BACK BAR */
+.back-bar { background: #102940; padding: 10px 16px; border-bottom: 3px solid #b03060; }
+.back-bar .back-btn { background: #b03060; border: none; border-radius: 4px; color: #fff; font-weight: 700; cursor: pointer; font-size: 0.72rem; padding: 4px 10px; margin-bottom: 6px; display: inline-block; }
+.back-bar .bar-title { font-size: 1rem; font-weight: 700; color: #fff; }
+
+/* CARDS */
+.navy-card { background: #102940; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.cat-row { display: flex; align-items: center; gap: 12px; padding: 13px 12px; background: rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 6px; cursor: pointer; }
+.cat-row:active { background: rgba(255,255,255,0.14); }
+.cat-icon { font-size: 1.5rem; width: 34px; text-align: center; flex-shrink: 0; }
+.cat-info { flex: 1; }
+.cat-name { font-size: 1rem; font-weight: 700; color: #fff; }
+.cat-sub { font-size: 0.78rem; color: #fff; font-weight: 700; margin-top: 1px; }
+.cat-count { color: #fff; border-radius: 20px; padding: 4px 14px; font-size: 1rem; font-weight: 700; min-width: 32px; text-align: center; }
+.cat-arrow { color: #fff; font-size: 1.1rem; font-weight: 700; }
+
+/* ITEM CARD */
+.item-card { background: #102940; border-radius: 8px; padding: 14px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
+.item-check { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; background: transparent; cursor: pointer; color: #fff; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.item-check.done { background: #b07d10; border-color: #b07d10; }
+.item-icon { font-size: 1.3rem; flex-shrink: 0; }
+.item-body { flex: 1; }
+.item-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.item-title.done { text-decoration: line-through; }
+.item-badge-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
+.item-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
+.item-time { font-size: 0.88rem; color: #fff; font-weight: 700; }
+.item-day { font-size: 0.78rem; color: #fff; font-weight: 700; }
+.item-note { font-size: 0.82rem; color: #fff; margin-top: 4px; }
+
+/* CALENDAR */
+.cal-card { background: #102940; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cal-nav button { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #fff; padding: 4px 10px; }
+.cal-month { font-size: 1rem; font-weight: 700; color: #fff; }
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+.cal-dow { text-align: center; font-size: 0.65rem; font-weight: 700; color: #fff; padding: 4px 0; text-transform: uppercase; }
+.cal-day { border-radius: 6px; padding: 7px 3px; text-align: center; font-size: 0.88rem; color: #fff; min-height: 34px; border: 2px solid transparent; cursor: default; position: relative; }
+.cal-day.today { background: #b03060; border-color: #fff; font-weight: 700; }
+.cal-day.has-items { background: rgba(176,125,16,0.3); cursor: pointer; }
+.cal-day.selected { background: #b07d10; border-color: #b07d10; font-weight: 700; }
+.cal-dot { width: 5px; height: 5px; border-radius: 50%; background: #b03060; margin: 2px auto 0; }
+
+/* MED SLOTS */
+.med-slot { display: flex; align-items: center; gap: 12px; padding: 13px 12px; background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 6px; }
+.med-slot.done { background: rgba(255,255,255,0.04); }
+.med-slot-icon { font-size: 1.3rem; width: 30px; text-align: center; flex-shrink: 0; }
+.med-slot-info { flex: 1; }
+.med-slot-label { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.med-slot-detail { font-size: 0.82rem; color: #fff; font-weight: 700; }
+.med-check { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; background: transparent; cursor: pointer; color: #fff; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.med-check.done { background: #b07d10; border-color: #b07d10; }
+
+/* FORMS */
+.form-page { min-height: 100vh; background: #0a1f33; }
+.form-header { background: #102940; padding: 12px 16px 0; border-bottom: 3px solid #b03060; }
+.form-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.form-body { padding: 20px 16px; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; margin-top: 14px; }
+.form-input { width: 100%; padding: 14px 12px; border: 2px solid #fff; border-radius: 8px; font-size: 1.05rem; color: #102940; background: #fff; outline: none; font-weight: 700; }
+.form-select { width: 100%; padding: 14px 12px; border: 2px solid #fff; border-radius: 8px; font-size: 1.05rem; color: #fff; background: #1a3a5c; outline: none; font-weight: 700; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.type-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.type-pill { padding: 10px 14px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); background: transparent; cursor: pointer; font-size: 0.82rem; font-weight: 700; color: #fff; }
+.type-pill.active { border-color: currentColor; }
+
+/* DEMO BANNER */
+.demo-banner { background: #b03060; border-radius: 8px; padding: 12px 16px; margin-top: 20px; text-align: center; }
+.demo-banner-title { font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.demo-banner-text { font-size: 0.82rem; color: #fff; line-height: 1.75; margin-bottom: 10px; }
+.demo-banner-btn { display: block; background: #fff; color: #b03060; font-weight: 700; padding: 10px 14px; border-radius: 6px; font-size: 0.88rem; text-align: center; text-decoration: none; }
+
+/* FOOTER */
+.app-footer { background: #102940; border-top: 3px solid rgba(255,255,255,0.08); padding: 16px 20px; margin-top: 20px; text-align: center; }
+.app-footer-logo { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.app-footer-logo span { color: #b03060; }
+.app-footer-version { font-size: 0.72rem; color: #fff; margin-bottom: 12px; }
+.app-footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; }
+.app-footer-links a { color: #fff; font-size: 0.78rem; font-weight: 700; text-decoration: none; }
+.app-footer-copy { font-size: 0.72rem; color: #fff; font-style: italic; line-height: 1.75; }
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
+
+/* SIGN IN PAGE */
+.signin-page { min-height: 100vh; background: #0a1f33; }
+.signin-hero { background: #102940; padding: 12px 20px 16px; text-align: center; border-bottom: 4px solid #b03060; }
+.signin-tag { display: inline-block; background: #b07d10; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 3px; margin-bottom: 12px; }
+.signin-hero h1 { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 8px; }
+.signin-hero h1 em { color: #b03060; font-style: italic; }
+.signin-hero p { font-size: 0.82rem; color: #fff; line-height: 1.4; }
+.signin-form { padding: 20px 16px; }
+.signin-note { background: #b07d10; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.82rem; color: #fff; font-weight: 700; line-height: 1.75; text-align: center; }
+.signin-privacy { font-size: 0.75rem; color: #fff; text-align: center; margin-bottom: 20px; line-height: 1.75; font-style: italic; }
+.signin-error { background: rgba(176,48,96,0.2); border: 1px solid #b03060; border-radius: 6px; padding: 10px 14px; margin-bottom: 12px; font-size: 0.82rem; color: #fff; font-weight: 700; display: none; }
 </style>
 </head>
 <body>
-<div id="root"></div>
+
+<!-- ══════════════════════════════ -->
+<!-- SIGN IN PAGE                   -->
+<!-- ══════════════════════════════ -->
+<div id="page-signin" class="page active signin-page">
+  <nav class="nav" style="justify-content:center;gap:16px;">
+    <a href="https://kasiacare.com" style="font-size:1.2rem;font-weight:700;color:#fff;text-decoration:none;">Kasia<span style="color:#b03060;">Care</span></a>
+    <a href="demo-readme.html" class="btn-rose">Read Me First</a>
+  </nav>
+
+  <div class="signin-hero">
+    <div class="signin-tag">Care Plan Software</div>
+    <h1>Welcome to the<br><em>KasiaCare</em> App</h1>
+    <p>This is a demo app. Sign in to get started. Your information helps us improve KasiaCare for every family that comes after.</p>
+  </div>
+
+  <div class="signin-form">
+    <label class="form-label" style="margin-top:0;">First Name</label>
+    <input class="form-input" type="text" id="signin-first" placeholder="Your first name" autocomplete="given-name">
+
+    <label class="form-label">Last Name</label>
+    <input class="form-input" type="text" id="signin-last" placeholder="Your last name" autocomplete="family-name">
+
+    <label class="form-label">Email Address</label>
+    <input class="form-input" type="email" id="signin-email" placeholder="your@email.com" autocomplete="email">
+
+    <label class="form-label">Confirm Email Address</label>
+    <input class="form-input" type="email" id="signin-email2" placeholder="Confirm your email" autocomplete="email">
+
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-top:20px;margin-bottom:16px;background:#102940;padding:14px;border-radius:8px;">
+      <input type="checkbox" id="terms-check" style="margin-top:4px;width:20px;height:20px;flex-shrink:0;cursor:pointer;">
+      <label for="terms-check" style="font-size:0.82rem;color:#fff;font-weight:700;line-height:1.75;cursor:pointer;">
+        I understand this is a demo. My information will be used only to notify me when KasiaCare launches. I agree to the <a href="privacy.html" style="color:#b07d10;text-decoration:underline;">Privacy Policy</a>.
+      </label>
+    </div>
+    <div id="signin-error" class="signin-error">Please fill in all fields before continuing.</div>
+    <button class="btn-rose-lg" onclick="handleSignIn()">Enter the Demo</button>
+
+    <div class="signin-privacy">
+      Your information is kept private and used only to notify you when KasiaCare launches. We never sell your data. Ever.
+    </div>
+
+    <div class="signin-note">
+      Not sure what to try? Read the Demo Guide first.<br>
+      <a href="demo-readme.html" style="color:#fff;font-weight:700;text-decoration:underline;">Read Me First →</a>
+    </div>
+
+    <!-- Formspree hidden form for submission -->
+    <form id="signin-form-submit" action="https://formspree.io/f/xgodzdnq" method="POST" style="display:none;">
+      <input type="hidden" name="first_name" id="hidden-first">
+      <input type="hidden" name="last_name" id="hidden-last">
+      <input type="hidden" name="email" id="hidden-email">
+      <input type="hidden" name="_subject" value="KasiaCare Demo Sign In">
+      <input type="hidden" name="source" value="Demo Sign In Form">
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- DASHBOARD PAGE                 -->
+<!-- ══════════════════════════════ -->
+<div id="page-dashboard" class="page">
+  <nav class="nav">
+    <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span>Care</span></div>
+    <div class="nav-btns">
+      <button class="btn-gold" onclick="showPage('calendar')">Calendar</button>
+      <button class="btn-rose" onclick="showPage('add')">+</button>
+    </div>
+  </nav>
+  <div class="greeting">
+    <div class="greeting-main" id="greeting-text">Good morning 🩷</div>
+    <div class="greeting-date" id="greeting-date"></div>
+    <div class="greeting-time" id="greeting-time"></div>
+  </div>
+  <div style="padding:8px 16px 16px;" id="dashboard-content"></div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- CATEGORY PAGE                  -->
+<!-- ══════════════════════════════ -->
+<div id="page-category" class="page">
+  <nav class="nav">
+    <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span>Care</span></div>
+    <div class="nav-btns">
+      <button class="btn-gold" onclick="showPage('calendar')">Calendar</button>
+      <button class="btn-rose" onclick="showPage('add')">+</button>
+    </div>
+  </nav>
+  <div id="category-content" style="padding-bottom:20px;"></div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- CALENDAR PAGE                  -->
+<!-- ══════════════════════════════ -->
+<div id="page-calendar" class="page">
+  <nav class="nav">
+    <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span>Care</span></div>
+    <div class="nav-btns">
+      <button class="btn-rose" onclick="showPage('add')">+</button>
+    </div>
+  </nav>
+  <div id="calendar-content" style="padding:4px 16px 20px;"></div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- ADD ITEM PAGE                  -->
+<!-- ══════════════════════════════ -->
+<div id="page-add" class="page form-page">
+  <div class="form-header">
+    <div class="form-header-top">
+      <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span>Care</span></div>
+      <button class="btn-rose" onclick="goBack()">Care Plan</button>
+    </div>
+    <div class="gold-banner" style="margin:0 0 10px;">Add to Care Plan</div>
+    <div style="display:flex;justify-content:space-between;padding-bottom:10px;">
+      <button class="btn-cancel" onclick="goBack()">Cancel</button>
+    </div>
+  </div>
+  <div class="form-body">
+    <label class="form-label" style="margin-top:0;">Type</label>
+    <div class="type-pills" id="type-pills"></div>
+
+    <label class="form-label">Name</label>
+    <input class="form-input" type="text" id="add-title" placeholder="Brief name">
+
+    <div class="form-grid">
+      <div>
+        <label class="form-label">Date</label>
+        <input class="form-input" type="date" id="add-date">
+      </div>
+      <div>
+        <label class="form-label">Time</label>
+        <input class="form-input" type="time" id="add-time">
+      </div>
+    </div>
+
+    <label class="form-label">Notes (optional)</label>
+    <input class="form-input" type="text" id="add-note" placeholder="Any notes...">
+
+    <button class="btn-rose-lg" style="margin-top:20px;" onclick="saveItem()">Save to Care Plan</button>
+    <button class="btn-outline" onclick="goBack()">Cancel</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- ADD MED PAGE                   -->
+<!-- ══════════════════════════════ -->
+<div id="page-addmed" class="page form-page">
+  <div class="form-header">
+    <div class="form-header-top">
+      <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span>Care</span></div>
+      <button class="btn-rose" onclick="goBack()">Care Plan</button>
+    </div>
+    <div class="gold-banner" style="margin:0 0 10px;">Add Med Reminder</div>
+    <div style="display:flex;justify-content:space-between;padding-bottom:10px;">
+      <button class="btn-cancel" onclick="goBack()">Cancel</button>
+    </div>
+  </div>
+  <div class="form-body">
+    <label class="form-label" style="margin-top:0;">Time Slot</label>
+    <select class="form-select" id="med-slot"></select>
+
+    <label class="form-label">Brief Med Name or Label</label>
+    <input class="form-input" type="text" id="med-label" placeholder="Brief med name or label">
+
+    <label class="form-label">Notes (optional)</label>
+    <input class="form-input" type="text" id="med-note" placeholder="e.g. Take with food...">
+
+    <div class="navy-card" style="margin-top:20px;border-left:4px solid #b07d10;">
+      <p style="font-size:0.82rem;color:#fff;font-weight:700;line-height:1.75;">Med reminders use brief labels only. Medication names and dosages are not stored.</p>
+    </div>
+
+    <button class="btn-rose-lg" style="margin-top:16px;background:#6b2d8a;" onclick="saveMed()">Save Med Reminder</button>
+    <button class="btn-outline" onclick="goBack()">Cancel</button>
+  </div>
+</div>
+
 <script>
-// Suppress Babel development warning
-const _warn = console.warn;
-console.warn = (...args) => { if(args[0]&&args[0].includes&&args[0].includes('Babel')) return; _warn(...args); };
-</script>
-<script type="text/babel">
-const { useState, useRef, useEffect } = React;
-
-const C = {
-  navy:"#102940", rose:"#b03060", gold:"#b07d10",
-  green:"#2d6b2d", purple:"#6b2d8a", teal:"#1a7a6a", brown:"#8a4a10",
-};
-
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
 const TODAY = new Date();
-const fmt      = (d) => new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric"});
-const fmtTime  = (d) => new Date(d).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
-const fmtFull  = (d) => new Date(d).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
-const fmtClock = (d) => new Date(d).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"});
-const isToday  = (date) => { const d=new Date(date); return d.getDate()===TODAY.getDate()&&d.getMonth()===TODAY.getMonth()&&d.getFullYear()===TODAY.getFullYear(); };
-const dayLabel = (date) => { const d=new Date(date); const diff=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()))/86400000); if(diff===0)return"Today"; if(diff===1)return"Tomorrow"; return fmt(date); };
-const getGreeting = () => { const h=new Date().getHours(); if(h<12)return"Good morning"; if(h<17)return"Good afternoon"; return"Good evening"; };
 
 const CATS = {
-  appointment:{label:"Appointments", icon:"📅", color:C.rose},
-  task:       {label:"Tasks",         icon:"🪴", color:C.green},
-  activity:   {label:"Activities",    icon:"🚴‍♀️",color:C.teal},
-  med:        {label:"Med Reminders", icon:"🧃", color:C.purple},
-  meal:       {label:"Meals",         icon:"🥣", color:C.gold},
-  notes:      {label:"Notes",         icon:"📝", color:C.navy},
-  order:      {label:"Orders",        icon:"📦", color:C.brown},
+  appointment: { label:'Appointments',  icon:'📅', color:'#b03060' },
+  task:        { label:'Tasks',          icon:'🪴', color:'#2d6b2d' },
+  activity:    { label:'Activities',     icon:'🚴‍♀️', color:'#1a7a6a' },
+  med:         { label:'Med Reminders',  icon:'🧃', color:'#6b2d8a' },
+  meal:        { label:'Meals',          icon:'🥣', color:'#b07d10' },
+  notes:       { label:'Notes',          icon:'📝', color:'#102940' },
+  order:       { label:'Orders',         icon:'📦', color:'#8a4a10' },
 };
 
 const MED_SLOTS = [
-  {id:"breakfast",     label:"Breakfast Med",      time:"8:30 AM",  icon:"🥣"},
-  {id:"morningsnack",  label:"Morning Snack Med",  time:"10:30 AM", icon:"🍎"},
-  {id:"lunch",         label:"Lunch Med",          time:"12:00 PM", icon:"☀️"},
-  {id:"afternoonsnack",label:"Afternoon Snack Med",time:"3:00 PM",  icon:"🍊"},
-  {id:"supper",        label:"Supper Med",         time:"5:30 PM",  icon:"🥣"},
-  {id:"bedtimesnack",  label:"Bedtime Snack Med",  time:"8:00 PM",  icon:"🍎"},
+  { id:'breakfast',     label:'Breakfast Med',       time:'8:30 AM',  icon:'🥣' },
+  { id:'morningsnack',  label:'Morning Snack Med',   time:'10:30 AM', icon:'🍎' },
+  { id:'lunch',         label:'Lunch Med',           time:'12:00 PM', icon:'☀️' },
+  { id:'afternoonsnack',label:'Afternoon Snack Med', time:'3:00 PM',  icon:'🍊' },
+  { id:'supper',        label:'Supper Med',          time:'5:30 PM',  icon:'🥣' },
+  { id:'bedtimesnack',  label:'Bedtime Snack Med',   time:'8:00 PM',  icon:'🍎' },
 ];
 
-const INITIAL_ITEMS = [
-  {id:1, type:"appointment",title:"Dr. Williams checkup",   date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),10,30),done:false,note:"Bring medication list"},
-  {id:2, type:"task",       title:"Morning routine",        date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(), 8, 0),done:true, note:""},
-  {id:3, type:"activity",   title:"Afternoon walk — 20 min",date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),14, 0),done:false,note:"Around the block"},
-  {id:4, type:"meal",       title:"Breakfast",              date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(), 8,30),done:true, note:"Oatmeal and fruit"},
-  {id:5, type:"meal",       title:"Lunch",                  date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),12, 0),done:false,note:""},
-  {id:6, type:"notes",      title:"Caregiver handoff note", date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),16, 0),done:false,note:"Energy was good today"},
-  {id:7, type:"order",      title:"Reorder medical supplies",date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate(),11, 0),done:false,note:"Gloves, wipes"},
-  {id:8, type:"appointment",title:"Physical therapy",       date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+2,9,0),done:false,note:""},
-  {id:9, type:"task",       title:"Laundry",                date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+1,10,0),done:false,note:""},
-  {id:10,type:"activity",   title:"Family visit",           date:new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+3,14,0),done:false,note:"Sister coming over"},
+function d(y,mo,day,h,m) { return new Date(y,mo,day,h,m); }
+const Y=TODAY.getFullYear(), M=TODAY.getMonth(), D=TODAY.getDate();
+
+let items = [
+  { id:1,  type:'appointment', title:'Dr. Williams checkup',    date:d(Y,M,D,10,30), done:false, note:'Bring medication list' },
+  { id:2,  type:'task',        title:'Morning routine',         date:d(Y,M,D,8,0),   done:true,  note:'' },
+  { id:3,  type:'activity',    title:'Afternoon walk — 20 min', date:d(Y,M,D,14,0),  done:false, note:'Around the block' },
+  { id:4,  type:'meal',        title:'Breakfast',               date:d(Y,M,D,8,30),  done:true,  note:'Oatmeal and fruit' },
+  { id:5,  type:'meal',        title:'Lunch',                   date:d(Y,M,D,12,0),  done:false, note:'' },
+  { id:6,  type:'notes',       title:'Caregiver handoff note',  date:d(Y,M,D,16,0),  done:false, note:'Energy was good today' },
+  { id:7,  type:'order',       title:'Reorder medical supplies',date:d(Y,M,D,11,0),  done:false, note:'Gloves, wipes' },
+  { id:8,  type:'appointment', title:'Physical therapy',        date:d(Y,M,D+2,9,0), done:false, note:'' },
+  { id:9,  type:'task',        title:'Laundry',                 date:d(Y,M,D+1,10,0),done:false, note:'' },
+  { id:10, type:'activity',    title:'Family visit',            date:d(Y,M,D+3,14,0),done:false, note:'Sister coming over' },
+  // ── June sample data ──
+  { id:101, type:'appointment', title:'Annual physical exam',         date:d(Y,5,3,10,0),  done:false, note:'Fasting required' },
+  { id:102, type:'appointment', title:'Dentist checkup',              date:d(Y,5,10,14,0), done:false, note:'' },
+  { id:103, type:'appointment', title:'Eye doctor',                   date:d(Y,5,17,11,0), done:false, note:'Bring glasses' },
+  { id:104, type:'task',        title:'Pick up prescriptions',        date:d(Y,5,4,10,0),  done:false, note:'Call ahead first' },
+  { id:105, type:'task',        title:'Order medical supplies',       date:d(Y,5,11,10,0), done:false, note:'Gloves and wipes' },
+  { id:106, type:'task',        title:'Wash bedding',                 date:d(Y,5,7,9,0),   done:false, note:'' },
+  { id:107, type:'task',        title:'Wash bedding',                 date:d(Y,5,14,9,0),  done:false, note:'' },
+  { id:108, type:'task',        title:'Wash bedding',                 date:d(Y,5,21,9,0),  done:false, note:'' },
+  { id:109, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,5,2,9,0),   done:false, note:'' },
+  { id:110, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,5,4,9,0),   done:false, note:'' },
+  { id:111, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,5,9,9,0),   done:false, note:'' },
+  { id:112, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,5,16,9,0),  done:false, note:'' },
+  { id:113, type:'activity',    title:'Family visit',                 date:d(Y,5,8,14,0),  done:false, note:'Sisters coming over' },
+  { id:114, type:'activity',    title:'Family visit',                 date:d(Y,5,22,14,0), done:false, note:'' },
+  { id:115, type:'meal',        title:'Breakfast',                    date:d(Y,5,2,8,30),  done:false, note:'Oatmeal and fruit' },
+  { id:116, type:'meal',        title:'Breakfast',                    date:d(Y,5,3,8,30),  done:false, note:'' },
+  { id:117, type:'meal',        title:'Breakfast',                    date:d(Y,5,4,8,30),  done:false, note:'' },
+  { id:118, type:'meal',        title:'Breakfast',                    date:d(Y,5,5,8,30),  done:false, note:'' },
+  { id:119, type:'meal',        title:'Breakfast',                    date:d(Y,5,6,8,30),  done:false, note:'' },
+  { id:120, type:'meal',        title:'Lunch',                        date:d(Y,5,2,12,0),  done:false, note:'Soup and bread' },
+  { id:121, type:'meal',        title:'Lunch',                        date:d(Y,5,3,12,0),  done:false, note:'' },
+  { id:122, type:'meal',        title:'Lunch',                        date:d(Y,5,4,12,0),  done:false, note:'' },
+  { id:123, type:'meal',        title:'Lunch',                        date:d(Y,5,5,12,0),  done:false, note:'' },
+  { id:124, type:'meal',        title:'Lunch',                        date:d(Y,5,6,12,0),  done:false, note:'' },
+  { id:125, type:'notes',       title:'Caregiver handoff note',       date:d(Y,5,2,17,0),  done:false, note:'Good energy today' },
+  { id:126, type:'notes',       title:'Caregiver handoff note',       date:d(Y,5,9,17,0),  done:false, note:'Slept well' },
+  { id:127, type:'notes',       title:'Caregiver handoff note',       date:d(Y,5,16,17,0), done:false, note:'Appetite good' },
+  { id:128, type:'order',       title:'Reorder incontinence supplies',date:d(Y,5,15,10,0), done:false, note:'' },
 ];
 
-const INITIAL_MEDS = [
-  {id:1,slot:"breakfast",    label:"With breakfast",       done:true, note:"Take with food"},
-  {id:2,slot:"morningsnack", label:"Morning snack",         done:true, note:""},
-  {id:3,slot:"lunch",        label:"With lunch",            done:false,note:"Take with food"},
-  {id:4,slot:"afternoonsnack",label:"Afternoon snack",      done:false,note:""},
-  {id:5,slot:"supper",       label:"With supper",           done:false,note:"Take with food"},
-  {id:6,slot:"bedtimesnack", label:"Bedtime snack",         done:false,note:"Take with food"},
+let meds = [
+  { id:1, slot:'breakfast',     label:'Morning reminder',  done:true,  note:'Take with food' },
+  { id:2, slot:'morningsnack',  label:'Morning snack',     done:true,  note:'' },
+  { id:3, slot:'lunch',         label:'With lunch',        done:false, note:'Take with food' },
+  { id:4, slot:'afternoonsnack',label:'Afternoon snack',   done:false, note:'' },
+  { id:5, slot:'supper',        label:'With supper',       done:false, note:'Take with food' },
+  { id:6, slot:'bedtimesnack',  label:'Bedtime snack',     done:false, note:'Take with food' },
 ];
 
-const inp = {width:"100%",padding:"14px 12px",border:"2px solid #fff",borderRadius:"8px",fontSize:"1.05rem",fontFamily:"Verdana,Geneva,sans-serif",color:"#102940",background:"#fff",outline:"none",boxSizing:"border-box",fontWeight:700};
-const lbl = {display:"block",fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"8px",textTransform:"uppercase",letterSpacing:"1px"};
+let currentPage = 'signin';
+let prevPage = 'dashboard';
+let activeCat = null;
+let calMonth = new Date(TODAY.getFullYear(), TODAY.getMonth(), 1);
+let selectedDay = null;
+let formType = 'task';
+let clockInterval = null;
 
-const GoldBanner = ({title,count}) => (
-  <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",margin:"14px 0 10px",display:"flex",alignItems:"center",justifyContent:"center",gap:"10px"}}>
-    <div style={{fontSize:"0.82rem",fontWeight:700,color:"#fff",textTransform:"uppercase",letterSpacing:"1px",whiteSpace:"nowrap"}}>{title}</div>
-    {count!==undefined&&<div style={{background:"#fff",color:C.gold,borderRadius:"20px",padding:"2px 10px",fontSize:"0.82rem",fontWeight:700}}>{count}</div>}
-  </div>
-);
-
-function App() {
-  const [items,setItems]         = useState(INITIAL_ITEMS);
-  const [meds,setMeds]           = useState(INITIAL_MEDS);
-  const [view,setView]           = useState("dashboard");
-  const [activeCat,setActiveCat] = useState(null);
-  const [prevView,setPrevView]   = useState("dashboard");
-  const [calMonth,setCalMonth]   = useState(new Date(TODAY.getFullYear(),TODAY.getMonth(),1));
-  const [formType,setFormType]   = useState("task");
-  const [selectedDay,setSelectedDay] = useState(null);
-  const [now,setNow]             = useState(new Date());
-
-  useEffect(()=>{const t=setInterval(()=>setNow(new Date()),1000);return()=>clearInterval(t);},[]);
-
-  const navigate=(newView,cat)=>{setPrevView(view);if(cat)setActiveCat(cat);setView(newView);window.scrollTo(0,0);};
-  const goBack=()=>{setView(prevView||"dashboard");window.scrollTo(0,0);};
-  const toggleItem=(id)=>setItems(p=>p.map(i=>i.id===id?{...i,done:!i.done}:i));
-  const toggleMed=(id)=>setMeds(p=>p.map(m=>m.id===id?{...m,done:!m.done}:m));
-  const todayItems=items.filter(i=>isToday(i.date));
-
-  const calDays=()=>{const y=calMonth.getFullYear(),m=calMonth.getMonth();const first=new Date(y,m,1).getDay(),total=new Date(y,m+1,0).getDate();const days=[];for(let i=0;i<first;i++)days.push(null);for(let d=1;d<=total;d++)days.push(d);return days;};
-  const hasOnDay=(day,cat)=>{if(!day)return false;return items.filter(i=>!cat||i.type===cat).some(i=>{const d=new Date(i.date);return d.getDate()===day&&d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear();});};
-  const isTodayDay=(day)=>day&&day===TODAY.getDate()&&calMonth.getMonth()===TODAY.getMonth()&&calMonth.getFullYear()===TODAY.getFullYear();
-
-  const ItemCard=({item})=>(
-    <div style={{background:C.navy,borderRadius:"8px",padding:"14px",marginBottom:"8px",borderLeft:`5px solid ${CATS[item.type].color}`,display:"flex",gap:"12px",alignItems:"flex-start"}}>
-      <button onClick={()=>toggleItem(item.id)} style={{width:"28px",height:"28px",borderRadius:"50%",border:`2px solid ${item.done?C.gold:"#fff"}`,background:item.done?C.gold:"transparent",cursor:"pointer",color:"#fff",fontSize:"0.85rem",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:"2px"}}>{item.done?"✓":""}</button>
-      <div style={{fontSize:"1.3rem",flexShrink:0}}>{CATS[item.type].icon}</div>
-      <div style={{flex:1}}>
-        <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",textDecoration:item.done?"line-through":"none",marginBottom:"4px"}}>{item.title}</div>
-        <div style={{marginBottom:"3px"}}>
-          <span style={{background:CATS[item.type].color,color:"#fff",fontSize:"0.65rem",fontWeight:700,padding:"2px 8px",borderRadius:"3px",textTransform:"uppercase",letterSpacing:"1px"}}>{CATS[item.type].label}</span>
-        </div>
-        <div style={{fontSize:"0.78rem",color:"#fff",fontWeight:700,marginBottom:"2px"}}>{dayLabel(item.date)}</div>
-        <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700}}>{fmtTime(item.date)}</div>
-        {item.note?<div style={{fontSize:"0.82rem",color:"#fff",marginTop:"4px"}}>{item.note}</div>:null}
-      </div>
-    </div>
-  );
-
-  const CalView=({cat})=>(
-    <div style={{background:C.navy,borderRadius:"10px",padding:"16px",marginBottom:"16px"}}>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
-        <button onClick={()=>setCalMonth(new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1))} style={{background:"none",border:"none",fontSize:"1.4rem",cursor:"pointer",color:"#fff"}}>‹</button>
-        <div style={{fontSize:"1rem",fontWeight:700,color:"#fff"}}>{calMonth.toLocaleDateString("en-US",{month:"long",year:"numeric"})}</div>
-        <button onClick={()=>setCalMonth(new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1))} style={{background:"none",border:"none",fontSize:"1.4rem",cursor:"pointer",color:"#fff"}}>›</button>
-      </div>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"3px"}}>
-        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d=><div key={d} style={{textAlign:"center",fontSize:"0.65rem",fontWeight:700,color:"#fff",padding:"4px 0",textTransform:"uppercase"}}>{d}</div>)}
-        {calDays().map((day,i)=>{const isSel=selectedDay===day&&calMonth.getMonth()===TODAY.getMonth();return(
-          <div key={i} onClick={()=>day&&hasOnDay(day,cat)?setSelectedDay(selectedDay===day?null:day):null}
-            style={{background:isSel?C.gold:isTodayDay(day)?C.rose:hasOnDay(day,cat)?"rgba(176,125,16,0.3)":"rgba(255,255,255,0.05)",borderRadius:"6px",padding:"7px 3px",textAlign:"center",fontSize:"0.88rem",color:"#fff",fontWeight:isTodayDay(day)||isSel?700:400,minHeight:"34px",border:isSel?`2px solid ${C.gold}`:isTodayDay(day)?"2px solid #fff":"2px solid transparent",cursor:hasOnDay(day,cat)?"pointer":"default"}}>
-            {day}
-            {hasOnDay(day,cat)&&!isTodayDay(day)&&!isSel?<div style={{width:"5px",height:"5px",borderRadius:"50%",background:C.rose,margin:"2px auto 0"}}></div>:null}
-          </div>);})}
-      </div>
-      {selectedDay&&(
-        <div style={{marginTop:"14px"}}>
-          <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",marginBottom:"10px",fontSize:"0.88rem",fontWeight:700,color:"#fff",textAlign:"center",textTransform:"uppercase",letterSpacing:"1.5px"}}>{calMonth.toLocaleDateString("en-US",{month:"long"})} {selectedDay}</div>
-          {items.filter(i=>{const d=new Date(i.date);return d.getDate()===selectedDay&&d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear()&&(!cat||i.type===cat);}).sort((a,b)=>new Date(a.date)-new Date(b.date)).map(item=>(
-            <div key={item.id} style={{background:"rgba(255,255,255,0.08)",borderRadius:"8px",padding:"12px",marginBottom:"6px",borderLeft:`4px solid ${CATS[item.type].color}`,display:"flex",gap:"10px",alignItems:"flex-start"}}>
-              <div style={{fontSize:"1.2rem"}}>{CATS[item.type].icon}</div>
-              <div style={{flex:1}}>
-                <div style={{fontSize:"0.95rem",fontWeight:700,color:"#fff",marginBottom:"4px"}}>{item.title}</div>
-                <div style={{marginBottom:"2px"}}><span style={{background:CATS[item.type].color,padding:"2px 8px",borderRadius:"3px",fontSize:"0.65rem",fontWeight:700,textTransform:"uppercase",letterSpacing:"1px",color:"#fff"}}>{CATS[item.type].label}</span></div>
-                <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff"}}>{dayLabel(item.date)}</div>
-                <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700}}>{fmtTime(item.date)}</div>
-                {item.note?<div style={{fontSize:"0.78rem",color:"#fff",marginTop:"3px"}}>{item.note}</div>:null}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-
-  const Header=()=>(
-    <div style={{background:C.navy,padding:"12px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:100,boxShadow:"0 2px 12px rgba(0,0,0,0.4)"}}>
-      <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-      <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
-        <div onClick={()=>navigate("calendar")} style={{background:C.gold,color:"#fff",fontSize:"0.62rem",fontWeight:700,letterSpacing:"1.5px",textTransform:"uppercase",padding:"6px 14px",borderRadius:"3px",cursor:"pointer"}}>Calendar</div>
-        <button onClick={()=>navigate("add")} style={{background:C.rose,color:"#fff",border:"none",borderRadius:"6px",padding:"7px 14px",fontSize:"0.82rem",fontWeight:700,cursor:"pointer"}}>+</button>
-      </div>
-    </div>
-  );
-
-  const GreetingBar=()=>(
-    <div style={{background:C.navy,padding:"8px 16px 10px",borderBottom:"1px solid rgba(255,255,255,0.08)",textAlign:"center"}}>
-      <div style={{fontSize:"0.88rem",fontWeight:700,color:"#fff"}}>{getGreeting()} <span style={{color:"#b03060",fontSize:"1.1rem"}}>♥</span></div>
-      <div style={{fontSize:"0.75rem",fontWeight:700,color:"#fff",marginTop:"2px"}}>{fmtFull(TODAY)}</div>
-      <div style={{fontSize:"0.72rem",fontWeight:700,color:"#fff",marginTop:"2px"}}>{fmtClock(now)}</div>
-    </div>
-  );
-
-  const BackBar=({title})=>(
-    <div style={{background:C.navy,padding:"10px 16px",borderBottom:`3px solid ${C.rose}`}}>
-      <button onClick={goBack} style={{background:C.rose,border:"none",borderRadius:"4px",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"0.72rem",padding:"4px 10px",marginBottom:"6px",display:"inline-block"}}>Back</button>
-      <div style={{fontSize:"1rem",fontWeight:700,color:"#fff"}}>{title}</div>
-    </div>
-  );
-
-  const Dashboard=()=>(
-    <div style={{padding:"16px"}}>
-      <div style={{background:C.navy,borderRadius:"10px",padding:"16px",marginBottom:"16px"}}>
-        <a href="demo-readme.html" style={{display:"block",background:C.rose,color:"#fff",fontWeight:700,padding:"10px 14px",borderRadius:"6px",marginBottom:"8px",fontSize:"0.88rem",textAlign:"center",textDecoration:"none"}}>Read Me First</a>
-        <div style={{background:C.gold,borderRadius:"6px",padding:"8px 14px",marginBottom:"12px",fontSize:"0.88rem",fontWeight:700,color:"#fff",textTransform:"uppercase",letterSpacing:"1.5px",textAlign:"center"}}>Today's Care Plan</div>
-        {Object.entries(CATS).map(([type,cfg])=>{
-          const count=type==="med"?meds.length:todayItems.filter(i=>i.type===type).length;
-          const done=type==="med"?meds.filter(m=>m.done).length:todayItems.filter(i=>i.type===type&&i.done).length;
-          return(
-            <div key={type} onClick={()=>navigate("category",type)} style={{display:"flex",alignItems:"center",gap:"12px",padding:"13px 12px",background:"rgba(255,255,255,0.08)",borderRadius:"8px",marginBottom:"6px",cursor:"pointer",borderLeft:`5px solid ${cfg.color}`}}>
-              <div style={{fontSize:"1.5rem",width:"34px",textAlign:"center"}}>{cfg.icon}</div>
-              <div style={{flex:1}}>
-                <div style={{fontSize:"1rem",fontWeight:700,color:"#fff"}}>{cfg.label}</div>
-                <div style={{fontSize:"0.78rem",color:"#fff",fontWeight:700,marginTop:"1px"}}>{count>0?`${done} of ${count} complete`:"Nothing scheduled"}</div>
-              </div>
-              <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                <div style={{background:count>0?cfg.color:"rgba(255,255,255,0.15)",color:"#fff",borderRadius:"20px",padding:"4px 14px",fontSize:"1rem",fontWeight:700,minWidth:"32px",textAlign:"center"}}>{count}</div>
-                <div style={{color:"#fff",fontSize:"1.1rem",fontWeight:700}}>›</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {items.filter(i=>!isToday(i.date)&&new Date(i.date)>=TODAY).length>0&&(
-        <>
-          <GoldBanner title="Coming Up" />
-          {items.filter(i=>!isToday(i.date)&&new Date(i.date)>=TODAY).sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(0,3).map(item=><ItemCard key={item.id} item={item}/>)}
-        </>
-      )}
-      <div style={{background:C.rose,borderRadius:"8px",padding:"12px 16px",marginTop:"20px",textAlign:"center"}}>
-        <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"6px",textTransform:"uppercase",letterSpacing:"1px"}}>Demo Mode</div>
-        <div style={{fontSize:"0.82rem",color:"#fff",lineHeight:1.75,marginBottom:"10px"}}>This is a KasiaCare Demo. Data resets when you close. <a href="signup.html" style={{color:"#fff",fontWeight:700,textDecoration:"underline"}}>Sign up free</a> — be the first when we launch.</div>
-        <a href="demo-readme.html" style={{display:"block",background:"#fff",color:C.rose,fontWeight:700,padding:"10px 14px",borderRadius:"6px",fontSize:"0.88rem",textAlign:"center",textDecoration:"none"}}>Read Me First</a>
-      </div>
-    </div>
-  );
-
-  const CategoryView=()=>{
-    if(!activeCat)return null;
-    if(activeCat==="med"){
-      const doneCount=meds.filter(m=>m.done).length;
-      return(
-        <div>
-          <div style={{background:C.navy,padding:"10px 16px",borderBottom:`3px solid ${C.rose}`}}>
-            <button onClick={goBack} style={{background:C.rose,border:"none",borderRadius:"4px",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"0.72rem",padding:"4px 10px",marginBottom:"6px",display:"inline-block"}}>Back</button>
-            <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"2px"}}>{fmtFull(TODAY)}</div>
-            <div style={{fontSize:"0.78rem",fontWeight:700,color:"#fff",marginBottom:"4px"}}>{doneCount} of {meds.length} complete</div>
-            <GoldBanner title="Daily Med Schedule"/>
-          </div>
-          <div style={{padding:"16px"}}>
-            <div style={{background:C.navy,borderRadius:"10px",padding:"14px",marginBottom:"16px"}}>
-              {MED_SLOTS.map(slot=>{
-                const reminder=meds.find(m=>m.slot===slot.id);
-                return(
-                  <div key={slot.id} style={{display:"flex",alignItems:"center",gap:"12px",padding:"13px 12px",background:reminder?.done?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.1)",borderRadius:"8px",marginBottom:"6px",borderLeft:`5px solid ${reminder?(reminder.done?C.gold:C.rose):"rgba(255,255,255,0.2)"}`}}>
-                    <div style={{fontSize:"1.3rem",width:"30px",textAlign:"center"}}>{slot.icon}</div>
-                    <div style={{flex:1}}>
-                      <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:"2px"}}>{slot.label}</div>
-                      <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700}}>{slot.time}{reminder?` · ${reminder.label}`:" · No reminder set"}{reminder?.note?` · ${reminder.note}`:""}</div>
-                    </div>
-                    {reminder?<button onClick={()=>toggleMed(reminder.id)} style={{width:"28px",height:"28px",borderRadius:"50%",border:`2px solid ${reminder.done?C.gold:"#fff"}`,background:reminder.done?C.gold:"transparent",cursor:"pointer",color:"#fff",fontSize:"0.8rem",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{reminder.done?"✓":""}</button>:null}
-                  </div>
-                );
-              })}
-            </div>
-            <div style={{background:C.gold,borderRadius:"6px",padding:"12px 16px",marginBottom:"16px"}}>
-              <div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700,lineHeight:1.75}}>Med reminders use brief labels only. Medication names and dosages are not stored.</div>
-            </div>
-            <button onClick={()=>navigate("addmed")} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>+ Add Med Reminder</button>
-          </div>
-        </div>
-      );
-    }
-    const cfg=CATS[activeCat];
-    const catItems=items.filter(i=>i.type===activeCat).sort((a,b)=>new Date(a.date)-new Date(b.date));
-    const todayCat=catItems.filter(i=>isToday(i.date));
-    const upcoming=catItems.filter(i=>!isToday(i.date)&&new Date(i.date)>=TODAY);
-    return(
-      <div>
-        <BackBar title={`${cfg.icon} ${cfg.label}`}/>
-        <div style={{padding:"16px"}}>
-          <CalView cat={activeCat}/>
-          {todayCat.length>0?<><GoldBanner title="Today" count={todayCat.length}/>{todayCat.map(item=><ItemCard key={item.id} item={item}/>)}</>:null}
-          {upcoming.length>0?<><GoldBanner title="Upcoming" count={upcoming.length}/>{upcoming.map(item=><ItemCard key={item.id} item={item}/>)}</>:null}
-          {todayCat.length===0&&upcoming.length===0?<div style={{background:C.navy,borderRadius:"8px",padding:"32px 20px",textAlign:"center"}}><div style={{fontSize:"1rem",color:"#fff",fontWeight:700}}>Nothing scheduled yet.</div><div style={{fontSize:"0.88rem",color:"#fff",marginTop:"6px"}}>Tap + Add to get started.</div></div>:null}
-        </div>
-      </div>
-    );
-  };
-
-  const FullCalView=()=>{
-    const monthItems=items.filter(i=>{const d=new Date(i.date);return d.getMonth()===calMonth.getMonth()&&d.getFullYear()===calMonth.getFullYear();}).sort((a,b)=>new Date(a.date)-new Date(b.date));
-    return(
-      <div>
-        <div style={{background:C.navy,padding:"10px 16px",borderBottom:`3px solid ${C.rose}`}}>
-          <button onClick={()=>setView("dashboard")} style={{background:C.rose,border:"none",borderRadius:"4px",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"0.72rem",padding:"4px 10px",marginBottom:"6px",display:"inline-block"}}>Back</button>
-          <GoldBanner title="Full Care Plan"/>
-        </div>
-        <div style={{padding:"16px"}}>
-          <CalView cat={null}/>
-          <GoldBanner title="This Month" count={monthItems.length}/>
-          {monthItems.length===0?<div style={{background:C.navy,borderRadius:"8px",padding:"32px 20px",textAlign:"center"}}><div style={{fontSize:"1rem",color:"#fff",fontWeight:700}}>Nothing scheduled this month.</div></div>:monthItems.map(item=><ItemCard key={item.id} item={item}/>)}
-        </div>
-      </div>
-    );
-  };
-
-  const AddForm=()=>{
-    const titleRef2=useRef();const dateRef2=useRef();const timeRef2=useRef();const noteRef2=useRef();
-    const save=()=>{
-      const title=titleRef2.current?.value?.trim();const date=dateRef2.current?.value;const time=timeRef2.current?.value;const note=noteRef2.current?.value?.trim()||"";
-      if(!title||!date)return;
-      setItems(p=>[...p,{id:Date.now(),type:formType,title,date:new Date(`${date}T${time||"08:00"}`),done:false,note}]);
-      setView(prevView||"dashboard");
-    };
-    return(
-      <div style={{minHeight:"100vh",background:"#0a1f33"}}>
-        <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.rose}`}}>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
-            <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.gold,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Care Plan</button>
-          </div>
-          <GoldBanner title="Add to Care Plan"/>
-        </div>
-        <div style={{padding:"20px 16px"}}>
-          <div style={{marginBottom:"20px"}}>
-            <div style={lbl}>Type</div>
-            <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>
-              {Object.entries(CATS).map(([type,cfg])=>(
-                <button key={type} onClick={()=>setFormType(type)} style={{padding:"10px 14px",borderRadius:"8px",border:`2px solid ${formType===type?cfg.color:"rgba(255,255,255,0.3)"}`,background:formType===type?cfg.color:"transparent",cursor:"pointer",fontSize:"0.82rem",fontWeight:700,color:"#fff"}}>{cfg.icon} {cfg.label}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{marginBottom:"18px"}}><label style={lbl}>Name</label><input ref={titleRef2} style={inp} placeholder={`Brief ${CATS[formType].label.toLowerCase()} name`}/></div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px",marginBottom:"18px"}}>
-            <div><label style={lbl}>Date</label><input type="date" ref={dateRef2} style={inp}/></div>
-            <div><label style={lbl}>Time</label><input type="time" ref={timeRef2} style={inp}/></div>
-          </div>
-          <div style={{marginBottom:"24px"}}><label style={lbl}>Notes (optional)</label><input ref={noteRef2} style={inp} placeholder="Any notes..."/></div>
-          <button onClick={save} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"16px",fontSize:"1.1rem",fontWeight:700,cursor:"pointer",marginBottom:"10px"}}>Save to Care Plan</button>
-          <button onClick={goBack} style={{width:"100%",background:"transparent",color:"#fff",border:"2px solid #fff",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>Cancel</button>
-        </div>
-      </div>
-    );
-  };
-
-  const AddMedForm=()=>{
-    const labelRef2=useRef();const noteRef2=useRef();const slotRef2=useRef();
-    const save=()=>{
-      const label=labelRef2.current?.value?.trim();const note=noteRef2.current?.value?.trim()||"";const slot=slotRef2.current?.value||"am";
-      if(!label)return;
-      setMeds(p=>[...p,{id:Date.now(),slot,label,done:false,note}]);
-      setView(prevView||"dashboard");
-    };
-    return(
-      <div style={{minHeight:"100vh",background:"#0a1f33"}}>
-        <div style={{background:C.navy,padding:"12px 16px 0",borderBottom:`3px solid ${C.purple}`}}>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px"}}>
-            <div onClick={()=>setView("dashboard")} style={{fontSize:"1.2rem",fontWeight:700,color:"#fff",cursor:"pointer"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-            <button onClick={()=>setView("dashboard")} style={{background:C.gold,color:"#fff",border:"none",borderRadius:"4px",padding:"5px 14px",fontSize:"0.72rem",fontWeight:700,cursor:"pointer"}}>Care Plan</button>
-          </div>
-          <GoldBanner title="Add Med Reminder"/>
-        </div>
-        <div style={{padding:"20px 16px"}}>
-          <div style={{marginBottom:"18px"}}><label style={lbl}>Time Slot</label><select ref={slotRef2} style={{...inp,background:"#1a3a5c",color:"#fff",border:"2px solid #fff"}} defaultValue="am">{MED_SLOTS.map(s=><option key={s.id} value={s.id}>{s.icon} {s.label} — {s.time}</option>)}</select></div>
-          <div style={{marginBottom:"18px"}}><label style={lbl}>Brief Med Name or Label</label><input ref={labelRef2} style={inp} placeholder="Brief med name or label"/></div>
-          <div style={{marginBottom:"24px"}}><label style={lbl}>Notes (optional)</label><input ref={noteRef2} style={inp} placeholder="e.g. Take with food..."/></div>
-          <div style={{background:C.gold,borderRadius:"6px",padding:"12px 16px",marginBottom:"24px"}}><div style={{fontSize:"0.82rem",color:"#fff",fontWeight:700,lineHeight:1.75}}>Med reminders use brief labels only. Medication names and dosages are not stored.</div></div>
-          <button onClick={save} style={{width:"100%",background:C.rose,color:"#fff",border:"none",borderRadius:"8px",padding:"16px",fontSize:"1.1rem",fontWeight:700,cursor:"pointer",marginBottom:"10px"}}>Save Med Reminder</button>
-          <button onClick={goBack} style={{width:"100%",background:"transparent",color:"#fff",border:"2px solid #fff",borderRadius:"8px",padding:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer"}}>Cancel</button>
-        </div>
-      </div>
-    );
-  };
-
-
-  const AppFooter=()=>(
-    <div style={{background:C.navy,borderTop:"3px solid rgba(255,255,255,0.08)",padding:"16px 20px",marginTop:"20px",textAlign:"center"}}>
-      <div style={{fontSize:"1rem",fontWeight:700,color:"#fff",marginBottom:"6px"}}>Kasia<span style={{color:C.rose}}>Care</span></div>
-      <div style={{fontSize:"0.72rem",color:"#fff",marginBottom:"12px"}}>Care Plan Software · Demo v1.5.6 · May 2026</div>
-      <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap",gap:"14px",marginBottom:"12px"}}>
-        <a href="#" onClick={(e)=>{e.preventDefault();setView("dashboard");window.scrollTo(0,0);}} style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Home</a>
-        <a href="https://kasiacare.com" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Website</a>
-        <a href="privacy.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Privacy Policy</a>
-        <a href="family-heals.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Family Heals</a>
-        <a href="resources.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>External Resources</a>
-        <a href="contact.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Contact Us</a>
-        <a href="signup.html" style={{color:"#fff",fontSize:"0.78rem",fontWeight:700}}>Sign Up</a>
-      </div>
-      <div style={{fontSize:"0.72rem",color:"#fff",fontStyle:"italic"}}>Demo data resets when you close. No information is saved or stored.</div>
-      <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"6px",fontStyle:"italic"}}>"No one receiving care should feel unknown. No one providing care should feel unprepared."</div>
-      <div style={{fontSize:"0.68rem",color:"#fff",marginTop:"10px",borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:"10px"}}>© 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style={{color:"#b03060"}}>♥</span> · Demo v1.5.6</div>
-    </div>
-  );
-
-  return(
-    <div style={{fontFamily:"Verdana,Geneva,sans-serif",background:"#0a1f33",minHeight:"100vh",color:"#fff"}}>
-      {view!=="add"&&view!=="addmed"&&<Header/>}
-      {view==="dashboard"&&<GreetingBar/>}
-      {view==="dashboard"&&<Dashboard/>}
-      {view==="category"&&activeCat&&<CategoryView/>}
-      {view==="calendar"&&<FullCalView/>}
-      {view==="add"&&<AddForm/>}
-      {view==="addmed"&&<AddMedForm/>}
-      <AppFooter/>
-    </div>
-  );
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+function showPage(page, cat) {
+  document.getElementById('page-' + currentPage).classList.remove('active');
+  prevPage = currentPage;
+  currentPage = page;
+  if (cat) activeCat = cat;
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+  if (page === 'dashboard') renderDashboard();
+  if (page === 'category') renderCategory();
+  if (page === 'calendar') renderCalendar();
+  if (page === 'add') renderAddForm();
+  if (page === 'addmed') renderAddMedForm();
 }
 
-ReactDOM.render(React.createElement(App), document.getElementById('root'));
+function goBack() {
+  showPage(prevPage);
+}
+
+// ══════════════════════════════════════════
+// SIGN IN
+// ══════════════════════════════════════════
+function handleSignIn() {
+  var first = document.getElementById('signin-first').value.trim();
+  var last  = document.getElementById('signin-last').value.trim();
+  var email = document.getElementById('signin-email').value.trim();
+  var email2= document.getElementById('signin-email2').value.trim();
+  var err   = document.getElementById('signin-error');
+
+  var terms = document.getElementById('terms-check');
+  if (!first || !last || !email || !email2) {
+    err.textContent = 'Please fill in all fields before continuing.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!terms.checked) {
+    err.textContent = 'Please read and agree to the terms before continuing.';
+    err.style.display = 'block';
+    return;
+  }
+  if (email !== email2) {
+    err.textContent = 'Email addresses do not match. Please check and try again.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!email.includes('@')) {
+    err.textContent = 'Please enter a valid email address.';
+    err.style.display = 'block';
+    return;
+  }
+
+  err.style.display = 'none';
+
+  // Submit to Formspree
+  document.getElementById('hidden-first').value = first;
+  document.getElementById('hidden-last').value  = last;
+  document.getElementById('hidden-email').value = email;
+
+  var form = document.getElementById('signin-form-submit');
+  var data = new FormData(form);
+  fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} })
+    .then(function() {}).catch(function() {});
+
+  // Go to dashboard
+  showPage('dashboard');
+  renderDashboard();
+  startClock();
+}
+
+// ══════════════════════════════════════════
+// CLOCK
+// ══════════════════════════════════════════
+function startClock() {
+  updateClock();
+  clockInterval = setInterval(updateClock, 1000);
+}
+
+function updateClock() {
+  var now = new Date();
+  var h = now.getHours();
+  var greeting = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  var el = document.getElementById('greeting-text');
+  if (el) el.textContent = greeting + ' 🩷';
+
+  var dateEl = document.getElementById('greeting-date');
+  if (dateEl) dateEl.textContent = now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+
+  var timeEl = document.getElementById('greeting-time');
+  if (timeEl) timeEl.textContent = now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
+}
+
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+function isToday(date) {
+  var d = new Date(date);
+  return d.getDate()===TODAY.getDate() && d.getMonth()===TODAY.getMonth() && d.getFullYear()===TODAY.getFullYear();
+}
+
+function fmtTime(date) {
+  return new Date(date).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+}
+
+function dayLabel(date) {
+  var d = new Date(date);
+  var diff = Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate()) - new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate())) / 86400000);
+  if (diff === 0) return 'Today';
+  if (diff === 1) return 'Tomorrow';
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+function toggleItem(id) {
+  items = items.map(function(i) { return i.id===id ? Object.assign({},i,{done:!i.done}) : i; });
+  if (currentPage==='dashboard') renderDashboard();
+  if (currentPage==='category') renderCategory();
+  if (currentPage==='calendar') renderCalendar();
+}
+
+function toggleMed(id) {
+  meds = meds.map(function(m) { return m.id===id ? Object.assign({},m,{done:!m.done}) : m; });
+  renderCategory();
+}
+
+// ══════════════════════════════════════════
+// ITEM CARD HTML
+// ══════════════════════════════════════════
+function itemCardHTML(item) {
+  var cat = CATS[item.type];
+  var checkClass = item.done ? 'item-check done' : 'item-check';
+  var checkIcon = item.done ? '✓' : '';
+  var titleClass = item.done ? 'item-title done' : 'item-title';
+  return '<div class="item-card" style="border-left:5px solid '+cat.color+';">' +
+    '<button class="'+checkClass+'" onclick="toggleItem('+item.id+')" style="border-color:'+(item.done?'#b07d10':'#fff')+'">'+checkIcon+'</button>' +
+    '<div class="item-icon">'+cat.icon+'</div>' +
+    '<div class="item-body">' +
+      '<div class="'+titleClass+'">'+item.title+'</div>' +
+      '<div class="item-badge-row">' +
+        '<span class="item-badge" style="background:'+cat.color+'">'+cat.label+'</span>' +
+        '<span class="item-time">'+fmtTime(item.date)+'</span>' +
+      '</div>' +
+      '<div class="item-day">'+dayLabel(item.date)+'</div>' +
+      (item.note ? '<div class="item-note">'+item.note+'</div>' : '') +
+    '</div>' +
+  '</div>';
+}
+
+// ══════════════════════════════════════════
+// GOLD BANNER HTML
+// ══════════════════════════════════════════
+function goldBannerHTML(title, count) {
+  var countHTML = count !== undefined ? ' <span style="background:#fff;color:#b07d10;border-radius:20px;padding:2px 10px;font-size:0.82rem;">'+count+'</span>' : '';
+  return '<div class="gold-banner">'+title+countHTML+'</div>';
+}
+
+// ══════════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════════
+function renderDashboard() {
+  var todayItems = items.filter(function(i) { return isToday(i.date); });
+  var html = '<div class="navy-card">';
+  html += '<a href="demo-readme.html" style="display:block;background:#b03060;color:#fff;font-weight:700;padding:10px 14px;border-radius:6px;margin-bottom:8px;font-size:0.88rem;text-align:center;text-decoration:none;">Read Me First</a>';
+  html += '<div class="gold-banner" style="margin:0 0 12px;">Today\'s Care Plan</div>';
+
+  Object.keys(CATS).forEach(function(type) {
+    var cat = CATS[type];
+    var count = type==='med' ? meds.length : todayItems.filter(function(i){return i.type===type;}).length;
+    var done  = type==='med' ? meds.filter(function(m){return m.done;}).length : todayItems.filter(function(i){return i.type===type&&i.done;}).length;
+    var bg = count>0 ? cat.color : 'rgba(255,255,255,0.15)';
+    html += '<div class="cat-row" style="border-left:5px solid '+cat.color+';" onclick="showPage(\'category\',\''+type+'\')">'+
+      '<div class="cat-icon">'+cat.icon+'</div>'+
+      '<div class="cat-info">'+
+        '<div class="cat-name">'+cat.label+'</div>'+
+        '<div class="cat-sub">'+(count>0 ? done+' of '+count+' complete' : 'Nothing scheduled')+'</div>'+
+      '</div>'+
+      '<div class="cat-count" style="background:'+bg+'">'+count+'</div>'+
+      '<div class="cat-arrow">›</div>'+
+    '</div>';
+  });
+  html += '</div>';
+
+  var upcoming = items.filter(function(i){return !isToday(i.date)&&new Date(i.date)>=TODAY;});
+  upcoming.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  if (upcoming.length > 0) {
+    html += goldBannerHTML('Coming Up');
+    upcoming.slice(0,3).forEach(function(item){ html += itemCardHTML(item); });
+  }
+
+  html += '<div class="demo-banner">'+
+    '<div class="demo-banner-title">Demo Mode</div>'+
+    '<div class="demo-banner-text">This is a KasiaCare Demo. Data resets when you close. <a href="signup.html" style="color:#fff;font-weight:700;text-decoration:underline;">Sign up free</a> — be the first when we launch.</div>'+
+    '<a href="demo-readme.html" class="demo-banner-btn">Read Me First</a>'+
+  '</div>';
+
+  html += renderFooter();
+  document.getElementById('dashboard-content').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// CATEGORY
+// ══════════════════════════════════════════
+function renderCategory() {
+  if (!activeCat) return;
+  var html = '';
+
+  if (activeCat === 'med') {
+    var doneCount = meds.filter(function(m){return m.done;}).length;
+    html += '<div class="back-bar"><button class="back-btn" onclick="goBack()">Back</button><div class="bar-title">🧃 Med Reminders</div></div>';
+    html += '<div style="padding:16px;">';
+    html += '<button class="btn-rose-lg" onclick="goAddMed()" style="margin-bottom:0;">+ Add Med Reminder</button>';
+    html += '<div class="navy-card" style="margin-top:14px;">';
+    html += '<div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:4px;">'+new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+'</div>';
+    html += '<div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:8px;">'+doneCount+' of '+meds.length+' complete</div>';
+    html += '<div style="background:rgba(107,45,138,0.3);border-radius:20px;height:10px;margin-bottom:12px;overflow:hidden;"><div style="background:#6b2d8a;height:100%;width:'+(meds.length>0?Math.round(doneCount/meds.length*100):0)+'%;border-radius:20px;transition:width 0.3s;"></div></div>';
+    html += goldBannerHTML('Daily Med Schedule');
+
+    MED_SLOTS.forEach(function(slot) {
+      var reminder = meds.find(function(m){return m.slot===slot.id;});
+      var slotClass = reminder && reminder.done ? 'med-slot done' : 'med-slot';
+      var borderColor = reminder ? (reminder.done ? '#b07d10' : '#b03060') : 'rgba(255,255,255,0.2)';
+      html += '<div class="'+slotClass+'" style="border-left:5px solid '+borderColor+';">'+
+        '<div class="med-slot-icon">'+slot.icon+'</div>'+
+        '<div class="med-slot-info">'+
+          '<div class="med-slot-label">'+slot.label+'</div>'+
+          '<div class="med-slot-detail">'+slot.time+(reminder?' · '+reminder.label:' · No reminder set')+(reminder&&reminder.note?' · '+reminder.note:'')+'</div>'+
+        '</div>'+
+        (reminder ? '<button class="med-check'+(reminder.done?' done':'')+'" onclick="toggleMed('+reminder.id+')" style="border-color:'+(reminder.done?'#b07d10':'#fff')+'">'+(reminder.done?'✓':'')+'</button>' : '') +
+      '</div>';
+    });
+    html += '</div>';
+    html += '<div style="background:#b07d10;border-radius:6px;padding:12px 16px;margin-bottom:16px;font-size:0.82rem;color:#fff;font-weight:700;line-height:1.75;">Med reminders use brief labels only. Medication names and dosages are not stored.</div>';
+    html += '<button class="btn-rose-lg" onclick="goAddMed()">+ Add Med Reminder</button>';
+    html += '</div>';
+    document.getElementById('category-content').innerHTML = html;
+    return;
+  }
+
+  var cat = CATS[activeCat];
+  var catItems = items.filter(function(i){return i.type===activeCat;});
+  catItems.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  var todayCat = catItems.filter(function(i){return isToday(i.date);});
+  var upcoming = catItems.filter(function(i){return !isToday(i.date)&&new Date(i.date)>=TODAY;});
+
+  html += '<div class="back-bar"><button class="back-btn" onclick="goBack()">Back</button><div class="bar-title">'+cat.icon+' '+cat.label+'</div></div>';
+  html += '<div style="padding:16px;">';
+  html += renderCalendarHTML(activeCat);
+
+  if (todayCat.length > 0) {
+    html += goldBannerHTML('Today', todayCat.length);
+    todayCat.forEach(function(item){ html += itemCardHTML(item); });
+  }
+  if (upcoming.length > 0) {
+    html += goldBannerHTML('Upcoming', upcoming.length);
+    upcoming.forEach(function(item){ html += itemCardHTML(item); });
+  }
+  if (todayCat.length===0 && upcoming.length===0) {
+    html += '<div class="navy-card" style="text-align:center;"><div style="font-size:1rem;font-weight:700;color:#fff;">Nothing scheduled yet.</div><div style="font-size:0.88rem;color:#fff;margin-top:6px;">Tap + to get started.</div></div>';
+  }
+  html += '</div>';
+  document.getElementById('category-content').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// CALENDAR HTML
+// ══════════════════════════════════════════
+function renderCalendarHTML(cat) {
+  var y = calMonth.getFullYear(), m = calMonth.getMonth();
+  var first = new Date(y,m,1).getDay();
+  var total = new Date(y,m+1,0).getDate();
+  var days = [];
+  for (var i=0;i<first;i++) days.push(null);
+  for (var d=1;d<=total;d++) days.push(d);
+
+  var html = '<div class="cal-card">';
+  html += '<div class="cal-nav">'+
+    '<button onclick="prevMonth()">‹</button>'+
+    '<div class="cal-month" style="background:#b07d10;padding:6px 20px;border-radius:6px;">'+calMonth.toLocaleDateString('en-US',{month:'long',year:'numeric'})+'</div>'+
+    '<button onclick="nextMonth()">›</button>'+
+  '</div>';
+  html += '<div class="cal-grid">';
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d){
+    html += '<div class="cal-dow">'+d+'</div>';
+  });
+
+  days.forEach(function(day) {
+    if (!day) { html += '<div></div>'; return; }
+    var isT = day===TODAY.getDate() && m===TODAY.getMonth() && y===TODAY.getFullYear();
+    var hasSrc = cat==='med' ? false : items.filter(function(i){
+      var id=new Date(i.date); return (!cat||i.type===cat) && id.getDate()===day && id.getMonth()===m && id.getFullYear()===y;
+    }).length > 0;
+    var isSel = selectedDay===day && m===calMonth.getMonth();
+    var cls = 'cal-day';
+    if (isT) cls += ' today';
+    else if (isSel) cls += ' selected';
+    else if (hasSrc) cls += ' has-items';
+    var click = hasSrc ? 'onclick="selectDay('+day+')"' : '';
+    html += '<div class="'+cls+'" '+click+'>'+day+(hasSrc&&!isT&&!isSel?'<div class="cal-dot"></div>':'')+'</div>';
+  });
+  html += '</div>';
+
+  if (selectedDay) {
+    var selItems = items.filter(function(i){
+      var id=new Date(i.date);
+      return id.getDate()===selectedDay && id.getMonth()===calMonth.getMonth() && id.getFullYear()===calMonth.getFullYear() && (!cat||i.type===cat);
+    });
+    selItems.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+    if (selItems.length > 0) {
+      html += '<div style="margin-top:14px;">';
+      html += '<div class="gold-banner" style="margin:0 0 10px;">'+calMonth.toLocaleDateString('en-US',{month:'long'})+' '+selectedDay+'</div>';
+      selItems.forEach(function(item){
+        var cat2 = CATS[item.type];
+        html += '<div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:12px;margin-bottom:6px;border-left:4px solid '+cat2.color+';display:flex;gap:10px;align-items:flex-start;">'+
+          '<div style="font-size:1.2rem;">'+cat2.icon+'</div>'+
+          '<div style="flex:1;">'+
+            '<div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px;">'+item.title+'</div>'+
+            '<div style="margin-bottom:2px;"><span class="item-badge" style="background:'+cat2.color+'">'+cat2.label+'</span></div>'+
+            '<div style="font-size:0.78rem;color:#fff;font-weight:700;">'+dayLabel(item.date)+'</div>'+
+            '<div style="font-size:0.82rem;color:#fff;font-weight:700;">'+fmtTime(item.date)+'</div>'+
+            (item.note?'<div style="font-size:0.78rem;color:#fff;margin-top:3px;">'+item.note+'</div>':'') +
+          '</div>'+
+        '</div>';
+      });
+      html += '</div>';
+    }
+  }
+  html += '</div>';
+  return html;
+}
+
+function prevMonth() { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()-1, 1); selectedDay=null; if(currentPage==='category') renderCategory(); else renderCalendar(); }
+function nextMonth() { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 1); selectedDay=null; if(currentPage==='category') renderCategory(); else renderCalendar(); }
+function selectDay(day) { selectedDay = selectedDay===day?null:day; if(currentPage==='category') renderCategory(); else renderCalendar(); }
+
+// ══════════════════════════════════════════
+// FULL CALENDAR
+// ══════════════════════════════════════════
+function renderCalendar() {
+  var y=calMonth.getFullYear(), m=calMonth.getMonth();
+  var monthItems = items.filter(function(i){
+    var d=new Date(i.date); return d.getMonth()===m && d.getFullYear()===y;
+  });
+  monthItems.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+
+  var html = '';
+  html += renderCalendarHTML(null);
+  html += goldBannerHTML('Care Plan: ' + calMonth.toLocaleDateString('en-US',{month:'long'}), monthItems.length);
+  if (monthItems.length===0) {
+    html += '<div class="navy-card" style="text-align:center;"><div style="font-size:1rem;font-weight:700;color:#fff;">Nothing scheduled this month.</div></div>';
+  } else {
+    monthItems.forEach(function(item){ html += itemCardHTML(item); });
+  }
+  html += renderFooter();
+  document.getElementById('calendar-content').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// ADD FORMS
+// ══════════════════════════════════════════
+function renderAddForm() {
+  var pillsHTML = '';
+  Object.keys(CATS).forEach(function(type) {
+    var cat = CATS[type];
+    var active = type===formType ? ' active" style="border-color:'+cat.color+';background:'+cat.color+';' : '" style="';
+    pillsHTML += '<button class="type-pill'+active+'" onclick="setFormType(\''+type+'\')">'+cat.icon+' '+cat.label+'</button>';
+  });
+  document.getElementById('type-pills').innerHTML = pillsHTML;
+  document.getElementById('add-title').value = '';
+  document.getElementById('add-date').value = '';
+  document.getElementById('add-time').value = '';
+  document.getElementById('add-note').value = '';
+}
+
+function setFormType(type) {
+  formType = type;
+  var pills = document.querySelectorAll('.type-pill');
+  pills.forEach(function(p) {
+    var t = p.textContent.trim();
+    var matched = Object.keys(CATS).find(function(k){ return CATS[k].icon+' '+CATS[k].label === t || t.includes(CATS[k].label); });
+    if (matched === type) {
+      p.style.borderColor = CATS[type].color;
+      p.style.background = CATS[type].color;
+    } else if (matched) {
+      p.style.borderColor = 'rgba(255,255,255,0.3)';
+      p.style.background = 'transparent';
+    }
+  });
+}
+
+function saveItem() {
+  var title = document.getElementById('add-title').value.trim();
+  var date  = document.getElementById('add-date').value;
+  var time  = document.getElementById('add-time').value || '08:00';
+  var note  = document.getElementById('add-note').value.trim();
+  if (!title || !date) { alert('Please enter a name and date.'); return; }
+  var newItem = { id: Date.now(), type: formType, title: title, date: new Date(date+'T'+time), done: false, note: note };
+  items.push(newItem);
+  showPage(prevPage==='add'?'dashboard':prevPage);
+}
+
+function renderAddMedForm() {
+  var slotHTML = '';
+  MED_SLOTS.forEach(function(s) {
+    slotHTML += '<option value="'+s.id+'">'+s.icon+' '+s.label+' — '+s.time+'</option>';
+  });
+  document.getElementById('med-slot').innerHTML = slotHTML;
+  document.getElementById('med-label').value = '';
+  document.getElementById('med-note').value = '';
+}
+
+function goAddMed() { showPage("addmed"); }
+
+function saveMed() {
+  var label = document.getElementById('med-label').value.trim();
+  var note  = document.getElementById('med-note').value.trim();
+  var slot  = document.getElementById('med-slot').value;
+  if (!label) { alert('Please enter a med name or label.'); return; }
+  meds.push({ id: Date.now(), slot: slot, label: label, done: false, note: note });
+  showPage(prevPage==='addmed'?'category':prevPage);
+  if (currentPage==='category') activeCat='med';
+}
+
+// ══════════════════════════════════════════
+// FOOTER
+// ══════════════════════════════════════════
+function renderFooter() {
+  return '<div class="app-footer">'+
+    '<div class="app-footer-logo">Kasia<span>Care</span></div>'+
+    '<div class="app-footer-version">Care Plan Software · Demo v2.0.0 · May 2026</div>'+
+    '<div class="app-footer-links">'+
+      '<a href="#" onclick="showPage(\'dashboard\');return false;">Home</a>'+
+      '<a href="demo-readme.html">Read Me First</a>'+
+      '<a href="privacy.html">Privacy Policy</a>'+
+      '<a href="contact.html">Contact Us</a>'+
+      '<a href="signup.html">Sign Up</a>'+
+      '<a href="family-heals.html">Family Heals</a>'+
+      '<a href="resources.html">External Resources</a>'+
+      '<a href="https://kasiacare.com">Website</a>'+
+    '</div>'+
+    '<div class="app-footer-copy">&copy; 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span></div>'+
+  '</div>';
+}
 </script>
 </body>
 </html>
