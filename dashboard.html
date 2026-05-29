@@ -119,6 +119,13 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 .demo-banner-btn { display: block; background: #fff; color: #b03060; font-weight: 700; padding: 10px 14px; border-radius: 6px; font-size: 0.88rem; text-align: center; text-decoration: none; }
 
 /* FOOTER */
+.bottom-nav { display:flex; justify-content:space-between; align-items:center; padding:16px; margin-top:16px; gap:16px; border-top:1px solid rgba(255,255,255,0.1); }
+.btn-back-bottom { background:#b03060; color:#fff; border:none; border-radius:6px; padding:10px 24px; font-size:0.88rem; font-weight:700; cursor:pointer; letter-spacing:0.5px; }
+.btn-top { background:#b03060; color:#fff; border:none; border-radius:6px; padding:10px 24px; font-size:0.88rem; font-weight:700; cursor:pointer; letter-spacing:0.5px; }
+.quick-nav { background:#102940; padding:10px 16px; border-top:2px solid rgba(255,255,255,0.1); margin-top:20px; }
+.quick-nav-row { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin-bottom:6px; }
+.quick-nav-btn { background:#0a1f33; color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:4px; padding:5px 10px; font-size:0.65rem; font-weight:700; cursor:pointer; text-transform:uppercase; letter-spacing:0.5px; }
+.quick-nav-divider { height:1px; background:rgba(255,255,255,0.1); margin:6px 0; }
 .app-footer { background: #102940; border-top: 3px solid rgba(255,255,255,0.08); padding: 16px 20px; margin-top: 20px; text-align: center; }
 .app-footer-logo { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
 .app-footer-logo span { color: #b03060; }
@@ -201,6 +208,23 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
       <input type="hidden" name="source" value="Demo Sign In Form">
     </form>
   </div>
+
+  <div class="app-footer">
+    <div class="app-footer-logo">Kasia<span>Care</span></div>
+    <div class="app-footer-version">Care Plan Software · Demo v2.6.0 · May 2026</div>
+    <div class="app-footer-links">
+      <a href="index.html">Home</a>
+      <a href="demo-readme.html">Read Me First</a>
+      <a href="features.html">Features</a>
+      <a href="subscriptions.html">Subscriptions</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="family-heals.html">Family Heals</a>
+      <a href="resources.html">External Resources</a>
+    </div>
+    <div class="app-footer-copy">&copy; 2026 KasiaCare. All rights reserved. Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span></div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════ -->
@@ -220,6 +244,20 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
     <div class="greeting-time" id="greeting-time"></div>
   </div>
   <div style="padding:8px 16px 16px;" id="dashboard-content"></div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- CATEGORIES PAGE                -->
+<!-- ══════════════════════════════ -->
+<div id="page-categories" class="page">
+  <nav class="nav">
+    <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span style="color:#b03060;">Care</span></div>
+    <div class="nav-btns">
+      <button class="btn-gold" onclick="showPage('calendar')">Calendar</button>
+      <button class="btn-rose" onclick="showPage('add')">+</button>
+    </div>
+  </nav>
+  <div id="categories-content" style="padding:8px 16px 16px;"></div>
 </div>
 
 <!-- ══════════════════════════════ -->
@@ -243,6 +281,7 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
   <nav class="nav">
     <div class="nav-logo" onclick="showPage('dashboard')">Kasia<span>Care</span></div>
     <div class="nav-btns">
+      <button class="btn-gold" onclick="showPage('categories')">Categories</button>
       <button class="btn-rose" onclick="showPage('add')">+</button>
     </div>
   </nav>
@@ -329,13 +368,13 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 const TODAY = new Date();
 
 const CATS = {
-  appointment: { label:'Appointments',  icon:'🗓️', color:'#b03060' },
-  task:        { label:'Tasks',          icon:'🪴', color:'#7c3aed' },
   activity:    { label:'Activities',     icon:'🚴‍♀️', color:'#0891b2' },
-  med:         { label:'Med Reminders',  icon:'🧃', color:'#9b72cf' },
+  appointment: { label:'Appointments',  icon:'🗓️', color:'#b03060' },
   meal:        { label:'Meals',          icon:'🥣', color:'#2d7a2d' },
+  med:         { label:'Med Reminders',  icon:'🧃', color:'#9b72cf' },
   notes:       { label:'Notes',          icon:'📝', color:'#e0c800' },
   order:       { label:'Orders',         icon:'📦', color:'#8a4a10' },
+  task:        { label:'Tasks',          icon:'🪴', color:'#7c3aed' },
 };
 
 const MED_SLOTS = [
@@ -417,6 +456,7 @@ let meds = [
 ];
 
 let currentPage = 'signin';
+let scrollPositions = {};
 let prevPage = 'dashboard';
 let activeCat = null;
 let calMonth = new Date(TODAY.getFullYear(), TODAY.getMonth(), 1);
@@ -427,18 +467,53 @@ let clockInterval = null;
 // ══════════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════════
-function showPage(page, cat) {
+function showPage(page, cat, isBack) {
+  // Save current scroll position
+  scrollPositions[currentPage] = window.scrollY;
   document.getElementById('page-' + currentPage).classList.remove('active');
-  prevPage = currentPage;
+  if (!isBack) prevPage = currentPage;
   currentPage = page;
   if (cat) activeCat = cat;
   document.getElementById('page-' + page).classList.add('active');
   window.scrollTo(0, 0);
   if (page === 'dashboard') renderDashboard();
+  if (page === 'categories') renderCategories();
   if (page === 'category') renderCategory();
   if (page === 'calendar') renderCalendar();
   if (page === 'add') renderAddForm();
   if (page === 'addmed') renderAddMedForm();
+  // Restore scroll position
+  setTimeout(function() {
+    window.scrollTo(0, scrollPositions[page] || 0);
+  }, 50);
+}
+
+function quickNavHTML() {
+  var catBtns = '';
+  Object.keys(CATS).forEach(function(type) {
+    var cat = CATS[type];
+    catBtns += '<button class="quick-nav-btn" onclick="showPage(\'category\',\''+type+'\')" style="border-color:'+cat.color+';">'+cat.icon+' '+cat.label+'</button>';
+  });
+  return '<div class="quick-nav">'+
+    '<div style="background:#b07d10;border-radius:6px;padding:8px 14px;margin-bottom:8px;text-align:center;font-size:0.78rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;">App Main Links</div>'+
+    '<div class="quick-nav-row">'+
+      '<button class="quick-nav-btn" onclick="showPage(\'add\')" style="border-color:#b03060;">+ Add Item</button>'+
+      '<button class="quick-nav-btn" onclick="showPage(\'calendar\')" style="border-color:#fff;">🗓️ Calendar</button>'+
+      '<button class="quick-nav-btn" onclick="showPage(\'categories\')" style="border-color:#b07d10;">📋 Categories</button>'+
+      '<button class="quick-nav-btn" onclick="showPage(\'dashboard\')" style="border-color:#fff;">🏠 Home</button>'+
+    '</div>'+
+    '<div class="quick-nav-divider"></div>'+
+    '<div class="quick-nav-row">'+catBtns+'</div>'+
+  '</div>';
+}
+
+function scrollToTop() { window.scrollTo({top:0, behavior:"smooth"}); }
+
+function bottomNavHTML(backFn) {
+  return '<div class="bottom-nav">'+
+    '<button class="btn-back-bottom" onclick="'+backFn+'">← Back</button>'+
+    '<button class="btn-top" onclick="scrollToTop()">Top ↑</button>'+
+  '</div>';
 }
 
 function toggleSection(id, btn) {
@@ -464,7 +539,7 @@ function toggleRestOfMonth() {
 }
 
 function goBack() {
-  showPage(prevPage);
+  showPage(prevPage, null, true);
 }
 
 // ══════════════════════════════════════════
@@ -488,7 +563,7 @@ function handleSignIn() {
     err.style.display = 'block';
     return;
   }
-  if (email !== email2) {
+  if (email.toLowerCase() !== email2.toLowerCase()) {
     err.textContent = 'Email addresses do not match. Please check and try again.';
     err.style.display = 'block';
     return;
@@ -504,7 +579,7 @@ function handleSignIn() {
   // Submit to Formspree
   document.getElementById('hidden-first').value = first;
   document.getElementById('hidden-last').value  = last;
-  document.getElementById('hidden-email').value = email;
+  document.getElementById('hidden-email').value = email.toLowerCase();
 
   var form = document.getElementById('signin-form-submit');
   var data = new FormData(form);
@@ -634,7 +709,7 @@ function renderDashboard() {
 
   // TODAY — full day all items done and not done
   var todayAll = items.filter(function(i){ return isToday(i.date); });
-  todayAll.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+  todayAll.sort(function(a,b){ return a.title.localeCompare(b.title); });
 
   // THIS WEEK — Monday through Sunday of current week
   var dayOfWeek = TODAY.getDay(); // 0=Sun 1=Mon
@@ -643,7 +718,7 @@ function renderDashboard() {
   var weekItems = items.filter(function(i){
     var d=new Date(i.date); return d>=monday&&d<=sunday;
   }); // monday already set to start of week above
-  weekItems.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+  weekItems.sort(function(a,b){ return a.title.localeCompare(b.title); });
 
   // THIS MONTH — first to last of month
   var monthStart = new Date(TODAY.getFullYear(),TODAY.getMonth(),1);
@@ -652,7 +727,7 @@ function renderDashboard() {
     var d=new Date(i.date);
     return d.getMonth()===TODAY.getMonth()&&d.getFullYear()===TODAY.getFullYear();
   });
-  monthItems2.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+  monthItems2.sort(function(a,b){ return a.title.localeCompare(b.title); });
 
   // VIEW BY CATEGORY
   var allFuture = items.filter(function(i){ return new Date(i.date)>=TODAY; });
@@ -736,6 +811,7 @@ function renderDashboard() {
     '<a href="demo-readme.html" class="demo-banner-btn">Read Me First</a>'+
   '</div>';
 
+  html += bottomNavHTML('scrollToTop()');
   html += renderFooter();
   document.getElementById('dashboard-content').innerHTML = html;
 }
@@ -743,6 +819,31 @@ function renderDashboard() {
 // ══════════════════════════════════════════
 // CATEGORY
 // ══════════════════════════════════════════
+function renderCategories() {
+  var html = '<div class="gold-banner" style="margin:6px 0 12px;">Care Plan Categories</div>';
+  html += '<div class="navy-card">';
+  Object.keys(CATS).forEach(function(type) {
+    var cat = CATS[type];
+    var todayItems = items.filter(function(i){ return i.type===type && isToday(i.date); });
+    var medCount = type==='med' ? meds.length : 0;
+    var count = type==='med' ? medCount : todayItems.length;
+    var done = type==='med' ? meds.filter(function(m){return m.done;}).length : todayItems.filter(function(i){return i.done;}).length;
+    var bg = count>0 ? cat.color : 'rgba(255,255,255,0.15)';
+    html += '<div class="cat-row" style="border-left:5px solid '+cat.color+';" onclick="showPage(\'category\',\''+type+'\')">'+ 
+      '<div class="cat-icon">'+cat.icon+'</div>'+
+      '<div class="cat-info">'+
+        '<div class="cat-name">'+cat.label+'</div>'+
+        '<div class="cat-sub">'+( count>0 ? done+' of '+count+' complete' : 'Tap to view all')+'</div>'+
+      '</div>'+
+      '<div class="cat-count" style="background:'+bg+'">'+count+'</div>'+
+      '<div class="cat-arrow">›</div>'+
+    '</div>';
+  });
+  html += '</div>';
+  html += bottomNavHTML('goBack()');
+  document.getElementById('categories-content').innerHTML = html;
+}
+
 function renderCategory() {
   if (!activeCat) return;
   var html = '';
@@ -800,6 +901,7 @@ function renderCategory() {
   if (todayCat.length===0 && upcoming.length===0) {
     html += '<div class="navy-card" style="text-align:center;"><div style="font-size:1rem;font-weight:700;color:#fff;">Nothing scheduled yet.</div><div style="font-size:0.88rem;color:#fff;margin-top:6px;">Tap + to get started.</div></div>';
   }
+  html += bottomNavHTML('goBack()');
   html += '</div>';
   document.getElementById('category-content').innerHTML = html;
 }
@@ -893,6 +995,7 @@ function renderCalendar() {
   } else {
     monthItems.forEach(function(item){ html += itemCardHTML(item); });
   }
+  html += bottomNavHTML('goBack()');
   html += renderFooter();
   document.getElementById('calendar-content').innerHTML = html;
 }
@@ -983,9 +1086,9 @@ function saveMed() {
 // FOOTER
 // ══════════════════════════════════════════
 function renderFooter() {
-  return '<div class="app-footer">'+
+  return quickNavHTML() + '<div class="app-footer">'+
     '<div class="app-footer-logo">Kasia<span>Care</span></div>'+
-    '<div class="app-footer-version">Care Plan Software · Demo v2.0.0 · May 2026</div>'+
+    '<div class="app-footer-version">Care Plan Software · Demo v2.6.0 · May 2026</div>'+
     '<div class="app-footer-links">'+
       '<a href="#" onclick="showPage(\'dashboard\');return false;">Home</a>'+
       '<a href="demo-readme.html">Read Me First</a>'+
