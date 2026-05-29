@@ -17,15 +17,16 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 18px; -webkit-text-size-adjust: 100%; }
 body { font-family: Verdana, Geneva, sans-serif; background: #0a1f33; color: #fff; min-height: 100vh; }
+.app-wrap { max-width: 680px; margin: 0 auto; background: #0a1f33; min-height: 100vh; position: relative; }
 input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 
 /* NAV */
-.nav { background: #102940; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+.nav { background: #102940; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); max-width: 680px; }
 .nav-logo { font-size: 1.2rem; font-weight: 700; color: #fff; cursor: pointer; }
 .nav-logo span { color: #b03060; }
 .nav-btns { display: flex; gap: 10px; align-items: center; }
 .btn-gold { background: #b07d10; color: #fff; border: none; border-radius: 4px; padding: 6px 14px; font-size: 0.72rem; font-weight: 700; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
-.btn-rose { background: #b03060; color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+.btn-rose { background: #b03060; color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-size: 0.88rem; font-weight: 700; cursor: pointer; display: inline-block; text-decoration: none; }
 .btn-rose-lg { background: #b03060; color: #fff; border: none; border-radius: 8px; padding: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; width: 100%; display: block; text-align: center; margin-bottom: 10px; }
 .btn-outline { background: transparent; color: #fff; border: 2px solid #fff; border-radius: 8px; padding: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; width: 100%; display: block; text-align: center; }
 .btn-cancel { background: transparent; color: #fff; border: 2px solid #fff; border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
@@ -109,6 +110,9 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 .type-pill.active { border-color: currentColor; }
 
 /* DEMO BANNER */
+.view-btn { width:100%; background:#b07d10; color:#fff; border:none; border-radius:6px; padding:10px 14px; font-size:0.82rem; font-weight:700; cursor:pointer; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; text-align:left; display:flex; justify-content:space-between; align-items:center; }
+.view-btn:after { content:'›'; font-size:1.2rem; }
+.view-btn.open:after { content:'⌄'; }
 .demo-banner { background: #b03060; border-radius: 8px; padding: 12px 16px; margin-top: 20px; text-align: center; }
 .demo-banner-title { font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
 .demo-banner-text { font-size: 0.82rem; color: #fff; line-height: 1.75; margin-bottom: 10px; }
@@ -145,7 +149,7 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 <!-- ══════════════════════════════ -->
 <!-- SIGN IN PAGE                   -->
 <!-- ══════════════════════════════ -->
-<div id="page-signin" class="page active signin-page">
+<div class="app-wrap"><div id="page-signin" class="page active signin-page">
   <nav class="nav" style="justify-content:center;gap:16px;">
     <a href="https://kasiacare.com" style="font-size:1.2rem;font-weight:700;color:#fff;text-decoration:none;">Kasia<span style="color:#b03060;">Care</span></a>
     <a href="demo-readme.html" class="btn-rose">Read Me First</a>
@@ -263,8 +267,8 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
     <label class="form-label" style="margin-top:0;">Type</label>
     <div class="type-pills" id="type-pills"></div>
 
-    <label class="form-label">Name</label>
-    <input class="form-input" type="text" id="add-title" placeholder="Brief name">
+    <label class="form-label" id="add-title-label">Item Name</label>
+    <input class="form-input" type="text" id="add-title" placeholder="Brief item name">
 
     <div class="form-grid">
       <div>
@@ -278,7 +282,7 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
     </div>
 
     <label class="form-label">Notes (optional)</label>
-    <input class="form-input" type="text" id="add-note" placeholder="Any notes...">
+    <input class="form-input" type="text" id="add-note" placeholder="e.g. Bring medication list, Take with food...">
 
     <button class="btn-rose-lg" style="margin-top:20px;" onclick="saveItem()">Save to Care Plan</button>
     <button class="btn-outline" onclick="goBack()">Cancel</button>
@@ -325,12 +329,12 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 const TODAY = new Date();
 
 const CATS = {
-  appointment: { label:'Appointments',  icon:'📅', color:'#b03060' },
-  task:        { label:'Tasks',          icon:'🪴', color:'#2d6b2d' },
-  activity:    { label:'Activities',     icon:'🚴‍♀️', color:'#1a7a6a' },
-  med:         { label:'Med Reminders',  icon:'🧃', color:'#6b2d8a' },
-  meal:        { label:'Meals',          icon:'🥣', color:'#b07d10' },
-  notes:       { label:'Notes',          icon:'📝', color:'#102940' },
+  appointment: { label:'Appointments',  icon:'🗓️', color:'#b03060' },
+  task:        { label:'Tasks',          icon:'🪴', color:'#7c3aed' },
+  activity:    { label:'Activities',     icon:'🚴‍♀️', color:'#0891b2' },
+  med:         { label:'Med Reminders',  icon:'🧃', color:'#9b72cf' },
+  meal:        { label:'Meals',          icon:'🥣', color:'#2d7a2d' },
+  notes:       { label:'Notes',          icon:'📝', color:'#e0c800' },
   order:       { label:'Orders',         icon:'📦', color:'#8a4a10' },
 };
 
@@ -357,6 +361,20 @@ let items = [
   { id:8,  type:'appointment', title:'Physical therapy',        date:d(Y,M,D+2,9,0), done:false, note:'' },
   { id:9,  type:'task',        title:'Laundry',                 date:d(Y,M,D+1,10,0),done:false, note:'' },
   { id:10, type:'activity',    title:'Family visit',            date:d(Y,M,D+3,14,0),done:false, note:'Sister coming over' },
+  // Past May items so week and month views show history
+  { id:11, type:'appointment', title:'Dr. Chen follow-up',       date:d(Y,4,1,9,0),   done:true,  note:'Blood pressure check' },
+  { id:12, type:'task',        title:'Pick up prescriptions',    date:d(Y,4,2,10,0),  done:true,  note:'' },
+  { id:13, type:'activity',    title:'Morning walk — 20 min',    date:d(Y,4,5,9,0),   done:true,  note:'' },
+  { id:14, type:'meal',        title:'Breakfast',                date:d(Y,4,5,8,30),  done:true,  note:'Eggs and toast' },
+  { id:15, type:'meal',        title:'Lunch',                    date:d(Y,4,5,12,0),  done:true,  note:'Chicken soup' },
+  { id:16, type:'task',        title:'Laundry',                  date:d(Y,4,6,9,0),   done:true,  note:'' },
+  { id:17, type:'notes',       title:'Caregiver handoff note',   date:d(Y,4,6,17,0),  done:true,  note:'Good day overall' },
+  { id:18, type:'activity',    title:'Morning walk — 20 min',    date:d(Y,4,7,9,0),   done:true,  note:'' },
+  { id:19, type:'meal',        title:'Breakfast',                date:d(Y,4,7,8,30),  done:true,  note:'' },
+  { id:20, type:'meal',        title:'Lunch',                    date:d(Y,4,7,12,0),  done:true,  note:'' },
+  { id:21, type:'appointment', title:'Physical therapy',         date:d(Y,4,8,10,0),  done:true,  note:'Exercises for mobility' },
+  { id:22, type:'task',        title:'Order medical supplies',   date:d(Y,4,9,10,0),  done:true,  note:'Gloves and wipes' },
+  { id:23, type:'activity',    title:'Family visit',             date:d(Y,4,10,14,0), done:true,  note:'Sister visited' },
   // ── June sample data ──
   { id:101, type:'appointment', title:'Annual physical exam',         date:d(Y,5,3,10,0),  done:false, note:'Fasting required' },
   { id:102, type:'appointment', title:'Dentist checkup',              date:d(Y,5,10,14,0), done:false, note:'' },
@@ -389,6 +407,7 @@ let items = [
 ];
 
 let meds = [
+  // Daily sample — Breakfast Med and Supper Med Mon-Fri (this week)
   { id:1, slot:'breakfast',     label:'Morning reminder',  done:true,  note:'Take with food' },
   { id:2, slot:'morningsnack',  label:'Morning snack',     done:true,  note:'' },
   { id:3, slot:'lunch',         label:'With lunch',        done:false, note:'Take with food' },
@@ -420,6 +439,15 @@ function showPage(page, cat) {
   if (page === 'calendar') renderCalendar();
   if (page === 'add') renderAddForm();
   if (page === 'addmed') renderAddMedForm();
+}
+
+function toggleSection(id, btn) {
+  var div = document.getElementById(id);
+  if (!div) return;
+  var isOpen = div.style.display !== 'none';
+  div.style.display = isOpen ? 'none' : 'block';
+  if (isOpen) btn.classList.remove('open');
+  else btn.classList.add('open');
 }
 
 function toggleRestOfMonth() {
@@ -555,12 +583,12 @@ function itemCardHTML(item) {
     '<button class="'+checkClass+'" onclick="toggleItem('+item.id+')" style="border-color:'+(item.done?'#b07d10':'#fff')+'">'+checkIcon+'</button>' +
     '<div class="item-icon">'+cat.icon+'</div>' +
     '<div class="item-body">' +
-      '<div class="'+titleClass+'">'+item.title+'</div>' +
       '<div class="item-badge-row">' +
-        '<span class="item-badge" style="background:'+cat.color+'">'+cat.label+'</span>' +
+        '<span class="item-day">'+dayLabel(item.date)+'</span>' +
         '<span class="item-time">'+fmtTime(item.date)+'</span>' +
       '</div>' +
-      '<div class="item-day">'+dayLabel(item.date)+'</div>' +
+      '<div style="margin-bottom:3px;"><span class="item-badge" style="background:'+cat.color+'">'+cat.label+'</span></div>' +
+      '<div class="'+titleClass+'">'+item.title+'</div>' +
       (item.note ? '<div class="item-note">'+item.note+'</div>' : '') +
     '</div>' +
   '</div>';
@@ -600,35 +628,110 @@ function renderDashboard() {
   });
   html += '</div>';
 
-  // Tomorrow items
+  // ── FOUR COLLAPSIBLE VIEW BUTTONS ──
   var tomorrow = new Date(TODAY); tomorrow.setDate(tomorrow.getDate()+1);
-  var tomorrowItems = items.filter(function(i){
-    var d=new Date(i.date);
-    return d.getDate()===tomorrow.getDate()&&d.getMonth()===tomorrow.getMonth()&&d.getFullYear()===tomorrow.getFullYear();
-  });
-  tomorrowItems.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
-  if (tomorrowItems.length > 0) {
-    html += goldBannerHTML('Tomorrow', tomorrowItems.length);
-    tomorrowItems.forEach(function(item){ html += itemCardHTML(item); });
-  }
+  var weekEnd = new Date(TODAY); weekEnd.setDate(weekEnd.getDate()+7);
 
-  // Rest of month — shown/hidden
-  var restOfMonth = items.filter(function(i){
+  // TODAY — full day all items done and not done
+  var todayAll = items.filter(function(i){ return isToday(i.date); });
+  todayAll.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+
+  // THIS WEEK — Monday through Sunday of current week
+  var dayOfWeek = TODAY.getDay(); // 0=Sun 1=Mon
+  var monday = new Date(TODAY); monday.setDate(TODAY.getDate() - (dayOfWeek===0?6:dayOfWeek-1)); monday.setHours(0,0,0,0); // full week from Monday
+  var sunday = new Date(monday); sunday.setDate(monday.getDate()+6); sunday.setHours(23,59,59,999);
+  var weekItems = items.filter(function(i){
+    var d=new Date(i.date); return d>=monday&&d<=sunday;
+  }); // monday already set to start of week above
+  weekItems.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+
+  // THIS MONTH — first to last of month
+  var monthStart = new Date(TODAY.getFullYear(),TODAY.getMonth(),1);
+  var monthEnd = new Date(TODAY.getFullYear(),TODAY.getMonth()+1,0,23,59,59,999);
+  var monthItems2 = items.filter(function(i){
     var d=new Date(i.date);
-    var isTom = d.getDate()===tomorrow.getDate()&&d.getMonth()===tomorrow.getMonth()&&d.getFullYear()===tomorrow.getFullYear();
-    return !isToday(i.date)&&!isTom&&new Date(i.date)>=TODAY&&d.getMonth()===TODAY.getMonth()&&d.getFullYear()===TODAY.getFullYear();
+    return d.getMonth()===TODAY.getMonth()&&d.getFullYear()===TODAY.getFullYear();
   });
-  restOfMonth.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
-  if (restOfMonth.length > 0) {
-    html += '<div id="rest-of-month" style="display:none;">';
-    html += goldBannerHTML('Rest of This Month', restOfMonth.length);
-    restOfMonth.forEach(function(item){ html += itemCardHTML(item); });
-    html += '</div>';
-    html += '<button onclick="toggleRestOfMonth()" id="rest-btn" style="width:100%;background:#102940;color:#fff;border:2px solid #b07d10;border-radius:6px;padding:10px;font-size:0.88rem;font-weight:700;cursor:pointer;margin-top:6px;margin-bottom:6px;">View the Rest of the Month ('+restOfMonth.length+')</button>';
+  monthItems2.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+
+  // VIEW BY CATEGORY
+  var allFuture = items.filter(function(i){ return new Date(i.date)>=TODAY; });
+
+  html += '<div style="margin-top:6px;">';
+
+  // TODAY button
+  html += '<button onclick="toggleSection(\'today-section\',this)" class="view-btn">Today — '+todayAll.length+' Items</button>';
+  html += '<div id="today-section" style="display:none;">';
+  if (todayAll.length===0) {
+    html += '<div class="navy-card" style="text-align:center;font-size:0.88rem;color:#fff;">Nothing scheduled today.</div>';
+  } else {
+    todayAll.forEach(function(item){ html += itemCardHTML(item); });
   }
+  html += '</div>';
+
+  // THIS WEEK button
+  html += '<button onclick="toggleSection(\'week-section\',this)" class="view-btn">This Week — '+weekItems.length+' Items</button>';
+  html += '<div id="week-section" style="display:none;">';
+  if (weekItems.length===0) {
+    html += '<div class="navy-card" style="text-align:center;font-size:0.88rem;color:#fff;">Nothing scheduled this week.</div>';
+  } else {
+    weekItems.forEach(function(item){ html += itemCardHTML(item); });
+  }
+  html += '</div>';
+
+  // THIS MONTH button
+  html += '<button onclick="toggleSection(\'month-section\',this)" class="view-btn">This Month — '+monthItems2.length+' Items</button>';
+  html += '<div id="month-section" style="display:none;">';
+  if (monthItems2.length===0) {
+    html += '<div class="navy-card" style="text-align:center;font-size:0.88rem;color:#fff;">Nothing scheduled this month.</div>';
+  } else {
+    monthItems2.forEach(function(item){ html += itemCardHTML(item); });
+  }
+  html += '</div>';
+
+  // VIEW BY CATEGORY button
+  html += '<button onclick="toggleSection(\'cat-section\',this)" class="view-btn">View by Category</button>';
+  html += '<div id="cat-section" style="display:none;">';
+  Object.keys(CATS).forEach(function(type) {
+    var cat = CATS[type];
+    var catItems = items.filter(function(i){ return i.type===type; });
+    catItems.sort(function(a,b){ return new Date(a.date)-new Date(b.date); });
+    if (catItems.length > 0) {
+      var catId = 'subcat-'+type;
+      html += '<button onclick="toggleSection(\''+catId+'\',this)" style="width:100%;background:#102940;color:#fff;border:none;border-left:5px solid '+cat.color+';border-radius:6px;padding:8px 14px;font-size:0.78rem;font-weight:700;cursor:pointer;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center;">'+
+        '<span>'+cat.icon+' '+cat.label+'</span>'+
+        '<span>'+catItems.length+' ›</span>'+
+      '</button>';
+      html += '<div id="'+catId+'" style="display:none;margin-bottom:6px;">';
+      catItems.forEach(function(item){ html += itemCardHTML(item); });
+      html += '</div>';
+    }
+  });
+    // Add Med Reminders to View by Category
+  html += '<button onclick="toggleSection(\'subcat-med\',this)" style="width:100%;background:#102940;color:#fff;border:none;border-left:5px solid #9b72cf;border-radius:6px;padding:8px 14px;font-size:0.78rem;font-weight:700;cursor:pointer;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center;"><span>🧃 Med Reminders</span><span>'+meds.length+' ›</span></button>';
+  html += '<div id="subcat-med" style="display:none;margin-bottom:6px;">';
+  MED_SLOTS.forEach(function(slot) {
+    var reminder = meds.find(function(m){ return m.slot===slot.id; });
+    if (reminder) {
+      html += '<div class="item-card" style="border-left:5px solid #9b72cf;">'+
+        '<div style="font-size:1.3rem;width:30px;text-align:center;flex-shrink:0;">'+slot.icon+'</div>'+
+        '<div style="flex:1;">'+
+          '<div style="font-size:0.75rem;font-weight:700;color:#fff;margin-bottom:2px;">'+slot.time+'</div>'+
+          '<div style="display:inline-block;background:#9b72cf;color:#fff;font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Med Reminders</div>'+
+          '<div style="font-size:1rem;font-weight:700;color:#fff;">'+(reminder.done?'<s>':'')+slot.label+(reminder.done?'</s>':'')+'</div>'+
+          (reminder.note?'<div style="font-size:0.82rem;color:#fff;margin-top:2px;">'+reminder.note+'</div>':'')+
+        '</div>'+
+      '</div>';
+    }
+  });
+  html += '</div>';
+  html += '<button onclick="showPage(\'calendar\')" style="width:100%;background:#102940;color:#fff;border:none;border-left:5px solid #fff;border-radius:6px;padding:8px 14px;font-size:0.78rem;font-weight:700;cursor:pointer;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center;"><span>🗓️ Calendar</span><span>›</span></button>';
+  html += '</div>';
+
+  html += '</div>';
 
   html += '<div class="demo-banner">'+
-    '<div class="demo-banner-title">Demo Mode</div>'+
+    '<div class="demo-banner-title">Reminder — Demo Mode</div>'+
     '<div class="demo-banner-text">This is a KasiaCare Demo. Data resets when you close. <a href="signup.html" style="color:#fff;font-weight:700;text-decoration:underline;">Sign up free</a> — be the first when we launch.</div>'+
     '<a href="demo-readme.html" class="demo-banner-btn">Read Me First</a>'+
   '</div>';
@@ -825,6 +928,22 @@ function setFormType(type) {
       p.style.background = 'transparent';
     }
   });
+  // Update name field border color and placeholder
+  var titleInput = document.getElementById('add-title');
+  if (titleInput) {
+    titleInput.style.borderColor = CATS[type].color;
+    titleInput.style.borderWidth = '3px';
+    var placeholders = {
+      appointment: 'Brief appointment name',
+      task:        'Brief task name',
+      activity:    'Brief activity name',
+      med:         'Brief med name',
+      meal:        'Brief meal name',
+      notes:       'Brief note name',
+      order:       'Brief order name'
+    };
+    titleInput.placeholder = placeholders[type] || 'Brief item name...';
+  }
 }
 
 function saveItem() {
@@ -881,5 +1000,5 @@ function renderFooter() {
   '</div>';
 }
 </script>
-</body>
+</div></body>
 </html>
