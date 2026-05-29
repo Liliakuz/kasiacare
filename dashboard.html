@@ -422,6 +422,19 @@ function showPage(page, cat) {
   if (page === 'addmed') renderAddMedForm();
 }
 
+function toggleRestOfMonth() {
+  var div = document.getElementById('rest-of-month');
+  var btn = document.getElementById('rest-btn');
+  if (div.style.display === 'none') {
+    div.style.display = 'block';
+    btn.textContent = 'Hide Rest of Month';
+  } else {
+    div.style.display = 'none';
+    var count = btn.textContent.match(/\d+/);
+    btn.textContent = 'View the Rest of the Month' + (count ? ' ('+count[0]+')' : '');
+  }
+}
+
 function goBack() {
   showPage(prevPage);
 }
@@ -587,11 +600,31 @@ function renderDashboard() {
   });
   html += '</div>';
 
-  var upcoming = items.filter(function(i){return !isToday(i.date)&&new Date(i.date)>=TODAY;});
-  upcoming.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
-  if (upcoming.length > 0) {
-    html += goldBannerHTML('Coming Up');
-    upcoming.slice(0,3).forEach(function(item){ html += itemCardHTML(item); });
+  // Tomorrow items
+  var tomorrow = new Date(TODAY); tomorrow.setDate(tomorrow.getDate()+1);
+  var tomorrowItems = items.filter(function(i){
+    var d=new Date(i.date);
+    return d.getDate()===tomorrow.getDate()&&d.getMonth()===tomorrow.getMonth()&&d.getFullYear()===tomorrow.getFullYear();
+  });
+  tomorrowItems.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  if (tomorrowItems.length > 0) {
+    html += goldBannerHTML('Tomorrow', tomorrowItems.length);
+    tomorrowItems.forEach(function(item){ html += itemCardHTML(item); });
+  }
+
+  // Rest of month — shown/hidden
+  var restOfMonth = items.filter(function(i){
+    var d=new Date(i.date);
+    var isTom = d.getDate()===tomorrow.getDate()&&d.getMonth()===tomorrow.getMonth()&&d.getFullYear()===tomorrow.getFullYear();
+    return !isToday(i.date)&&!isTom&&new Date(i.date)>=TODAY&&d.getMonth()===TODAY.getMonth()&&d.getFullYear()===TODAY.getFullYear();
+  });
+  restOfMonth.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  if (restOfMonth.length > 0) {
+    html += '<div id="rest-of-month" style="display:none;">';
+    html += goldBannerHTML('Rest of This Month', restOfMonth.length);
+    restOfMonth.forEach(function(item){ html += itemCardHTML(item); });
+    html += '</div>';
+    html += '<button onclick="toggleRestOfMonth()" id="rest-btn" style="width:100%;background:#102940;color:#fff;border:2px solid #b07d10;border-radius:6px;padding:10px;font-size:0.88rem;font-weight:700;cursor:pointer;margin-top:6px;margin-bottom:6px;">View the Rest of the Month ('+restOfMonth.length+')</button>';
   }
 
   html += '<div class="demo-banner">'+
