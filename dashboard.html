@@ -1,4 +1,4 @@
-<!-- v2.6.9 · KasiaCare Dashboard · Demo · May 2026 · dashboard_v269.html -->
+<!-- v2.7.0 · KasiaCare Dashboard · Demo · May 2026 · dashboard_v270.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,7 +203,7 @@ input, select, button, textarea { font-family: Verdana, Geneva, sans-serif; }
 
   <div class="app-footer">
     <div class="app-footer-logo">Kasia<span>Care</span></div>
-    <div class="app-footer-version">Care Plan Software · Demo v2.6.9 · May 2026</div>
+    <div class="app-footer-version">Care Plan Software · Demo v2.7.0 · May 2026</div>
     <div style="font-size:0.72rem;color:#3a5a7a;font-style:italic;margin-top:4px;">Built in partnership with Claude AI · Anthropic</div>
     <div class="app-footer-links">
       <a href="index.html">Home</a>
@@ -436,6 +436,124 @@ let items = [
   { id:126, type:'notes',       title:'Caregiver handoff note',       date:d(Y,5,9,17,0),  done:false, note:'Slept well' },
   { id:127, type:'notes',       title:'Caregiver handoff note',       date:d(Y,5,16,17,0), done:false, note:'Appetite good' },
   { id:128, type:'order',       title:'Reorder incontinence supplies',date:d(Y,5,15,10,0), done:false, note:'' },
+
+  // ── July sample data ──
+  { id:201, type:'appointment', title:'Dr. Williams checkup',          date:d(Y,6,1,10,30),  done:false, note:'Bring medication list' },
+  { id:202, type:'appointment', title:'Physical therapy',              date:d(Y,6,8,9,0),    done:false, note:'Mobility exercises' },
+  { id:203, type:'appointment', title:'Dentist checkup',              date:d(Y,6,15,14,0),  done:false, note:'' },
+  { id:204, type:'appointment', title:'Dr. Chen follow-up',           date:d(Y,6,22,11,0),  done:false, note:'Blood pressure check' },
+  { id:205, type:'appointment', title:'Eye doctor',                   date:d(Y,6,29,10,0),  done:false, note:'Bring glasses' },
+  { id:206, type:'task',        title:'Pick up prescriptions',        date:d(Y,6,2,10,0),   done:false, note:'Call ahead first' },
+  { id:207, type:'task',        title:'Wash bedding',                 date:d(Y,6,7,9,0),    done:false, note:'' },
+  { id:208, type:'task',        title:'Order medical supplies',       date:d(Y,6,14,10,0),  done:false, note:'Gloves and wipes' },
+  { id:209, type:'task',        title:'Wash bedding',                 date:d(Y,6,21,9,0),   done:false, note:'' },
+  { id:210, type:'task',        title:'Pick up prescriptions',        date:d(Y,6,28,10,0),  done:false, note:'' },
+  { id:211, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,1,9,0),    done:false, note:'' },
+  { id:212, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,4,9,0),    done:false, note:'' },
+  { id:213, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,8,9,0),    done:false, note:'' },
+  { id:214, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,11,9,0),   done:false, note:'' },
+  { id:215, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,15,9,0),   done:false, note:'' },
+  { id:216, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,18,9,0),   done:false, note:'' },
+  { id:217, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,22,9,0),   done:false, note:'' },
+  { id:218, type:'activity',    title:'Morning walk — 20 min',        date:d(Y,6,25,9,0),   done:false, note:'' },
+  { id:219, type:'activity',    title:'Family visit',                 date:d(Y,6,5,14,0),   done:false, note:'Sister visiting' },
+  { id:220, type:'activity',    title:'Family visit',                 date:d(Y,6,19,14,0),  done:false, note:'Sunday lunch together' },
+  { id:221, type:'activity',    title:'Garden time — 30 min',         date:d(Y,6,12,10,0),  done:false, note:'' },
+  { id:222, type:'activity',    title:'Garden time — 30 min',         date:d(Y,6,26,10,0),  done:false, note:'' },
+  { id:223, type:'meal',        title:'Breakfast',                    date:d(Y,6,1,8,30),   done:false, note:'Oatmeal and fruit' },
+  { id:224, type:'meal',        title:'Breakfast',                    date:d(Y,6,3,8,30),   done:false, note:'' },
+  { id:225, type:'meal',        title:'Breakfast',                    date:d(Y,6,7,8,30),   done:false, note:'Eggs and toast' },
+  { id:226, type:'meal',        title:'Breakfast',                    date:d(Y,6,10,8,30),  done:false, note:'' },
+  { id:227, type:'meal',        title:'Lunch',                        date:d(Y,6,1,12,0),   done:false, note:'Chicken soup' },
+  { id:228, type:'meal',        title:'Lunch',                        date:d(Y,6,3,12,0),   done:false, note:'' },
+  { id:229, type:'meal',        title:'Lunch',                        date:d(Y,6,7,12,0),   done:false, note:'' },
+  { id:230, type:'meal',        title:'Dinner',                       date:d(Y,6,5,18,0),   done:false, note:'Family dinner' },
+  { id:231, type:'meal',        title:'Dinner',                       date:d(Y,6,12,18,0),  done:false, note:'' },
+  { id:232, type:'notes',       title:'Caregiver handoff note',       date:d(Y,6,1,17,0),   done:false, note:'Good energy today' },
+  { id:233, type:'notes',       title:'Caregiver handoff note',       date:d(Y,6,8,17,0),   done:false, note:'Slept well, appetite good' },
+  { id:234, type:'notes',       title:'Caregiver handoff note',       date:d(Y,6,15,17,0),  done:false, note:'Dentist went well' },
+  { id:235, type:'notes',       title:'Caregiver handoff note',       date:d(Y,6,22,17,0),  done:false, note:'Blood pressure stable' },
+  { id:236, type:'notes',       title:'Caregiver handoff note',       date:d(Y,6,29,17,0),  done:false, note:'Good week overall' },
+  { id:237, type:'order',       title:'Reorder incontinence supplies', date:d(Y,6,5,10,0),  done:false, note:'' },
+  { id:238, type:'order',       title:'Reorder medical gloves',        date:d(Y,6,19,10,0), done:false, note:'Size M' },
+  // ── August sample data ──
+  { id:301, type:'appointment', title:'Dr. Williams checkup',          date:d(Y,7,5,10,30),  done:false, note:'Monthly checkup' },
+  { id:302, type:'appointment', title:'Physical therapy',              date:d(Y,7,12,9,0),   done:false, note:'Mobility exercises' },
+  { id:303, type:'appointment', title:'Physical therapy',              date:d(Y,7,26,9,0),   done:false, note:'' },
+  { id:304, type:'appointment', title:'Dermatologist',                 date:d(Y,7,19,14,0),  done:false, note:'Annual skin check' },
+  { id:305, type:'task',        title:'Pick up prescriptions',         date:d(Y,7,6,10,0),   done:false, note:'' },
+  { id:306, type:'task',        title:'Wash bedding',                  date:d(Y,7,4,9,0),    done:false, note:'' },
+  { id:307, type:'task',        title:'Wash bedding',                  date:d(Y,7,18,9,0),   done:false, note:'' },
+  { id:308, type:'task',        title:'Order medical supplies',        date:d(Y,7,11,10,0),  done:false, note:'Gloves, wipes, bandages' },
+  { id:309, type:'task',        title:'Schedule September appointments',date:d(Y,7,25,10,0), done:false, note:'' },
+  { id:310, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,1,9,0),    done:false, note:'' },
+  { id:311, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,5,9,0),    done:false, note:'' },
+  { id:312, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,8,9,0),    done:false, note:'' },
+  { id:313, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,12,9,0),   done:false, note:'' },
+  { id:314, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,15,9,0),   done:false, note:'' },
+  { id:315, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,19,9,0),   done:false, note:'' },
+  { id:316, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,22,9,0),   done:false, note:'' },
+  { id:317, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,7,26,9,0),   done:false, note:'' },
+  { id:318, type:'activity',    title:'Family visit',                  date:d(Y,7,9,14,0),   done:false, note:'Niece visiting from Boston' },
+  { id:319, type:'activity',    title:'Family visit',                  date:d(Y,7,23,14,0),  done:false, note:'' },
+  { id:320, type:'activity',    title:'Garden time — 30 min',          date:d(Y,7,6,10,0),   done:false, note:'' },
+  { id:321, type:'activity',    title:'Garden time — 30 min',          date:d(Y,7,20,10,0),  done:false, note:'' },
+  { id:322, type:'meal',        title:'Breakfast',                     date:d(Y,7,1,8,30),   done:false, note:'Oatmeal and berries' },
+  { id:323, type:'meal',        title:'Breakfast',                     date:d(Y,7,5,8,30),   done:false, note:'' },
+  { id:324, type:'meal',        title:'Breakfast',                     date:d(Y,7,8,8,30),   done:false, note:'' },
+  { id:325, type:'meal',        title:'Breakfast',                     date:d(Y,7,12,8,30),  done:false, note:'' },
+  { id:326, type:'meal',        title:'Lunch',                         date:d(Y,7,1,12,0),   done:false, note:'Grilled chicken salad' },
+  { id:327, type:'meal',        title:'Lunch',                         date:d(Y,7,5,12,0),   done:false, note:'' },
+  { id:328, type:'meal',        title:'Lunch',                         date:d(Y,7,8,12,0),   done:false, note:'' },
+  { id:329, type:'meal',        title:'Dinner',                        date:d(Y,7,9,18,0),   done:false, note:'Family dinner with niece' },
+  { id:330, type:'meal',        title:'Dinner',                        date:d(Y,7,16,18,0),  done:false, note:'' },
+  { id:331, type:'notes',       title:'Caregiver handoff note',        date:d(Y,7,5,17,0),   done:false, note:'Great checkup results' },
+  { id:332, type:'notes',       title:'Caregiver handoff note',        date:d(Y,7,12,17,0),  done:false, note:'PT going well, more mobile' },
+  { id:333, type:'notes',       title:'Caregiver handoff note',        date:d(Y,7,19,17,0),  done:false, note:'Skin check came back clear' },
+  { id:334, type:'notes',       title:'Caregiver handoff note',        date:d(Y,7,26,17,0),  done:false, note:'Good month overall' },
+  { id:335, type:'order',       title:'Reorder incontinence supplies',  date:d(Y,7,7,10,0),  done:false, note:'' },
+  { id:336, type:'order',       title:'Reorder bandages and gauze',     date:d(Y,7,21,10,0), done:false, note:'' },
+  // ── September sample data ──
+  { id:401, type:'appointment', title:'Dr. Williams checkup',          date:d(Y,8,2,10,30),  done:false, note:'Monthly checkup' },
+  { id:402, type:'appointment', title:'Physical therapy',              date:d(Y,8,9,9,0),    done:false, note:'' },
+  { id:403, type:'appointment', title:'Physical therapy',              date:d(Y,8,23,9,0),   done:false, note:'' },
+  { id:404, type:'appointment', title:'Cardiologist',                  date:d(Y,8,16,11,0),  done:false, note:'Annual heart checkup' },
+  { id:405, type:'appointment', title:'Dr. Chen follow-up',            date:d(Y,8,30,10,0),  done:false, note:'Blood pressure review' },
+  { id:406, type:'task',        title:'Pick up prescriptions',         date:d(Y,8,3,10,0),   done:false, note:'' },
+  { id:407, type:'task',        title:'Wash bedding',                  date:d(Y,8,1,9,0),    done:false, note:'' },
+  { id:408, type:'task',        title:'Wash bedding',                  date:d(Y,8,15,9,0),   done:false, note:'' },
+  { id:409, type:'task',        title:'Wash bedding',                  date:d(Y,8,29,9,0),   done:false, note:'' },
+  { id:410, type:'task',        title:'Order medical supplies',        date:d(Y,8,8,10,0),   done:false, note:'Monthly restock' },
+  { id:411, type:'task',        title:'Schedule October appointments', date:d(Y,8,22,10,0),  done:false, note:'' },
+  { id:412, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,2,9,0),    done:false, note:'' },
+  { id:413, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,5,9,0),    done:false, note:'' },
+  { id:414, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,9,9,0),    done:false, note:'' },
+  { id:415, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,12,9,0),   done:false, note:'' },
+  { id:416, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,16,9,0),   done:false, note:'' },
+  { id:417, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,19,9,0),   done:false, note:'' },
+  { id:418, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,23,9,0),   done:false, note:'' },
+  { id:419, type:'activity',    title:'Morning walk — 20 min',         date:d(Y,8,26,9,0),   done:false, note:'' },
+  { id:420, type:'activity',    title:'Family visit',                  date:d(Y,8,6,14,0),   done:false, note:'Labor Day weekend gathering' },
+  { id:421, type:'activity',    title:'Family visit',                  date:d(Y,8,20,14,0),  done:false, note:'' },
+  { id:422, type:'activity',    title:'Garden time — 30 min',          date:d(Y,8,13,10,0),  done:false, note:'Fall planting' },
+  { id:423, type:'activity',    title:'Garden time — 30 min',          date:d(Y,8,27,10,0),  done:false, note:'' },
+  { id:424, type:'meal',        title:'Breakfast',                     date:d(Y,8,1,8,30),   done:false, note:'Oatmeal and apple' },
+  { id:425, type:'meal',        title:'Breakfast',                     date:d(Y,8,3,8,30),   done:false, note:'' },
+  { id:426, type:'meal',        title:'Breakfast',                     date:d(Y,8,8,8,30),   done:false, note:'' },
+  { id:427, type:'meal',        title:'Breakfast',                     date:d(Y,8,10,8,30),  done:false, note:'' },
+  { id:428, type:'meal',        title:'Lunch',                         date:d(Y,8,1,12,0),   done:false, note:'Tomato soup and grilled cheese' },
+  { id:429, type:'meal',        title:'Lunch',                         date:d(Y,8,3,12,0),   done:false, note:'' },
+  { id:430, type:'meal',        title:'Lunch',                         date:d(Y,8,8,12,0),   done:false, note:'' },
+  { id:431, type:'meal',        title:'Dinner',                        date:d(Y,8,6,18,0),   done:false, note:'Labor Day family dinner' },
+  { id:432, type:'meal',        title:'Dinner',                        date:d(Y,8,13,18,0),  done:false, note:'' },
+  { id:433, type:'notes',       title:'Caregiver handoff note',        date:d(Y,8,2,17,0),   done:false, note:'Good start to September' },
+  { id:434, type:'notes',       title:'Caregiver handoff note',        date:d(Y,8,9,17,0),   done:false, note:'PT progressing well' },
+  { id:435, type:'notes',       title:'Caregiver handoff note',        date:d(Y,8,16,17,0),  done:false, note:'Cardiologist very pleased' },
+  { id:436, type:'notes',       title:'Caregiver handoff note',        date:d(Y,8,23,17,0),  done:false, note:'Energy levels improving' },
+  { id:437, type:'notes',       title:'Caregiver handoff note',        date:d(Y,8,30,17,0),  done:false, note:'Great month — momentum building' },
+  { id:438, type:'order',       title:'Reorder incontinence supplies',  date:d(Y,8,4,10,0),  done:false, note:'' },
+  { id:439, type:'order',       title:'Reorder medical gloves',         date:d(Y,8,18,10,0), done:false, note:'Size M — order double' },
+  { id:440, type:'order',       title:'Reorder bandages and gauze',     date:d(Y,8,29,10,0), done:false, note:'' },
 ];
 
 let meds = [
@@ -1068,7 +1186,7 @@ function saveMed() {
 function renderFooter() {
   return quickNavHTML() + '<div class="app-footer">'+
     '<div class="app-footer-logo">Kasia<span>Care</span></div>'+
-    '<div class="app-footer-version">Care Plan Software · Demo v2.6.9 · May 2026</div>'+
+    '<div class="app-footer-version">Care Plan Software · Demo v2.7.0 · May 2026</div>'+
     '<div style="font-size:0.72rem;color:#3a5a7a;font-style:italic;margin-top:4px;">Built in partnership with Claude AI · Anthropic</div>'+
     '<div class="app-footer-links">'+
       '<a href="#" onclick="showPage(\'dashboard\');return false;">Home</a>'+
