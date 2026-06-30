@@ -1,4 +1,4 @@
-<!-- v1.5.0.1 · KasiaCare · logon · June 2026 · logon_v1501.html -->
+<!-- v1.5.0.2 · KasiaCare · logon · June 2026 · logon_v1502.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -151,7 +151,9 @@ function toggleMenu() {
   <div style="background:#102940;border-radius:10px;padding:28px 20px;border-top:5px solid #b03060;text-align:center;max-width:600px;margin:0 auto;">
     <span style="font-size:2.5rem;margin-bottom:14px;display:block;"><span style="color:#b03060;">&#9829;</span></span>
     <h2 style="font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:10px;">KasiaCare Demo</h2>
-    <p style="font-size:0.95rem;color:#fff;line-height:1.8;margin-bottom:22px;">Experience the care plan dashboard — add appointments, tasks, med reminders, meals, activities, notes, and orders. See exactly how KasiaCare works for your family.</p>
+    <p style="font-size:0.95rem;color:#fff;line-height:1.8;margin-bottom:18px;">Experience the care plan dashboard — add appointments, tasks, med reminders, meals, activities, notes, and orders. See exactly how KasiaCare works for your family.</p>
+
+    <a href="demo-readme.html" style="display:block;background:#b07d10;color:#fff;font-weight:700;padding:12px 20px;border-radius:8px;font-size:0.9rem;text-align:center;margin-bottom:18px;">Please Read the Demo Guide First</a>
 
     <!-- THREE BUTTONS -->
     <div style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;">
@@ -159,34 +161,43 @@ function toggleMenu() {
       <button onclick="toggleDemo('angel')" type="button" style="display:block;width:100%;background:#b03060;color:#fff;font-weight:700;padding:14px 20px;border-radius:8px;font-size:1rem;text-align:center;border:none;cursor:pointer;">Angel</button>
       <div id="demo-angel" style="display:none;background:#0a1f33;border-radius:8px;padding:18px;text-align:left;">
         <p style="font-size:0.88rem;color:#fff;line-height:1.7;margin-bottom:12px;">If you are a KasiaCare Angel, this is where you log on for the demo. Leave your email below and we will send you a link.</p>
-        <form action="https://formspree.io/f/xgodzdnq" method="POST" style="display:flex;flex-direction:column;gap:10px;">
+        <form id="form-angel" data-category="Angel" data-color="#b03060" class="demo-form" style="display:flex;flex-direction:column;gap:10px;">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="category" value="Angel">
           <input type="email" name="email" required placeholder="Your email address" style="padding:12px 14px;border-radius:6px;border:none;font-size:0.95rem;font-family:Verdana,Geneva,sans-serif;">
           <button type="submit" style="display:block;background:#b03060;color:#fff;font-weight:700;padding:12px 20px;border-radius:6px;font-size:0.95rem;text-align:center;border:none;cursor:pointer;">Send Me the Demo Link</button>
         </form>
+        <div id="success-angel" style="display:none;text-align:center;padding:10px 4px;">
+          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! Check your email for your demo link.</p>
+          <p style="font-size:0.78rem;color:#8aaac8;">Didn't get it? Check spam, or <a href="demo-readme.html" style="color:#b07d10;text-decoration:underline;">read the demo guide</a> while you wait.</p>
+        </div>
       </div>
 
       <button onclick="toggleDemo('pro')" type="button" style="display:block;width:100%;background:#6a3fa0;color:#fff;font-weight:700;padding:14px 20px;border-radius:8px;font-size:1rem;text-align:center;border:none;cursor:pointer;">Pro</button>
       <div id="demo-pro" style="display:none;background:#0a1f33;border-radius:8px;padding:18px;text-align:left;">
         <p style="font-size:0.88rem;color:#fff;line-height:1.7;margin-bottom:12px;">If you are a doctor, in the medical field, or in the education industry and interested in this demo, leave your email below and we will send you a link.</p>
-        <form action="https://formspree.io/f/xgodzdnq" method="POST" style="display:flex;flex-direction:column;gap:10px;">
+        <form id="form-pro" data-category="Pro" data-color="#6a3fa0" class="demo-form" style="display:flex;flex-direction:column;gap:10px;">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="category" value="Pro">
           <input type="email" name="email" required placeholder="Your email address" style="padding:12px 14px;border-radius:6px;border:none;font-size:0.95rem;font-family:Verdana,Geneva,sans-serif;">
           <button type="submit" style="display:block;background:#6a3fa0;color:#fff;font-weight:700;padding:12px 20px;border-radius:6px;font-size:0.95rem;text-align:center;border:none;cursor:pointer;">Send Me the Demo Link</button>
         </form>
+        <div id="success-pro" style="display:none;text-align:center;padding:10px 4px;">
+          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! Check your email for your demo link.</p>
+          <p style="font-size:0.78rem;color:#8aaac8;">Didn't get it? Check spam, or <a href="demo-readme.html" style="color:#b07d10;text-decoration:underline;">read the demo guide</a> while you wait.</p>
+        </div>
       </div>
 
       <button onclick="toggleDemo('guest')" type="button" style="display:block;width:100%;background:#2d6b2d;color:#fff;font-weight:700;padding:14px 20px;border-radius:8px;font-size:1rem;text-align:center;border:none;cursor:pointer;">Guest</button>
       <div id="demo-guest" style="display:none;background:#0a1f33;border-radius:8px;padding:18px;text-align:left;">
         <p style="font-size:0.88rem;color:#fff;line-height:1.7;margin-bottom:12px;">If you are a guest — an individual looking to maintain your own care plan — leave your email below and we will send you a link.</p>
-        <form action="https://formspree.io/f/xgodzdnq" method="POST" style="display:flex;flex-direction:column;gap:10px;">
+        <form id="form-guest" data-category="Guest" data-color="#2d6b2d" class="demo-form" style="display:flex;flex-direction:column;gap:10px;">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="category" value="Guest">
           <input type="email" name="email" required placeholder="Your email address" style="padding:12px 14px;border-radius:6px;border:none;font-size:0.95rem;font-family:Verdana,Geneva,sans-serif;">
           <button type="submit" style="display:block;background:#2d6b2d;color:#fff;font-weight:700;padding:12px 20px;border-radius:6px;font-size:0.95rem;text-align:center;border:none;cursor:pointer;">Send Me the Demo Link</button>
         </form>
+        <div id="success-guest" style="display:none;text-align:center;padding:10px 4px;">
+          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! Check your email for your demo link.</p>
+          <p style="font-size:0.78rem;color:#8aaac8;">Didn't get it? Check spam, or <a href="demo-readme.html" style="color:#b07d10;text-decoration:underline;">read the demo guide</a> while you wait.</p>
+        </div>
       </div>
 
     </div>
@@ -207,6 +218,37 @@ function toggleDemo(which) {
     }
   });
 }
+
+document.querySelectorAll('.demo-form').forEach(function(form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = new FormData(form);
+    if (data.get('_gotcha')) { return; } // honeypot tripped - silently stop
+    data.append('category', form.getAttribute('data-category'));
+    var catId = form.id.replace('form-', '');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    fetch('https://formspree.io/f/xgodzdnq', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response) {
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById('success-' + catId).style.display = 'block';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Me the Demo Link';
+        alert('Something went wrong. Please try again.');
+      }
+    }).catch(function() {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Me the Demo Link';
+      alert('Something went wrong. Please try again.');
+    });
+  });
+});
 </script>
 
 <!-- WHAT YOU CAN TRY -->
@@ -252,7 +294,7 @@ function toggleDemo(which) {
     <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
   </div>
 </div>
-<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br><span style="font-size:0.8rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.5.0.1 · Logon · <span id="kc-date"></span></span><br><span style="font-size:0.78rem;color:#3a5a7a;font-style:italic;">Built in partnership with Claude AI · Anthropic</span></div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br><span style="font-size:0.8rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.5.0.2 · Logon · <span id="kc-date"></span></span><br><span style="font-size:0.78rem;color:#3a5a7a;font-style:italic;">Built in partnership with Claude AI · Anthropic</span></div>
 
 <script id="kc-date-script">
 var d = new Date();
