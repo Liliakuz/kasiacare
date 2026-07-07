@@ -1,4 +1,4 @@
-<!-- v1.5.0.2 · KasiaCare · logon · June 2026 · logon_v1502.html -->
+<!-- v1.5.0.4 · KasiaCare · logon · June 2026 · logon_v1504.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,10 +111,12 @@ a { text-decoration: none; }
 
   <a href="logon.html" style="background:#b03060;color:#fff;font-weight:700;padding:6px 13px;border-radius:4px;font-size:0.78rem;white-space:nowrap;text-decoration:none;">Log On</a>
 
-  <button onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;flex-direction:column;gap:5px;" aria-label="Menu">
-    <span style="display:block;width:26px;height:3px;background:#fff;border-radius:2px;"></span>
-    <span style="display:block;width:26px;height:3px;background:#fff;border-radius:2px;"></span>
-    <span style="display:block;width:26px;height:3px;background:#fff;border-radius:2px;"></span>
+  <button onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;padding:6px;" aria-label="Menu">
+    <svg width="28" height="22" viewBox="0 0 28 22" xmlns="http://www.w3.org/2000/svg">
+      <rect y="0" width="28" height="3" rx="2" fill="#ffffff"/>
+      <rect y="9" width="28" height="3" rx="2" fill="#ffffff"/>
+      <rect y="18" width="28" height="3" rx="2" fill="#ffffff"/>
+    </svg>
   </button>
 
 </nav>
@@ -167,7 +169,7 @@ function toggleMenu() {
           <button type="submit" style="display:block;background:#b03060;color:#fff;font-weight:700;padding:12px 20px;border-radius:6px;font-size:0.95rem;text-align:center;border:none;cursor:pointer;">Send Me the Demo Link</button>
         </form>
         <div id="success-angel" style="display:none;text-align:center;padding:10px 4px;">
-          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! Check your email for your demo link.</p>
+          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! We will personally send your demo link within 24 hours — please check your email.</p>
           <p style="font-size:0.78rem;color:#8aaac8;">Didn't get it? Check spam, or <a href="demo-readme.html" style="color:#b07d10;text-decoration:underline;">read the demo guide</a> while you wait.</p>
         </div>
       </div>
@@ -181,7 +183,7 @@ function toggleMenu() {
           <button type="submit" style="display:block;background:#6a3fa0;color:#fff;font-weight:700;padding:12px 20px;border-radius:6px;font-size:0.95rem;text-align:center;border:none;cursor:pointer;">Send Me the Demo Link</button>
         </form>
         <div id="success-pro" style="display:none;text-align:center;padding:10px 4px;">
-          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! Check your email for your demo link.</p>
+          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! We will personally send your demo link within 24 hours — please check your email.</p>
           <p style="font-size:0.78rem;color:#8aaac8;">Didn't get it? Check spam, or <a href="demo-readme.html" style="color:#b07d10;text-decoration:underline;">read the demo guide</a> while you wait.</p>
         </div>
       </div>
@@ -195,7 +197,7 @@ function toggleMenu() {
           <button type="submit" style="display:block;background:#2d6b2d;color:#fff;font-weight:700;padding:12px 20px;border-radius:6px;font-size:0.95rem;text-align:center;border:none;cursor:pointer;">Send Me the Demo Link</button>
         </form>
         <div id="success-guest" style="display:none;text-align:center;padding:10px 4px;">
-          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! Check your email for your demo link.</p>
+          <p style="font-size:0.95rem;color:#fff;line-height:1.7;margin-bottom:6px;">&#10003; Thank you for taking the time to demo our application! We will personally send your demo link within 24 hours — please check your email.</p>
           <p style="font-size:0.78rem;color:#8aaac8;">Didn't get it? Check spam, or <a href="demo-readme.html" style="color:#b07d10;text-decoration:underline;">read the demo guide</a> while you wait.</p>
         </div>
       </div>
@@ -281,12 +283,12 @@ document.querySelectorAll('.demo-form').forEach(function(form) {
     <a href="features.html">Features</a>
     <a href="subscriptions.html">Subscriptions</a>
     <a href="signup.html">Sign Up</a>
-    <a href="angels.html">The Angels</a>
     <a href="logon.html">Log On · Demo</a>
   </div>
   <div class="footer-col">
     <h4>Company</h4>
     <a href="about.html">About KasiaCare</a>
+    <a href="angels.html">The Angels</a>
     <a href="commitment.html">Our Commitment</a>
     <a href="family-heals.html">Family Heals</a>
     <a href="resources.html">External Resources</a>
@@ -294,7 +296,7 @@ document.querySelectorAll('.demo-form').forEach(function(form) {
     <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
   </div>
 </div>
-<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br><span style="font-size:0.8rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.5.0.2 · Logon · <span id="kc-date"></span></span><br><span style="font-size:0.78rem;color:#3a5a7a;font-style:italic;">Built in partnership with Claude AI · Anthropic</span></div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br><span style="font-size:0.8rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.5.0.4 · Logon · <span id="kc-date"></span></span><br><span style="font-size:0.78rem;color:#3a5a7a;font-style:italic;">Built in partnership with Claude AI · Anthropic</span></div>
 
 <script id="kc-date-script">
 var d = new Date();
