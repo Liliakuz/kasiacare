@@ -1,4 +1,4 @@
-<!-- v1.5.1.8 · KasiaCare · Commitment · July 2026 · commitment_v1518.html -->
+<!-- v1.5.1.9 · KasiaCare · Commitment · July 2026 · commitment_v1519.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +109,7 @@ trace-badge
 trace-badge
 trace-badge
 
-/* Samsung Browser / forced colors fix */
+/* SVG hamburger used */
 .hamburger-line {
   display: block;
   width: 26px;
@@ -137,10 +137,12 @@ trace-badge
 
   <a href="logon.html" style="background:#b03060;color:#fff;font-weight:700;padding:6px 13px;border-radius:4px;font-size:0.78rem;white-space:nowrap;text-decoration:none;">Log On</a>
 
-  <button onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;padding:6px;display:flex;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent;" aria-label="Menu">
-    <span style="display:block;width:26px;height:3px;background-color:#ffffff !important;border-radius:2px;opacity:1;" class="hamburger-line"></span>
-    <span style="display:block;width:26px;height:3px;background-color:#ffffff !important;border-radius:2px;opacity:1;" class="hamburger-line"></span>
-    <span style="display:block;width:26px;height:3px;background-color:#ffffff !important;border-radius:2px;opacity:1;" class="hamburger-line"></span>
+  <button onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;padding:6px;" aria-label="Menu">
+    <svg width="28" height="22" viewBox="0 0 28 22" xmlns="http://www.w3.org/2000/svg">
+      <rect y="0" width="28" height="3" rx="2" fill="#ffffff"/>
+      <rect y="9" width="28" height="3" rx="2" fill="#ffffff"/>
+      <rect y="18" width="28" height="3" rx="2" fill="#ffffff"/>
+    </svg>
   </button>
 
 </nav>
@@ -284,7 +286,7 @@ function toggleMenu() {
     <a href="privacy.html">Privacy, Data &amp; AI Policy</a>
   </div>
 </div>
-<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br><span style="font-size:0.8rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.5.1.8 · Commitment · <span id="kc-date"></span></span><br><span style="font-size:0.78rem;color:#3a5a7a;font-style:italic;">Built in partnership with Claude AI · Anthropic</span></div>
+<div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br><span style="font-size:0.8rem;color:#3a5a7a;letter-spacing:0.5px;">KasiaCare Website v1.5.1.9 · Commitment · <span id="kc-date"></span></span><br><span style="font-size:0.78rem;color:#3a5a7a;font-style:italic;">Built in partnership with Claude AI · Anthropic</span></div>
 
 <script id="kc-date-script">
 var d = new Date();
