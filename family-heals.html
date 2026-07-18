@@ -1,4 +1,4 @@
-<!-- v1.65 · KasiaCare · family-heals · July 2026 · family-heals_v165.html -->
+<!-- v1.66 · KasiaCare · family-heals · July 2026 · family-heals_v166.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +17,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 18px; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body { font-family: Verdana, Geneva, sans-serif; background: #102940; color: #2c2010; line-height: 1.75; max-width: 100vw; }
+.wrap { max-width: 900px; margin: 0 auto; }
 a { text-decoration: none; }
 
 .nav { background: #102940; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
@@ -85,6 +86,8 @@ a { text-decoration: none; }
 </style>
 </head>
 <body>
+
+<div class="wrap">
 
 <nav class="nav" style="background:#102940;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:20px;position:sticky;top:0;z-index:100;">
 
@@ -230,7 +233,7 @@ function toggleMenu() {
   </div>
 </div>
 <div class="footer-bottom">&copy; 2026 KasiaCare &middot; Built for Kasia. Built for every family like ours. <span style="color:#b03060;">♥</span><br>
-<span style="font-size:0.72rem;color:#3a5a7a;">KasiaCare Website v1.65 · <span id="kc-date"></span> · Family Heals</span></div>
+<span style="font-size:0.72rem;color:#3a5a7a;">KasiaCare Website v1.66 · <span id="kc-date"></span> · Family Heals</span></div>
 
 <script>
 var d = new Date();
@@ -238,6 +241,8 @@ var months = ['January','February','March','April','May','June','July','August',
 var el = document.getElementById('kc-date');
 if (el) el.textContent = months[d.getMonth()] + ' ' + d.getFullYear();
 </script>
+
+</div>
 
 </body>
 </html>
